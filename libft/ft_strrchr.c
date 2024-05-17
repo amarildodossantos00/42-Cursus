@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 16:16:57 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/05/17 16:17:02 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/05/17 08:40:57 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/05/17 12:54:47 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+char	*ft_strrchr(const char *s, int c)
 {
-	size_t	count;
+	int	i;
 
-	count = 0;
-	while (count < n)
-		((unsigned char *)s)[count++] = c;
-	return (s);
+	i = ft_strlen(s);
+	i--;
+	while (i >= 0)
+	{
+		if ((char )s[i] == (char )c)
+			return ((char *)&s[i]);
+		i--;
+	}
+	if (c == '\0')
+		return ((char *)&s[ft_strlen(s)]);
+	return (NULL);
 }

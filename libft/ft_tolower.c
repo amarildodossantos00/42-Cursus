@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 16:16:57 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/05/17 16:17:02 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/05/15 06:26:42 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/05/15 06:33:19 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+int	ft_tolower(int c)
 {
-	size_t	count;
-
-	count = 0;
-	while (count < n)
-		((unsigned char *)s)[count++] = c;
-	return (s);
+	if (c >= 65 && c <= 90)
+		return ((c + 32));
+	return (c);
 }

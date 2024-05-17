@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 16:16:57 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/05/17 16:17:02 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/05/17 16:15:03 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/05/17 16:15:19 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+int	ft_lstsize(t_list *lst)
 {
-	size_t	count;
+	int		count;
+	t_list	*temp;
 
+	if (lst == NULL)
+		return (0);
 	count = 0;
-	while (count < n)
-		((unsigned char *)s)[count++] = c;
-	return (s);
+	temp = lst;
+	while (temp != NULL)
+	{
+		count++;
+		temp = temp->next;
+	}
+	return (count);
 }

@@ -1,23 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 16:16:57 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/05/17 16:17:02 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/05/17 16:10:25 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/05/17 16:10:29 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+int	ft_atoi(const char *nptr)
 {
-	size_t	count;
+	int	count;
+	int	sign;
+	int	result;
 
 	count = 0;
-	while (count < n)
-		((unsigned char *)s)[count++] = c;
-	return (s);
+	while (nptr[count] == ' ' || (nptr[count] >= 9 && nptr[count] <= 13))
+		count++;
+	sign = 1;
+	if (nptr[count] == '-' || nptr[count] == '+')
+	{
+		if (nptr[count] == '-')
+			sign *= -1;
+		count++;
+	}
+	result = 0;
+	while (nptr[count] >= '0' && nptr[count] <= '9')
+	{
+		result *= 10;
+		result += nptr[count] - '0';
+		count++;
+	}
+	return (result * sign);
 }

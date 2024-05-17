@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 16:16:57 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/05/17 16:17:02 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/05/17 16:20:29 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/05/17 16:20:31 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	size_t	count;
+	char	*dest;
+	char	*str;
+	int		count;
 
-	count = 0;
-	while (count < n)
-		((unsigned char *)s)[count++] = c;
-	return (s);
+	str = (char *)s;
+	dest = (char *)malloc((ft_strlen(str) + 1) * sizeof(char));
+	if (dest == NULL)
+		return (NULL);
+	count = -1;
+	while (str[++count] != '\0')
+		dest[count] = f(count, str[count]);
+	dest[count] = '\0';
+	return (dest);
 }

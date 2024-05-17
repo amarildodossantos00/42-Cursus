@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bzero.c                                            :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 14:42:14 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/05/14 14:45:23 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/05/17 16:15:46 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/05/17 16:15:49 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	bzero(void *s, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	ft_memset(s, 0, n);
+	char		*ddest;
+	const char	*ssrc;
+
+	ddest = (char *)dest;
+	ssrc = (const char *)src;
+	while (n-- > 0)
+		*ddest++ = *ssrc++;
+	return (dest);
 }
