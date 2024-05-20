@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 08:40:57 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/05/17 12:54:47 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/05/18 10:05:14 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/05/18 10:05:16 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	int		count;
+	char	*str;
+	char	character;
 
-	i = ft_strlen(s);
-	i--;
-	while (i >= 0)
-	{
-		if ((char )s[i] == (char )c)
-			return ((char *)&s[i]);
-		i--;
-	}
-	if (c == '\0')
-		return ((char *)&s[ft_strlen(s)]);
-	return (NULL);
+	str = (char *)s;
+	character = (unsigned char)c;
+	count = ft_strlen(str);
+	if (character == '\0')
+		return (&str[count]);
+	while (--count >= 0)
+		if (s[count] == character)
+			return (&str[count]);
+	return (0);
 }

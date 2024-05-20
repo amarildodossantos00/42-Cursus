@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 15:13:19 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/05/16 06:54:41 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/05/18 09:41:53 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/05/18 09:41:55 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int	i;
+	size_t	c;
 
-	i = 0;
-	while (i < n && s1[i] != '\0' && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+	if (n == 0)
+		return (0);
+	c = 0;
+	while ((s1[c] && s2[c]) != '\0' && s1[c] == s2[c] && c < n - 1)
+		c++;
+	return ((s1[c] - s2[c]));
 }
