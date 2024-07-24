@@ -21,10 +21,7 @@ void	conversor_sinal(int sinal)
 	i++;
 	if (i == 8)
 	{
-		if (c == '\0')
-			ft_printf("\n");
-		else
-			ft_printf("%c", c);
+		ft_printf("%c", c);
 		i = 0;
 		c = 0;
 	}

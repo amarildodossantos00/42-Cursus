@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 11:18:05 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/07/24 13:03:19 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/07/24 17:10:04 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,24 @@ int	ft_atoi(const char *str)
 	return (res * sinal);
 }
 
-void	enviar_sinal(int pid, unsigned char c)
+void	enviar_sinal(int pid, char *c)
 {
-	int				i;
-	unsigned char	aux;
+	int	i;
+	int	bit;
 
-	i = 8;
-	aux = c;
-	while (i > 0)
+	while (*c)
 	{
-		i--;
-		aux = c >> i;
-		if (aux % 2 == 0)
-			kill(pid, SIGUSR2);
-		else
-			kill(pid, SIGUSR1);
-		usleep(50);
+		i = 8;
+		while (i--)
+		{
+			bit = ((*c >> i) & 1);
+			if (bit % 2 == 0)
+				kill(pid, SIGUSR2);
+			else
+				kill(pid, SIGUSR1);
+			usleep(1000);
+		}
+		c++;
 	}
 }
 
@@ -65,8 +67,6 @@ int	main(int ac, char *av[])
 	i = 0;
 	pid = ft_atoi(av[1]);
 	sms = av[2];
-	while (sms[i])
-		enviar_sinal(pid, sms[i++]);
-	enviar_sinal(pid, '\0');
+	enviar_sinal(pid, ft_strjoin(sms, "\n"));
 	return (0);
 }

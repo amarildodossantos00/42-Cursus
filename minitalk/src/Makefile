@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amdos-sa <amdos-sa@student.42.fr>            +#+  +:+       +#+         #
+#    By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/16 17:10:43 by vcatete          #+#    #+#              #
-#    Updated: 2024/07/24 12:14:27 by amdos-sa         ###   ########.fr        #
+#    Created: 2024/07/24 17:06:41 by amdos-sa          #+#    #+#              #
+#    Updated: 2024/07/24 17:06:43 by amdos-sa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS	= -Wall -Werror -Wextra
 RM      = rm -rf
 NAME1	= server
 NAME2	= client
-OBJS	= ft_printf.o
+OBJS	= ft_printf.o ft_strjoin.o ft_strlen.o
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
