@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../lib/minitalk.h"
 
 void	conversor_sinal(int sinal)
 {

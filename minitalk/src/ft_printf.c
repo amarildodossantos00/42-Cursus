@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../lib/minitalk.h"
 
 void	write_c(char word, size_t *i)
 {
