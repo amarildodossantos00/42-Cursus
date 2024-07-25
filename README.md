@@ -6,5 +6,3 @@ Campus: 42 Luanda
 username: amdos-sa
 
 coalition: Fénix-Dourada
-
-Points: 100%
