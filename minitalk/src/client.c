@@ -56,7 +56,6 @@ void	enviar_sinal(int pid, char *c)
 int	main(int ac, char *av[])
 {
 	const char	*sms;
-	int			i;
 	int			pid;
 
 	if (ac != 3)
@@ -64,7 +63,6 @@ int	main(int ac, char *av[])
 		ft_printf("Uso: <PID do servidor> <mensagem>\n");
 		exit(0);
 	}
-	i = 0;
 	pid = ft_atoi(av[1]);
 	sms = av[2];
 	enviar_sinal(pid, ft_strjoin(sms, "\n"));
