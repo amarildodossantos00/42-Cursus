@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_a.c                                     :+:      :+:    :+:   */
+/*   operations_b.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 13:13:32 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/22 06:58:19 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/08/22 05:08:11 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/08/22 06:59:01 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pswap.h"
 
-void	sa(t_stack **s_a, int f)
+void	sb(t_stack **s_b, int f)
 {
 	t_stack	*aux;
 
-	if (!s_a || !*s_a)
+	if (!s_b || !*s_b)
 		return ;
-	aux = (*s_a)->next;
-	(*s_a)->next = aux->next;
-	aux->next = *s_a;
-	*s_a = aux;
+	aux = (*s_b)->next;
+	(*s_b)->next = aux->next;
+	aux->next = *s_b;
+	*s_b = aux;
 	if (f == 1)
 		return ;
-	ft_printf("sa\n");
+	ft_printf("sb\n");
 }
 
-void	pa(t_stack **s_a, t_stack **s_b)
+void	pb(t_stack **s_a, t_stack **s_b)
 {
 	t_stack	*aux;
 
@@ -40,42 +40,42 @@ void	pa(t_stack **s_a, t_stack **s_b)
 	ft_printf("pa\n");
 }
 
-void	ra(t_stack **s_a, int f)
+void	rb(t_stack **s_b, int f)
 {
 	t_stack	*first;
 	t_stack	*last;
 
-	if (!s_a || !*s_a || !(*s_a)->next)
+	if (!s_b || !*s_b || !(*s_b)->next)
 		return ;
-	first = *s_a;
-	last = *s_a;
+	first = *s_b;
+	last = *s_b;
 	while (last->next)
 		last = last->next;
-	*s_a = first->next;
+	*s_b = first->next;
 	first->next = NULL;
 	last->next = first;
 	if (f == 1)
 		return ;
-	ft_printf("ra\n");
+	ft_printf("rb\n");
 }
 
-void	rra(t_stack **s_a, int f)
+void	rrb(t_stack **s_b, int f)
 {
 	t_stack	*prev;
 	t_stack	*last;
 
-	if (!s_a || *s_a || !(*s_a)->next)
+	if (!s_b || *s_b || !(*s_b)->next)
 		return ;
 	prev = NULL;
-	last = *s_a;
+	last = *s_b;
 	while (last->next)
 	{
 		prev = last;
 		last = last->next;
 	}
 	prev->next = NULL;
-	last->next = *s_a;
-	*s_a = last;
+	last->next = *s_b;
+	*s_b = last;
 	if (f == 1)
 		return ;
 	ft_printf("rra\n");

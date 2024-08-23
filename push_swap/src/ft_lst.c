@@ -1,34 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lst.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/17 21:13:42 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/23 03:12:07 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/08/23 03:27:20 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/08/23 03:34:42 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pswap.h"
 
-int	interpreter_arg(char **matrix)
+int	lst_min(t_stack *stack)
 {
-	ft_start(matrix);
-	return (0);
+	int	min;
+
+	min = 0;
+	while (stack)
+	{
+		if (stack->value < min)
+			min = stack->value;
+			stack = stack->next;
+	}
+	return (min);
 }
 
-int	main(int ac, char *av[])
+int	lst_max(t_stack *stack)
 {
-	//char	**matrix;
+	int	max;
 
-	if (ac == 2)
+	max = 0;
+	while (stack)
 	{
-		ft_printf("Wait!\n");
+		if (stack->value > max)
+		{
+			max = stack->value;
+			stack = stack->next;
+		}
 	}
-	else if (ac > 2)
-		interpreter_arg(av + 1);
-	else
-		ft_error();
-	exit(0);
+	return (max);
 }

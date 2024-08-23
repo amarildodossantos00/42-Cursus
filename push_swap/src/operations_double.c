@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   operations_double.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/17 21:13:42 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/23 03:12:07 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/08/22 06:34:16 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/08/22 08:12:10 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pswap.h"
 
-int	interpreter_arg(char **matrix)
+void	ss(t_stack **s_a, t_stack **s_b)
 {
-	ft_start(matrix);
-	return (0);
+	sa(s_a, 1);
+	sb(s_b, 1);
+	ft_printf("ss\n");
 }
 
-int	main(int ac, char *av[])
+void	rr(t_stack **s_a, t_stack **s_b)
 {
-	//char	**matrix;
+	ra(s_a, 1);
+	rb(s_b, 1);
+	ft_printf("rr\n");
+}
 
-	if (ac == 2)
-	{
-		ft_printf("Wait!\n");
-	}
-	else if (ac > 2)
-		interpreter_arg(av + 1);
-	else
-		ft_error();
-	exit(0);
+void	rrr(t_stack **s_a, t_stack **s_b)
+{
+	rra(s_a, 1);
+	rrb(s_b, 1);
+	ft_printf("rrr\n");
 }

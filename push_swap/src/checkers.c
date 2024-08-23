@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 06:08:09 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/21 12:55:50 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/08/22 08:08:23 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ int	check_order(t_stack *stack)
 	return (0);
 }
 
-int	check_duplicate(t_stack *stack)
+/*int	check_duplicate(t_stack *stack)
 {
-}
+}*/

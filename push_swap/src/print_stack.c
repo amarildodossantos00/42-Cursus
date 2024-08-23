@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_stack.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/17 21:13:42 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/23 03:12:07 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/08/22 08:23:02 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/08/22 11:23:35 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pswap.h"
 
-int	interpreter_arg(char **matrix)
+void	print_stack(t_stack *stack)
 {
-	ft_start(matrix);
-	return (0);
-}
-
-int	main(int ac, char *av[])
-{
-	//char	**matrix;
-
-	if (ac == 2)
+	while (stack)
 	{
-		ft_printf("Wait!\n");
+		ft_printf("|%d", stack->value);
+		stack = stack->next;
 	}
-	else if (ac > 2)
-		interpreter_arg(av + 1);
-	else
-		ft_error();
-	exit(0);
 }

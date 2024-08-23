@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 06:28:09 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/19 06:50:45 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/08/23 03:14:08 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,27 @@
 
 int	ft_atoi(char *str)
 {
-	int	res;
-	int	signal;
+	long long int	res;
+	int				signal;
 
 	res = 0;
 	signal = 1;
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
 			signal = -1;
 		str++;
 	}
-	while (*str >= '0' && *str <= '9')
+	while (*str)
 	{
+		if (ft_isdigit(*str))
+			ft_error();
 		res = res * 10 + *str - '0';
 		str++;
 	}
+	if ((res * signal) > 2147483647 || (res * signal) < -2147483647)
+		ft_error();
 	return (res * signal);
 }
