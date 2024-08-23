@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 06:08:09 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/22 08:08:23 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/08/23 08:03:37 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,21 @@ int	check_order(t_stack *stack)
 	while (stack && stack->next)
 	{
 		if (stack->value > stack->next->value)
-			return (1);
+			return (0);
 		stack = stack->next;
 	}
-	return (0);
+	return (1);
 }
 
-/*int	check_duplicate(t_stack *stack)
+int	find_index(t_stack *s_a, int num)
 {
-}*/
+	int	i;
+
+	i = 0;
+	while (s_a->value != num)
+	{
+		i++;
+		s_a = s_a->next;
+	}
+	return (i);
+}

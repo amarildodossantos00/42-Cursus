@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 13:13:32 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/22 06:58:19 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/08/23 09:08:48 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	rra(t_stack **s_a, int f)
 	t_stack	*prev;
 	t_stack	*last;
 
-	if (!s_a || *s_a || !(*s_a)->next)
+	if (!s_a || !(*s_a)->next)
 		return ;
 	prev = NULL;
 	last = *s_a;

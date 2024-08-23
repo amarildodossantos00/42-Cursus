@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 05:08:11 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/22 06:59:01 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/08/23 13:26:47 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	pb(t_stack **s_a, t_stack **s_b)
 	*s_b = (*s_b)->next;
 	aux->next = *s_a;
 	*s_a = aux;
-	ft_printf("pa\n");
+	ft_printf("pb\n");
 }
 
 void	rb(t_stack **s_b, int f)
@@ -78,5 +78,5 @@ void	rrb(t_stack **s_b, int f)
 	*s_b = last;
 	if (f == 1)
 		return ;
-	ft_printf("rra\n");
+	ft_printf("rrb\n");
 }

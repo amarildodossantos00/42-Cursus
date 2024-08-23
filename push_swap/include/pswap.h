@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 21:07:13 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/23 03:10:16 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/08/23 13:48:01 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,13 @@ void	exit_error(char **matrix);
 void	ft_error(void);
 void	print_stack(t_stack *stack);
 void	free_stack(t_stack *stack);
+void	small_sort(t_stack ***s_a);
+void	big_sort(t_stack ***s_a);
 void	ft_start(char **matrix);
+int		lst_size(t_stack *stack);
+int		lst_min(t_stack *stack);
+int		lst_max(t_stack *stack);
+int		find_index(t_stack *s_a, int num);
 int		check_order(t_stack *stack);
 int		ft_strlen(char **str);
 int		ft_isdigit(int c);
