@@ -6,36 +6,42 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 04:18:03 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/22 07:54:07 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/02 06:13:53 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pswap.h"
 
-void	_creat_stack(t_stack **stack)
+void	ft_add_back(t_stack **stack, t_stack *stack_new)
 {
-	*stack = malloc(sizeof(t_stack));
-	*stack = NULL;
+	if (!stack)
+		return ;
+	if (!*stack)
+		*stack = stack_new;
+	else
+		(lst_last(*stack))->next = stack_new;
 }
 
-void	_push(t_stack **stack, int value)
+t_stack	*ft_stack_new(int content)
 {
-	t_stack	*new_node;
+	t_stack	*new;
 
-	new_node = (t_stack *)malloc(sizeof(t_stack));
-	new_node->value = value;
-	new_node->next = *stack;
-	*stack = new_node;
+	new = malloc(sizeof (t_stack));
+	if (!new)
+		ft_error();
+	new->value = content;
+	new->next = NULL;
+	return (new);
 }
 
-void	free_stack(t_stack *stack)
+void	free_stack(t_stack **stack)
 {
 	t_stack	*aux;
 
-	while (stack)
+	while (*stack)
 	{
-		aux = stack;
-		stack = stack->next;
-		free(aux);
+		aux = (*stack)->next;
+		free(*stack);
+		*stack = aux;
 	}
 }

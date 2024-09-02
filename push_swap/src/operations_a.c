@@ -6,77 +6,76 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 13:13:32 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/23 09:08:48 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/02 03:18:13 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pswap.h"
 
-void	sa(t_stack **s_a, int f)
+void	ft_sa(t_stack **a, int j)
 {
-	t_stack	*aux;
+	t_stack	*tmp;
 
-	if (!s_a || !*s_a)
+	if (!*a || !((*a)->next))
 		return ;
-	aux = (*s_a)->next;
-	(*s_a)->next = aux->next;
-	aux->next = *s_a;
-	*s_a = aux;
-	if (f == 1)
-		return ;
-	ft_printf("sa\n");
+	tmp = *a;
+	*a = (*a)->next;
+	tmp->next = (*a)->next;
+	(*a)->next = tmp;
+	if (j == 0)
+		write(1, "sa\n", 3);
 }
 
-void	pa(t_stack **s_a, t_stack **s_b)
+void	ft_pa(t_stack **a, t_stack **b, int j)
 {
-	t_stack	*aux;
+	t_stack	*tmp;
 
-	if (!s_b || !*s_b)
+	if (!*b)
 		return ;
-	aux = *s_b;
-	*s_b = (*s_b)->next;
-	aux->next = *s_a;
-	*s_a = aux;
-	ft_printf("pa\n");
+	tmp = *a;
+	*a = *b;
+	*b = (*b)->next;
+	(*a)->next = tmp;
+	if (j == 0)
+		write(1, "pa\n", 3);
 }
 
-void	ra(t_stack **s_a, int f)
+void	ft_ra(t_stack **a, int j)
 {
-	t_stack	*first;
-	t_stack	*last;
+	t_stack	*tmp;
 
-	if (!s_a || !*s_a || !(*s_a)->next)
+	if (!*a || !(*a)->next)
 		return ;
-	first = *s_a;
-	last = *s_a;
-	while (last->next)
-		last = last->next;
-	*s_a = first->next;
-	first->next = NULL;
-	last->next = first;
-	if (f == 1)
-		return ;
-	ft_printf("ra\n");
+	tmp = *a;
+	*a = lst_last(*a);
+	(*a)->next = tmp;
+	*a = tmp->next;
+	tmp->next = NULL;
+	if (j == 0)
+		write(1, "ra\n", 3);
 }
 
-void	rra(t_stack **s_a, int f)
+void	ft_rra(t_stack **a, int j)
 {
-	t_stack	*prev;
-	t_stack	*last;
+	t_stack	*tmp;
+	int		i;
 
-	if (!s_a || !(*s_a)->next)
+	if (!*a || !(*a)->next)
 		return ;
-	prev = NULL;
-	last = *s_a;
-	while (last->next)
+	i = 0;
+	tmp = *a;
+	while ((*a)->next)
 	{
-		prev = last;
-		last = last->next;
+		*a = (*a)->next;
+		i++;
 	}
-	prev->next = NULL;
-	last->next = *s_a;
-	*s_a = last;
-	if (f == 1)
-		return ;
-	ft_printf("rra\n");
+	(*a)->next = tmp;
+	while (i > 1)
+	{
+		tmp = tmp->next;
+		i--;
+	}
+	tmp->next = NULL;
+	if (j == 0)
+		write(1, "rra\n", 4);
 }

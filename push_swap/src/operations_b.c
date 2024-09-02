@@ -6,77 +6,76 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 05:08:11 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/23 13:26:47 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/02 03:19:00 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pswap.h"
 
-void	sb(t_stack **s_b, int f)
+void	ft_sb(t_stack **b, int j)
 {
-	t_stack	*aux;
+	t_stack	*tmp;
 
-	if (!s_b || !*s_b)
+	if (!*b || !((*b)->next))
 		return ;
-	aux = (*s_b)->next;
-	(*s_b)->next = aux->next;
-	aux->next = *s_b;
-	*s_b = aux;
-	if (f == 1)
-		return ;
-	ft_printf("sb\n");
+	tmp = *b;
+	*b = (*b)->next;
+	tmp->next = (*b)->next;
+	(*b)->next = tmp;
+	if (j == 0)
+		write(1, "sb\n", 3);
 }
 
-void	pb(t_stack **s_a, t_stack **s_b)
+void	ft_pb(t_stack **s_a, t_stack **s_b, int j)
 {
-	t_stack	*aux;
+	t_stack	*tmp;
 
-	if (!s_b || !*s_b)
+	if (!*s_a)
 		return ;
-	aux = *s_b;
-	*s_b = (*s_b)->next;
-	aux->next = *s_a;
-	*s_a = aux;
-	ft_printf("pb\n");
+	tmp = *s_b;
+	*s_b = *s_a;
+	*s_a = (*s_a)->next;
+	(*s_b)->next = tmp;
+	if (j == 0)
+		write(1, "pb\n", 3);
 }
 
-void	rb(t_stack **s_b, int f)
+void	ft_rb(t_stack **b, int j)
 {
-	t_stack	*first;
-	t_stack	*last;
+	t_stack	*tmp;
 
-	if (!s_b || !*s_b || !(*s_b)->next)
+	if (!*b || !(*b)->next)
 		return ;
-	first = *s_b;
-	last = *s_b;
-	while (last->next)
-		last = last->next;
-	*s_b = first->next;
-	first->next = NULL;
-	last->next = first;
-	if (f == 1)
-		return ;
-	ft_printf("rb\n");
+	tmp = *b;
+	*b = lst_last(*b);
+	(*b)->next = tmp;
+	*b = tmp->next;
+	tmp->next = NULL;
+	if (j == 0)
+		write(1, "rb\n", 3);
 }
 
-void	rrb(t_stack **s_b, int f)
+void	ft_rrb(t_stack **b, int j)
 {
-	t_stack	*prev;
-	t_stack	*last;
+	t_stack	*tmp;
+	int		i;
 
-	if (!s_b || *s_b || !(*s_b)->next)
+	if (!*b || !(*b)->next)
 		return ;
-	prev = NULL;
-	last = *s_b;
-	while (last->next)
+	i = 0;
+	tmp = *b;
+	while ((*b)->next)
 	{
-		prev = last;
-		last = last->next;
+		i++;
+		*b = (*b)->next;
 	}
-	prev->next = NULL;
-	last->next = *s_b;
-	*s_b = last;
-	if (f == 1)
-		return ;
-	ft_printf("rrb\n");
+	(*b)->next = tmp;
+	while (i > 1)
+	{
+		tmp = tmp->next;
+		i--;
+	}
+	tmp->next = NULL;
+	if (j == 0)
+		write(1, "rrb\n", 4);
 }

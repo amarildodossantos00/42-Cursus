@@ -1,8 +1,9 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = src/ft_atoi.c src/stack.c src/exit_error.c src/algorithm.c src/checkers.c src/operations_b.c src/main.c src/ft_printf.c src/operations_double.c src/ft_strlen.c src/operations_a.c src/ft_isdigit.c src/print_stack.c src/ft_lst.c src/big_sort.c
+SRCS= src/
+FILE = $(SRCS)ft_atoi.c $(SRCS)stack.c $(SRCS)exit_error.c $(SRCS)algorithm.c $(SRCS)checkers.c $(SRCS)operations_b.c $(SRCS)main.c $(SRCS)ft_printf.c $(SRCS)operations_double.c $(SRCS)ft_strlen.c $(SRCS)operations_a.c $(SRCS)ft_isdigit.c $(SRCS)ft_lst.c $(SRCS)rotate_case_ab.c $(SRCS)rotate_type.c $(SRCS)rotate_case_ba.c $(SRCS)lst_find.c $(SRCS)rotate_and_push.c $(SRCS)interpreter_args.c $(SRCS)ft_split.c $(SRCS)free_str.c
 INCLUDES = include/pswap.h
-OBJS = $(SRCS:.c=.o)
+OBJS = $(FILE:.c=.o)
 NAME = push_swap
 
 all: $(NAME)

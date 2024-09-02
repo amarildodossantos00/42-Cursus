@@ -6,21 +6,30 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 03:27:20 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/23 13:07:04 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/08/31 09:33:23 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pswap.h"
 
+t_stack	*lst_last(t_stack *stack)
+{
+	if (!stack)
+		return (NULL);
+	while (stack->next)
+		stack = stack->next;
+	return (stack);
+}
+
 int	lst_size(t_stack *stack)
 {
-	int	size;
+	size_t	size;
 
 	size = 0;
 	while (stack)
 	{
-		size++;
 		stack = stack->next;
+		size++;
 	}
 	return (size);
 }

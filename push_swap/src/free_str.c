@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_stack.c                                      :+:      :+:    :+:   */
+/*   free_str.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 08:23:02 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/22 11:23:35 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/08/31 08:29:02 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/09/02 06:34:04 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pswap.h"
 
-void	print_stack(t_stack *stack)
+void	free_str(char **matrix)
 {
-	while (stack)
+	char	*n1;
+
+	if (!matrix)
+		return ;
+	while (*matrix)
 	{
-		ft_printf("|%d", stack->value);
-		stack = stack->next;
+		n1 = *matrix;
+		matrix++;
+		free(n1);
 	}
+	matrix = NULL;
 }
