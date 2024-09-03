@@ -6,11 +6,11 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 03:06:15 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/09/02 02:59:27 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:38:38 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pswap.h"
+#include "../../include/pswap.h"
 
 int	apply_rarb(t_stack **a, t_stack **b, int c, char s)
 {

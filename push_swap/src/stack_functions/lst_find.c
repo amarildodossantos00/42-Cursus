@@ -6,11 +6,11 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 06:50:02 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/31 09:46:51 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:39:13 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pswap.h"
+#include "../../include/pswap.h"
 
 int	find_index(t_stack *s_a, int num)
 {
@@ -47,7 +47,6 @@ int	find_place_b(t_stack *s_b, int num_push)
 	}
 	return (i);
 }
-
 
 int	find_place_a(t_stack *s_a, int num_push)
 {

@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 21:07:13 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/09/02 06:33:46 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/03 08:06:41 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ int		lst_max(t_stack *stack);
 int		find_index(t_stack *s_a, int num);
 int		check_order(t_stack *stack);
 int		check_double_number(t_stack *stack);
-size_t		ft_strlen(const char *str);
 int		ft_isdigit(int c);
 int		ft_atoi(char *str);
 int		check_is_number(char *str);
 int		ft_printf(const char *str, ...);
+size_t	ft_strlen(const char *str);
 t_stack	*lst_last(t_stack *stack);
 t_stack	*interpreter_args(int ac, char **av);
 t_stack	*ft_stack_new(int content);

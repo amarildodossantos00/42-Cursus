@@ -6,11 +6,11 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 08:23:53 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/31 08:25:08 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:39:57 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pswap.h"
+#include "../../include/pswap.h"
 
 static int	count_words(const char *str, char c)
 {

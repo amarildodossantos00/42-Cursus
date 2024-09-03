@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 08:10:52 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/09/02 06:33:53 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/03 09:33:51 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,47 +41,47 @@ int	ft_atoi2(const char *str)
 	return (mod * i);
 }
 
-t_stack	*interpreter_two_args(char **av)
+static	void	process_arguments(char *arg, t_stack **s_a)
 {
-	t_stack	*s_a;
 	char	**aux;
-	int		i;
 	int		j;
+	int		value;
 
-	s_a = NULL;
-	i = 0;
-	aux = ft_split(av[1], 32);
-	while (aux[i])
+	aux = ft_split(arg, ' ');
+	if (!aux || aux[0] == NULL)
 	{
-		j = ft_atoi2(aux[i]);
-		ft_add_back(&s_a, ft_stack_new(j));
-		i++;
+		free_str(aux);
+		ft_error();
+	}
+	j = 0;
+	while (aux[j])
+	{
+		if (!check_is_number(aux[j]))
+		{
+			free_str(aux);
+			free_stack(s_a);
+			ft_error();
+		}
+		value = ft_atoi2(aux[j]);
+		ft_add_back(s_a, ft_stack_new(value));
+		j++;
 	}
 	free_str(aux);
-	free(aux);
-	return (s_a);
 }
 
 t_stack	*interpreter_args(int ac, char **av)
 {
 	t_stack	*s_a;
 	int		i;
-	int		j;
 
 	i = 1;
 	s_a = NULL;
 	if (ac < 2)
-		ft_error();
-	if (ac == 2)
-		s_a = interpreter_two_args(av);
-	else
+		exit(0);
+	while (i < ac)
 	{
-		while (i < ac)
-		{
-			j = ft_atoi2(av[i]);
-			ft_add_back(&s_a, ft_stack_new(j));
-			i++;
-		}
+		process_arguments(av[i], &s_a);
+		i++;
 	}
 	return (s_a);
 }

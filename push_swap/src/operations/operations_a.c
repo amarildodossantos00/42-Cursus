@@ -1,75 +1,75 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_b.c                                     :+:      :+:    :+:   */
+/*   operations_a.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 05:08:11 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/09/02 03:19:00 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/08/21 13:13:32 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/09/03 10:38:03 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pswap.h"
+#include "../../include/pswap.h"
 
-void	ft_sb(t_stack **b, int j)
+void	ft_sa(t_stack **a, int j)
 {
 	t_stack	*tmp;
 
-	if (!*b || !((*b)->next))
+	if (!*a || !((*a)->next))
 		return ;
-	tmp = *b;
+	tmp = *a;
+	*a = (*a)->next;
+	tmp->next = (*a)->next;
+	(*a)->next = tmp;
+	if (j == 0)
+		write(1, "sa\n", 3);
+}
+
+void	ft_pa(t_stack **a, t_stack **b, int j)
+{
+	t_stack	*tmp;
+
+	if (!*b)
+		return ;
+	tmp = *a;
+	*a = *b;
 	*b = (*b)->next;
-	tmp->next = (*b)->next;
-	(*b)->next = tmp;
+	(*a)->next = tmp;
 	if (j == 0)
-		write(1, "sb\n", 3);
+		write(1, "pa\n", 3);
 }
 
-void	ft_pb(t_stack **s_a, t_stack **s_b, int j)
+void	ft_ra(t_stack **a, int j)
 {
 	t_stack	*tmp;
 
-	if (!*s_a)
+	if (!*a || !(*a)->next)
 		return ;
-	tmp = *s_b;
-	*s_b = *s_a;
-	*s_a = (*s_a)->next;
-	(*s_b)->next = tmp;
-	if (j == 0)
-		write(1, "pb\n", 3);
-}
-
-void	ft_rb(t_stack **b, int j)
-{
-	t_stack	*tmp;
-
-	if (!*b || !(*b)->next)
-		return ;
-	tmp = *b;
-	*b = lst_last(*b);
-	(*b)->next = tmp;
-	*b = tmp->next;
+	tmp = *a;
+	*a = lst_last(*a);
+	(*a)->next = tmp;
+	*a = tmp->next;
 	tmp->next = NULL;
 	if (j == 0)
-		write(1, "rb\n", 3);
+		write(1, "ra\n", 3);
 }
 
-void	ft_rrb(t_stack **b, int j)
+void	ft_rra(t_stack **a, int j)
 {
 	t_stack	*tmp;
 	int		i;
 
-	if (!*b || !(*b)->next)
+	if (!*a || !(*a)->next)
 		return ;
 	i = 0;
-	tmp = *b;
-	while ((*b)->next)
+	tmp = *a;
+	while ((*a)->next)
 	{
+		*a = (*a)->next;
 		i++;
-		*b = (*b)->next;
 	}
-	(*b)->next = tmp;
+	(*a)->next = tmp;
 	while (i > 1)
 	{
 		tmp = tmp->next;
@@ -77,5 +77,5 @@ void	ft_rrb(t_stack **b, int j)
 	}
 	tmp->next = NULL;
 	if (j == 0)
-		write(1, "rrb\n", 4);
+		write(1, "rra\n", 4);
 }

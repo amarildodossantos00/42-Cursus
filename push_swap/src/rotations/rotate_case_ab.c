@@ -6,11 +6,11 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 06:33:08 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/31 09:08:14 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:38:44 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pswap.h"
+#include "../../include/pswap.h"
 
 int	case_rarb(t_stack *a, t_stack *b, int c)
 {

@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_error.c                                       :+:      :+:    :+:   */
+/*   ft_lst.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 12:31:45 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/09/02 05:41:55 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/08/23 03:27:20 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/09/03 10:50:03 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pswap.h"
+#include "../../include/pswap.h"
 
-void	ft_error(void)
+int	lst_max(t_stack *stack)
 {
-	write(2, "Error", 5);
-	exit(1);
+	int	max;
+
+	max = stack->value;
+	while (stack)
+	{
+		if (stack->value > max)
+			max = stack->value;
+		stack = stack->next;
+	}
+	return (max);
 }

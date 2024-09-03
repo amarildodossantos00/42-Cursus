@@ -6,11 +6,11 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 06:28:09 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/28 07:59:37 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:39:44 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pswap.h"
+#include "../../include/pswap.h"
 
 int	ft_atoi(char *str)
 {

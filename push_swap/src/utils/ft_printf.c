@@ -6,11 +6,11 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:06:04 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/17 21:12:22 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:39:51 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pswap.h"
+#include "../../include/pswap.h"
 
 void	write_c(char word, size_t *i)
 {

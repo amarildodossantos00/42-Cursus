@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_str.c                                         :+:      :+:    :+:   */
+/*   exit_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/31 08:29:02 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/09/02 06:34:04 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/08/21 12:31:45 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/09/03 10:39:35 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pswap.h"
+#include "../../include/pswap.h"
 
-void	free_str(char **matrix)
+void	ft_error(void)
 {
-	char	*n1;
-
-	if (!matrix)
-		return ;
-	while (*matrix)
-	{
-		n1 = *matrix;
-		matrix++;
-		free(n1);
-	}
-	matrix = NULL;
+	write(2, "Error\n", 6);
+	exit(1);
 }

@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_add_back.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/19 05:55:14 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/08/28 07:52:20 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/09/03 10:52:44 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/09/03 10:53:02 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/pswap.h"
+#include "../../include/pswap.h"
 
-int	ft_isdigit(int c)
+void	ft_add_back(t_stack **stack, t_stack *stack_new)
 {
-	return ((c >= '0' && c <= '9'));
+	if (!stack)
+		return ;
+	if (!*stack)
+		*stack = stack_new;
+	else
+		(lst_last(*stack))->next = stack_new;
 }
