@@ -6,35 +6,46 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 06:28:09 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/09/03 10:39:44 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/04 09:22:15 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pswap.h"
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str, t_stack ***s_a, char ***matrix)
 {
-	long long int	res;
-	int				signal;
+	int				mod;
+	long long int	i;
 
-	res = 0;
-	signal = 1;
+	i = 0;
+	mod = 1;
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
-	if (*str == '-' || *str == '+')
+	if (*str == '-')
 	{
-		if (*str == '-')
-			signal = -1;
+		mod = -1;
 		str++;
 	}
+	else if (*str == '+')
+		str++;
 	while (*str)
 	{
 		if (!ft_isdigit(*str))
+		{
+			if (matrix)
+				free_str(*matrix);
+			free_stack(*s_a);
 			ft_error();
-		res = res * 10 + *str - '0';
+		}
+		i = i * 10 + (*str - 48);
 		str++;
 	}
-	if ((res * signal) > 2147483647 || (res * signal) < -2147483647)
+	if ((mod * i) > 2147483647 || (mod * i) < -2147483648)
+	{
+		if (matrix)
+			free_str(*matrix);
+		free_stack(*s_a);
 		ft_error();
-	return (res * signal);
+	}
+	return (mod * i);
 }

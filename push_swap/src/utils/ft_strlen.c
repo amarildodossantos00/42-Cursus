@@ -6,18 +6,18 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 12:43:22 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/09/03 10:40:01 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/04 03:10:36 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pswap.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (s[i])
+	while (str[i])
 	{
 		i++;
 	}

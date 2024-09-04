@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 21:07:13 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/09/03 08:06:41 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/04 09:16:43 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	free_stack(t_stack **stack);
 void	ft_add_back(t_stack **stack, t_stack *stack_new);
 void	free_str(char **matrix);
 void	algorithm(t_stack **s_a);
-char	**ft_split(char const *s, char c);
+char	**ft_split(char *str);
 int		find_place_a(t_stack *s_a, int pnum);
 int		find_place_b(t_stack *s_b, int pnum);
 int		find_index(t_stack *s_a, int num);
@@ -63,10 +63,10 @@ int		find_index(t_stack *s_a, int num);
 int		check_order(t_stack *stack);
 int		check_double_number(t_stack *stack);
 int		ft_isdigit(int c);
-int		ft_atoi(char *str);
+int		ft_atoi(const char *str, t_stack ***stack, char ***matrix);
 int		check_is_number(char *str);
 int		ft_printf(const char *str, ...);
-size_t	ft_strlen(const char *str);
+size_t	ft_strlen(char *str);
 t_stack	*lst_last(t_stack *stack);
 t_stack	*interpreter_args(int ac, char **av);
 t_stack	*ft_stack_new(int content);

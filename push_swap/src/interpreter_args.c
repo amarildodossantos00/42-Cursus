@@ -6,40 +6,11 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 08:10:52 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/09/03 09:33:51 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/04 09:16:26 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pswap.h"
-
-int	ft_atoi2(const char *str)
-{
-	int				mod;
-	long long int	i;
-
-	i = 0;
-	mod = 1;
-	while (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\f'
-		|| *str == '\v' || *str == '\r')
-		str++;
-	if (*str == '-')
-	{
-		mod = -1;
-		str++;
-	}
-	else if (*str == '+')
-		str++;
-	while (*str)
-	{
-		if (!ft_isdigit(*str))
-			ft_error();
-		i = i * 10 + (*str - 48);
-		str++;
-	}
-	if ((mod * i) > 2147483647 || (mod * i) < -2147483647)
-		ft_error();
-	return (mod * i);
-}
 
 static	void	process_arguments(char *arg, t_stack **s_a)
 {
@@ -47,9 +18,10 @@ static	void	process_arguments(char *arg, t_stack **s_a)
 	int		j;
 	int		value;
 
-	aux = ft_split(arg, ' ');
+	aux = ft_split(arg);
 	if (!aux || aux[0] == NULL)
 	{
+		free_stack(s_a);
 		free_str(aux);
 		ft_error();
 	}
@@ -58,11 +30,11 @@ static	void	process_arguments(char *arg, t_stack **s_a)
 	{
 		if (!check_is_number(aux[j]))
 		{
-			free_str(aux);
 			free_stack(s_a);
+			free_str(aux);
 			ft_error();
 		}
-		value = ft_atoi2(aux[j]);
+		value = ft_atoi(aux[j], &s_a, &aux);
 		ft_add_back(s_a, ft_stack_new(value));
 		j++;
 	}
