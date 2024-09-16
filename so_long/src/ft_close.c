@@ -1,45 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_window.c                                     :+:      :+:    :+:   */
+/*   ft_close.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cramos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 09:52:46 by cramos            #+#    #+#             */
-/*   Updated: 2024/09/05 01:59:32 by cramos           ###   ########.fr       */
+/*   Created: 2024/09/13 18:30:01 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/09/16 03:59:42 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "../includes/so_long.h"
 
-int	close_window(void *param)
+int	close_exit(void *noth)
 {
 	t_vars	*vars;
 
-	vars = (t_vars *)param;
+	vars = (t_vars *)noth;
 	free_split(vars->map);
-	free_split(vars->new_map);
-	free_img(vars);
+	free_split(vars->map_copy);
+	destroy_image(vars);
 	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
 	exit(0);
 }
 
-void	close_e(t_vars *vars)
+void	close_v(t_vars *vars)
 {
 	free_split(vars->map);
-	free_split(vars->new_map);
-	free_img(vars);
-	mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_display(vars->mlx);
-	free(vars->mlx);
+	free_split(vars->map_copy);
 	exit(0);
 }
 
-int	close_map(t_vars *vars, int key)
+int	close_esc(int keycode, t_vars *vars)
 {
-	if (key == 65288 || key == 65307)
-		close_e(vars);
+	if (keycode == 65288 || keycode == 65307)
+		close_exit(vars);
 	return (0);
 }

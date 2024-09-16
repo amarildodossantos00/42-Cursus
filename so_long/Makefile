@@ -3,55 +3,59 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cramos <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/08/31 12:06:56 by cramos            #+#    #+#              #
-#    Updated: 2024/08/31 12:07:02 by cramos           ###   ########.fr        #
+#    Created: 2024/09/13 12:06:55 by amdos-sa          #+#    #+#              #
+#    Updated: 2024/09/16 08:31:19 by amdos-sa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
-
-FLAGS = -Wall -Wextra -Werror
-
 NAME = so_long
 
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+
 WAY = minilibx-linux
+MINILIBX = -L./minilibx-linux -lmlx_Linux -lXext -lX11 -lm
+SRC = src/main.c\
+		src/get_map.c\
+		src/aux_func1.c\
+		src/ft_close.c\
+		src/alocate_word.c\
+		src/free_split.c\
+		src/ft_strlen.c\
+		src/deli.c\
+		src/ft_split.c\
+		src/get_next_line.c\
+		src/render_map.c\
+		src/move_p.c\
+		src/validations_one.c\
+		src/validation_two.c\
+		src/validation_three.c\
+		src/validation_four.c\
+		src/set_images.c\
+		src/ft_printf.c\
+		src/game_print.c\
 
-MINILBX = -L./minilibx-linux -lmlx_Linux -lXext -lX11 -lm
-
-SRC = files/main.c\
-		files/read_map.c\
-		files/ft_split.c\
-		files/auxilary.c\
-		files/close_window.c\
-		files/img.c\
-		files/set_img.c\
-		files/move_player.c\
-		files/val_argum.c\
-		files/vali_jogab.c\
-		files/ft_flood_fill.c\
-		ftprintf/ft_printf.c\
-		ftprintf/ft_print.c\
-		ftprintf/auxilary_func.c
-
-OBJS = ${SRC:.c=.o}
+OBJ = ${SRC:.c=.o}
 
 all: ${NAME}
 
-${NAME}: ${OBJS}
-		make -C ${WAY}
-		${CC} ${FLAGS} -o ${NAME} ${OBJS} ${MINILBX}
-		clear
+${NAME}: ${OBJ}
+	make -C ${WAY}
+	${CC} ${CFLAGS} -o ${NAME} ${OBJ} ${MINILIBX}
+	clear
 
 clean:
-		rm -f ${OBJS}
-		make clean -C ${WAY}
+	rm -f ${OBJ}
+	make clean -C ${WAY}
+	clear
 
 fclean: clean
-		rm -rf ${NAME}
-		clear
-		
+	rm -rf ${NAME}
+	clear
+
 re: fclean all
+	clear
 
 .PHONY: all clean fclean re
