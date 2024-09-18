@@ -1,7 +1,17 @@
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/18 14:59:19 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/09/18 15:40:04 by amdos-sa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
-#include <fcntl.h>
-#include <stdio.h>
+#include <unistd.h>
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 42
@@ -10,26 +20,29 @@
 char	*ft_strdup(char *src)
 {
 	char	*dest;
-	int		i;
+	int	len;
 
-	i = 0;
-	while (src[i])
-		i++;
-	dest = (char *)malloc(sizeof(char) * (i + 1));
-	i = -1;
-	while (src[++i])
-		dest[i] = src[i];
-	dest[i] = '\0';
-	return (dest);
+	while (src[len])
+		len++;
+	dest = malloc(sizeof(char) * (len + 1));
+	if (dest)
+	{
+		len = -1;
+		while (src[++len])
+			dest[len] = src[len];
+		dest[len] = '\0';
+		return (dest);
+	}
+	return (NULL);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	buffer[BUFFER_SIZE];
-	char		line[70000];
+	char		linha[70000];
 	static int	buffer_size;
-	static int 	buffer_pos;
-	int			i;
+	static int	buffer_pos;
+	int		i;
 
 	i = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -47,7 +60,7 @@ char	*get_next_line(int fd)
 		if (line[i - 1] == '\n')
 			break ;
 	}
-	line[i] = '\0';
+	len[i] = '\0';
 	if (i == 0)
 		return (NULL);
 	return (ft_strdup(line));
