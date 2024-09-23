@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 42
@@ -22,6 +22,7 @@ char	*ft_strdup(char *src)
 	char	*dest;
 	int	len;
 
+	len = 0;
 	while (src[len])
 		len++;
 	dest = malloc(sizeof(char) * (len + 1));
@@ -39,7 +40,7 @@ char	*ft_strdup(char *src)
 char	*get_next_line(int fd)
 {
 	static char	buffer[BUFFER_SIZE];
-	char		linha[70000];
+	char		line[70000];
 	static int	buffer_size;
 	static int	buffer_pos;
 	int		i;
@@ -60,8 +61,9 @@ char	*get_next_line(int fd)
 		if (line[i - 1] == '\n')
 			break ;
 	}
-	len[i] = '\0';
+	line[i] = '\0';
 	if (i == 0)
 		return (NULL);
 	return (ft_strdup(line));
+
 }
