@@ -19,7 +19,13 @@
 # include <pthread.h>
 
 typedef struct s_philo{
-	pthread_t	philo;
+	int	id;
+	long	time_dead;
+	long	time_eat;
+	long	time_sleep;
+	pthread_t thread;
+	pthread_mutex_t *left;
+	pthread_mutex_t *right;
 }	t_philo;
 
 void *process_thread(void *arg);
