@@ -6,17 +6,20 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 09:44:23 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/09/23 09:48:08 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:10:24 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <unistd.h>
-# include <stdlib.h>
 # include <stdio.h>
+# include <string.h>
 # include <pthread.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <time.h>
+# include <sys/wait.h>
 
 typedef struct s_philo{
 	int	id;
