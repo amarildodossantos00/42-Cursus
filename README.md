@@ -1,8 +1,11 @@
 # 42-Cursus
-My study at 42
+Our study at 42 school
 
 Campus: 42 Luanda
 
-username: amdos-sa
+username: amdos-sa, pzau, cramos, ctuiango, vcatete
 
-coalition: Fénix-Dourada
+coalition: Fénix-Dourada, Solaris, Aégis
+
+
+This is about our projecs during the Communcore course :)
