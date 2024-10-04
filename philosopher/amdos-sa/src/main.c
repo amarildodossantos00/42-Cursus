@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 09:41:53 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/10/03 11:02:40 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/10/04 14:00:59 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,29 @@ int	main(int ac, char *av[])
 
 	i = 0;
 	j = 0;
-	num_philos = atoi(av[1]);
-	philos = (t_philo *)malloc(sizeof(t_philo) * num_philos);
+	monitor_data.death_occurred = 0;
+
 	if (ac < 5 || ac > 6)
 	{
 		printf("Uso: %s <num_philos> <time_dead> <time_eat> <time_sleep>\n", av[0]);
 		return (-1);
 	}
+
+	num_philos = atoi(av[1]);
+	philos = (t_philo *)malloc(sizeof(t_philo) * num_philos);
 	if (!philos)
 	{
 		perror("Falha ao alocar memória para filósofos");
 		return (-1);
 	}
+
 	forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * num_philos);
 	if (!forks)
 	{
 		perror("Falha ao alocar memória para forks");
 		return (-1);
 	}
+
 	while (i < num_philos)
 	{
 		if (pthread_mutex_init(&forks[i], NULL) != 0)
@@ -55,6 +60,7 @@ int	main(int ac, char *av[])
 		}
 		i++;
 	}
+
 	i = 0;
 	while (i < num_philos)
 	{
@@ -65,6 +71,8 @@ int	main(int ac, char *av[])
 		philos[i].left = &forks[i];
 		philos[i].right = &forks[(i + 1) % num_philos];
 		philos[i].last_meal = get_timestamp();
+		philos[i].monitor = &monitor_data;
+
 		if (pthread_create(&philos[i].thread, NULL, process_thread, (void *)&philos[i]) != 0)
 		{
 			perror("Falha ao criar a thread");
@@ -76,8 +84,10 @@ int	main(int ac, char *av[])
 		}
 		i++;
 	}
+
 	monitor_data.philos = philos;
 	monitor_data.num_philos = num_philos;
+
 	if (pthread_create(&monitor, NULL, monitor_thread, (void *)&monitor_data)!= 0)
 	{
 		perror("Falha ao criar a thread de monitoramento");
@@ -87,6 +97,7 @@ int	main(int ac, char *av[])
 		free(philos);
 		return (-1);
 	}
+
 	i = 0;
 	while (i < num_philos)
 	{
@@ -94,6 +105,7 @@ int	main(int ac, char *av[])
 		i++;
 	}
 	pthread_join(monitor, NULL);
+
 	i = 0;
 	while (i < num_philos)
 	{
