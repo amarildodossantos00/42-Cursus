@@ -12,7 +12,6 @@
 
 #include "../header/header.h"
 
-
 int	main(int ac, char **av)
 {
 	t_vars	vars;
@@ -26,6 +25,7 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	ft_initialize_args(ac, av, &vars);
-	ft_initialize_rest(vars);
+	ft_initialize_rest(&vars);
+	ft_dispose_all(&vars);
 	return (0);
 }

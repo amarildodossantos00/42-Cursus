@@ -21,6 +21,7 @@ SRC = src/main.c\
       src/aux.c\
 	  src/init.c\
 	  src/base_func.c\
+	  src/last_all.c\
 
 OBJ = ${SRC:.c=.o}
 
