@@ -14,8 +14,8 @@
 
 void     ft_initialize_args(int ac, char **av, t_vars *vars)
 {
-    vars->num_philo = ft_atoi(av[1]);
     vars->time_die = ft_atoi(av[2]);
+    vars->num_philo = ft_atoi(av[1]);
     vars->time_eat = ft_atoi(av[3]);
     vars->time_sleep = ft_atoi(av[4]);
     vars->num_philo_aux = 0;
@@ -44,7 +44,7 @@ int     ft_initialize_rest(t_vars *vars)
         vars->philosophers[i].time_init = 0;
         vars->philosophers[i].time_last = 0;
         vars->philosophers[i].time_eat_cont = 0;
-        vars->philosophers[i].left = &vars->forks[i + 1 % vars->num_philo];
+        vars->philosophers[i].left = &vars->forks[(i + 1) % vars->num_philo];
         vars->philosophers[i].right = &vars->forks[i];
         vars->philosophers[i].p_vars = vars;
         pthread_create(&vars->philosophers[i].thread, NULL, &philos_action, &vars->philosophers[i]);

@@ -46,7 +46,7 @@ typedef struct s_vars
 
 void    ft_initialize_args(int ac, char **av, t_vars *vars);
 void    *philos_action(void *param);
-int     ft_initialize_rest(t_vars *vars);
+int     ft_initialize_rest(t_vars vars);
 int	    ft_check_error(int ac, char **av);
 int     ft_strlen(char *str);
 int     ft_atoi(char *str);
