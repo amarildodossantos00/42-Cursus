@@ -44,7 +44,7 @@ int     ft_initialize_rest(t_vars *vars)
         vars->philosophers[i].time_init = 0;
         vars->philosophers[i].time_last = 0;
         vars->philosophers[i].time_eat_cont = 0;
-        vars->philosophers[i].left = &vars->forks[i + 1 % vars->num_philo];
+        vars->philosophers[i].left = &vars->forks[(i + 1) % vars->num_philo];
         vars->philosophers[i].right = &vars->forks[i];
         vars->philosophers[i].p_vars = vars;
         pthread_create(&vars->philosophers[i].thread, NULL, &philos_action, &vars->philosophers[i]);
