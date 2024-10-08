@@ -40,7 +40,7 @@ int     ft_initialize_rest(t_vars *vars)
     i = 0;
     while (i < vars->num_philo)
     {
-        vars->philosophers[i].id = i + 1; 
+        vars->philosophers[i].id = i + 1;
         vars->philosophers[i].time_init = 0;
         vars->philosophers[i].time_last = 0;
         vars->philosophers[i].time_eat_cont = 0;

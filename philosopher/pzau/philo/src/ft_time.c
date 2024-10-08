@@ -1,36 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aux.c                                              :+:      :+:    :+:   */
+/*   ft_time.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pzau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 14:00:21 by pzau              #+#    #+#             */
-/*   Updated: 2024/10/04 18:00:53 by pzau             ###   ########.fr       */
+/*   Created: 2024/10/07 19:21:28 by pzau              #+#    #+#             */
+/*   Updated: 2024/10/07 19:21:46 by pzau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/header.h"
 
-int	ft_atoi(char *str)
+long	current_time(void)
 {
-	int	result;
-	int	sign;
-	int	i;
-
-	i = 0;
-	result = 0;
-	sign = 1;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		*str++;
-	if (*str == '-')
-		sign = -1;
-	if (*str == '-' || *str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + *str - '0';
-		str++;
-	}
-	return (sign * result);
+	struct timeval	time;
+	gettimeofday(&time, NULL);
+	return ((ime.tv_sec * 1000) + (time.tv_usec / 1000));
 }
