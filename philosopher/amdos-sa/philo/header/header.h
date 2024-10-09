@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:12:13 by pzau              #+#    #+#             */
-/*   Updated: 2024/10/08 14:40:07 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/10/09 13:44:01 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ typedef struct s_philo
 {
 	int				id;
 	pthread_t		thread;
-	size_t			time_init;
-	size_t			time_last;
+	long			time_init;
+	long			time_last;
 	int				time_eat_cont;
+	int				death_occurred;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
 	t_vars			*p_vars;
@@ -49,6 +50,7 @@ void	ft_initialize_args(int ac, char **av, t_vars *vars);
 void	*philos_action(void *param);
 void	ft_dispose_all(t_vars *vars);
 void	initial_aux(t_vars *vars);
+void	*monitor_philo(void *arg);
 int		ft_initialize_rest(t_vars *vars, int i);
 int		ft_check_error(int ac, char **av);
 int		ft_atoi(char *str);
