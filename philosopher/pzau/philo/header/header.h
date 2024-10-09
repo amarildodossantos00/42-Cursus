@@ -17,6 +17,7 @@
 # include <unistd.h> 
 # include <stdlib.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 typedef struct s_vars t_vars;
 
@@ -46,6 +47,8 @@ typedef struct s_vars
 
 void    ft_initialize_args(int ac, char **av, t_vars *vars);
 void    *philos_action(void *param);
+void    ft_dispose_all(t_vars *vars);
+long	current_time(void);
 int     ft_initialize_rest(t_vars *vars);
 int	    ft_check_error(int ac, char **av);
 int     ft_strlen(char *str);

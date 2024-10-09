@@ -28,8 +28,8 @@ int     ft_initialize_rest(t_vars *vars)
     int     i;
 
     i = 0;
-    vars->philosophers = malloc(sizeof(t_vars) * (vars->num_philo));
-    vars->forks = malloc(sizeof(t_vars) * (vars->num_philo));
+    vars->philosophers = malloc(sizeof(t_philo) * (vars->num_philo));
+    vars->forks = malloc(sizeof(pthread_mutex_t) * (vars->num_philo));
     if (vars->philosophers == NULL || vars->forks == NULL)
         return (1);
     while (i < vars->num_philo)
@@ -40,7 +40,7 @@ int     ft_initialize_rest(t_vars *vars)
     i = 0;
     while (i < vars->num_philo)
     {
-        vars->philosophers[i].id = i + 1; 
+        vars->philosophers[i].id = i + 1;
         vars->philosophers[i].time_init = 0;
         vars->philosophers[i].time_last = 0;
         vars->philosophers[i].time_eat_cont = 0;
@@ -50,4 +50,9 @@ int     ft_initialize_rest(t_vars *vars)
         pthread_create(&vars->philosophers[i].thread, NULL, &philos_action, &vars->philosophers[i]);
         i++;
     }
+<<<<<<< HEAD
 }
+=======
+    return (0);
+}
+>>>>>>> 7e0dee48c50b18d2ebd68fb1507d5dc9ab3fa4a8

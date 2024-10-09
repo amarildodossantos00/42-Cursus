@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   base_func.c                                        :+:      :+:    :+:   */
+/*   ft_time.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pzau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/05 10:12:40 by pzau              #+#    #+#             */
-/*   Updated: 2024/10/05 10:12:42 by pzau             ###   ########.fr       */
+/*   Created: 2024/10/07 19:21:28 by pzau              #+#    #+#             */
+/*   Updated: 2024/10/07 19:21:46 by pzau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/header.h"
 
-void    *philos_action(void *param)
+long	current_time(void)
 {
-    t_philo     *philo;
-
-    philo = (t_philo *)param;
-    printf("O filosofo %d esta ativo\n", philo->id);
+	struct timeval	time;
+	gettimeofday(&time, NULL);
+	return ((ime.tv_sec * 1000) + (time.tv_usec / 1000));
 }
