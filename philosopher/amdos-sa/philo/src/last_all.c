@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_timestamp.c                                    :+:      :+:    :+:   */
+/*   last_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 13:01:59 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/10/04 13:36:01 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/10/07 15:50:33 by pzau              #+#    #+#             */
+/*   Updated: 2024/10/08 12:29:54 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "../header/header.h"
 
-long	get_timestamp(void)
+void	ft_dispose_all(t_vars *vars)
 {
-	struct timeval tv;
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
+	int	i;
 
-long	get_elapsed_time(long start_time)
-{
-	long current_time = get_timestamp();
-	return (current_time - start_time);
+	i = 0;
+	while (i < vars->num_philo)
+	{
+		if (pthread_join(vars->philosophers[i].thread, NULL) != 0)
+			printf("Falhou!\n");
+		i++;
+	}
+	i = 0;
+	while (i < vars->num_philo)
+	{
+		pthread_mutex_destroy(&vars->forks[i]);
+		i++;
+	}
+	free(vars->philosophers);
+	free(vars->forks);
 }
