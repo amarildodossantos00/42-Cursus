@@ -50,5 +50,9 @@ int     ft_initialize_rest(t_vars *vars)
         pthread_create(&vars->philosophers[i].thread, NULL, &philos_action, &vars->philosophers[i]);
         i++;
     }
+<<<<<<< HEAD
+}
+=======
     return (0);
 }
+>>>>>>> 7e0dee48c50b18d2ebd68fb1507d5dc9ab3fa4a8
