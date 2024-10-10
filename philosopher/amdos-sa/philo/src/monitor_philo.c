@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:39:25 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/10/10 10:18:48 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/10/10 10:34:32 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*monitor_philo(void *arg)
 			if ((current_time - monitor->philosophers[i].time_last) > monitor->philosophers[i].p_vars->time_die)
 			{
 				timetamp = get_elapsed_time(start_time);
-				printf("[%ld] %d died\n", timetamp, monitor->philosophers[i].id);
+				printf("[%ld] %d died\n", timetamp, monitor->philosophers[i].id + 1);
 				exit(1);
 			}
 			i++;
