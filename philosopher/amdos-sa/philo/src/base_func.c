@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 10:12:40 by pzau              #+#    #+#             */
-/*   Updated: 2024/10/09 13:52:28 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/10/10 13:08:48 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	eat_and_sleep(t_philo *philo, long start_time)
 	printf("[%ld] %d is eating\n",
 		get_elapsed_time(start_time), philo->id);
 	usleep(philo->p_vars->time_eat * 1000);
+	philo->time_eat_cont++;
 	pthread_mutex_unlock(philo->left);
 	pthread_mutex_unlock(philo->right);
 	printf("[%ld] %d dropped the forks\n",

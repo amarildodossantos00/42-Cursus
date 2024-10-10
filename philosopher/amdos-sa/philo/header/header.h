@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:12:13 by pzau              #+#    #+#             */
-/*   Updated: 2024/10/09 13:44:01 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/10/10 13:05:23 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_philo
 	pthread_t		thread;
 	long			time_init;
 	long			time_last;
-	int				time_eat_cont;
+	long				time_eat_cont;
 	int				death_occurred;
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
