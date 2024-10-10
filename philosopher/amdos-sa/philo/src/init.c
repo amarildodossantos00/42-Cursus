@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:10:29 by pzau              #+#    #+#             */
-/*   Updated: 2024/10/09 13:46:47 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/10/10 10:15:58 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_initialize_args(int ac, char **av, t_vars *vars)
 
 int	ft_initialize_rest(t_vars *vars, int i)
 {
-	int	start_time;
 	initial_aux(vars);
 	if (vars->philosophers == NULL || vars->forks == NULL)
 		return (1);
@@ -35,12 +34,11 @@ int	ft_initialize_rest(t_vars *vars, int i)
 		i++;
 	}
 	i = 0;
-	start_time = get_timestamp();
 	while (i < vars->num_philo)
 	{
 		vars->philosophers[i].id = i + 1;
-		vars->philosophers[i].time_init = start_time;
-		vars->philosophers[i].time_last = start_time;
+		vars->philosophers[i].time_init = get_timestamp();
+		vars->philosophers[i].time_last = get_timestamp();
 		vars->philosophers[i].time_eat_cont = 0;
 		vars->philosophers[i].left = &vars->forks[(i + 1) % vars->num_philo];
 		vars->philosophers[i].right = &vars->forks[i];
