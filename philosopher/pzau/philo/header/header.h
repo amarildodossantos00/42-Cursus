@@ -35,6 +35,7 @@ typedef struct s_all_mutexs
     pthread_mutex_t mutex_died;
     pthread_mutex_t mutex_print_sms;
     pthread_mutex_t mutex_one;
+    pthread_mutex_t mutex_message;
 }   t_all_mutexs;
 
 typedef struct s_philo

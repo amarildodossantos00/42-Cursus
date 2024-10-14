@@ -40,6 +40,7 @@ void   ft_dispose_all(t_vars *vars)
     pthread_mutex_destroy(&vars->all_mutexs.mutex_died);
     pthread_mutex_destroy(&vars->all_mutexs.mutex_print_sms);
     pthread_mutex_destroy(&vars->all_mutexs.mutex_one);
+    pthread_mutex_destroy(&vars->all_mutexs.mutex_message);
     free(vars->philosophers);
     free(vars->forks);
 }

@@ -90,8 +90,8 @@ void    *philos_action(void *param)
         }
         pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_on_routine);
         //function for only one philosopher (put inside of a if and return one to break)
-        pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_on_routine);
+        pthread_mutex_lock(&philo->p_vars->all_mutexs.mutex_one);
         running_messagers(philo);
-        pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_on_routine);
+        pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_one);
     }
 }

@@ -21,17 +21,17 @@ long	current_time(void)
 
 static int		philo_died(t_philo *philo, long	current)
 {
-	pthread_mutex_lock(&philo->p_vars->all_mutexs.mutex_died);
+	pthread_mutex_lock(&philo->p_vars->all_mutexs.mutex_last_eat);
 	if ((current - philo->time_last) > (size_t)philo->p_vars->time_die)
 	{
+		pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_last_eat);
 		print_all_messagers(philo, DEAD);
 		pthread_mutex_lock(&philo->p_vars->all_mutexs.mew_mutex_died);
 		philo->p_vars->on_routine = 0;
 		pthread_mutex_unlock(&philo->p_vars->all_mutexs.mew_mutex_died);
-		pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_died);
 		return (1);
 	}
-	pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_died);
+	pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_last_eat);
 	return (0);
 }
 
@@ -43,6 +43,7 @@ void	*philo_monitoring(void *param)
 
 	vars = (t_vars *)param;
 	i = 0;
+    pthread_mutex_lock(&vars->all_mutexs.mutex_message);
 	while  (1)
 	{
 		usleep(100);
@@ -61,5 +62,25 @@ void	*philo_monitoring(void *param)
 				break ;
 			i++;
 		}
+		i = 0;
+		if (vars->num_philo_aux)
+		{
+			while (i < vars->num_philo)
+			{
+				if (vars->philosophers[i] != vars->num_philo_aux)
+				{
+					vars->num_philo_aux = vars->num_philo_aux;
+				}
+				else
+					i++;
+			}
+			if (i == vars->num_philo)
+			{
+				pthread_mutex_lock(&vars->all_mutexs.mew_mutex_died);
+				vars->on_routine = 0;
+				pthread_mutex_unlock(&vars->all_mutexs.mew_mutex_died);
+			}
+		}
 	}
+    pthread_mutex_unlock(&vars->all_mutexs.mutex_message);
 }
