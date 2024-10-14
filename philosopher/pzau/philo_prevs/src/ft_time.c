@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_time.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pzau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 12:10:29 by pzau              #+#    #+#             */
-/*   Updated: 2024/10/04 18:14:44 by pzau             ###   ########.fr       */
+/*   Created: 2024/10/07 19:21:28 by pzau              #+#    #+#             */
+/*   Updated: 2024/10/07 19:21:46 by pzau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/header.h"
 
-int	main(int ac, char **av)
+long	current_time(void)
 {
-	t_vars	vars;
-	int			error;
-
-	error = ft_check_error(ac, av);
-	if (error)
-	{
-		printf("Usage: <num_philo> <time_die> <time_eat>");
-		printf(" <time_sleep> <n_time_philo_eat>\n");
-		return (1);
-	}
-	ft_initialize_args(ac, av, &vars);
-	ft_initialize_rest(&vars);
-	ft_dispose_all(&vars);
-	return (0);
+	struct timeval	time;
+	gettimeofday(&time, NULL);
+	return ((ime.tv_sec * 1000) + (time.tv_usec / 1000));
 }

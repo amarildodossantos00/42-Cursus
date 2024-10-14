@@ -37,6 +37,7 @@ void	*monitor_philo(void *arg)
 		{
 			current_time = get_timestamp();
 	
+				printf("first time: %ld ........ second time: %d\n", (current_time - monitor->philosophers[i].time_last), monitor->philosophers[i].p_vars->time_die);
 			pthread_mutex_lock(&monitor->time_last);
 			if ((current_time - monitor->philosophers[i].time_last)
 				> monitor->philosophers[i].p_vars->time_die)

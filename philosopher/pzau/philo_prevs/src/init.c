@@ -19,16 +19,8 @@ void     ft_initialize_args(int ac, char **av, t_vars *vars)
     vars->time_eat = ft_atoi(av[3]);
     vars->time_sleep = ft_atoi(av[4]);
     vars->num_philo_aux = 0;
-    vars->philo_eat_cont = 0;
-    vars->on_routine = 1;
     if (ac == 6)
         vars->num_philo_aux = ft_atoi(av[5]);
-    pthread_mutex_init(&vars->all_mutexs.mutex_on_routine, NULL);
-    pthread_mutex_init(&vars->all_mutexs.mutex_last_eat, NULL);
-    pthread_mutex_init(&vars->all_mutexs.mew_mutex_died, NULL);
-    pthread_mutex_init(&vars->all_mutexs.mutex_died, NULL);
-    pthread_mutex_init(&vars->all_mutexs.mutex_print_sms, NULL);
-    pthread_mutex_init(&vars->all_mutexs.mutex_one, NULL);
 }
 
 int     ft_initialize_rest(t_vars *vars)
@@ -49,16 +41,18 @@ int     ft_initialize_rest(t_vars *vars)
     while (i < vars->num_philo)
     {
         vars->philosophers[i].id = i + 1;
-        vars->philosophers[i].time_init = current_time();
-        vars->philosophers[i].time_last = current_time();
-        vars->philosophers[i].eat_cont = 0;
+        vars->philosophers[i].time_init = 0;
+        vars->philosophers[i].time_last = 0;
+        vars->philosophers[i].time_eat_cont = 0;
         vars->philosophers[i].left = &vars->forks[(i + 1) % vars->num_philo];
         vars->philosophers[i].right = &vars->forks[i];
         vars->philosophers[i].p_vars = vars;
         pthread_create(&vars->philosophers[i].thread, NULL, &philos_action, &vars->philosophers[i]);
         i++;
     }
-    if (vars->num_philo > 1)
-        pthread_create(&vars->monitoring, NULL, &philo_monitoring, vars);
+<<<<<<< HEAD
+}
+=======
     return (0);
 }
+>>>>>>> 7e0dee48c50b18d2ebd68fb1507d5dc9ab3fa4a8
