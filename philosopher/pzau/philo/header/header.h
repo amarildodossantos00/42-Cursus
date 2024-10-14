@@ -57,7 +57,6 @@ typedef struct s_vars
     int     time_eat;
     int     time_sleep;
     int     num_philo_aux;
-    int     philo_eat_cont;
     int     on_routine;
     t_philo *philosophers;
     t_all_mutexs    all_mutexs;

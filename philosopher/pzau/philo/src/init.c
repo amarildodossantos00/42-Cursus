@@ -19,7 +19,6 @@ void     ft_initialize_args(int ac, char **av, t_vars *vars)
     vars->time_eat = ft_atoi(av[3]);
     vars->time_sleep = ft_atoi(av[4]);
     vars->num_philo_aux = 0;
-    vars->philo_eat_cont = 0;
     vars->on_routine = 1;
     if (ac == 6)
         vars->num_philo_aux = ft_atoi(av[5]);

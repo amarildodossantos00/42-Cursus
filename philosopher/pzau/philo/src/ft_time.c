@@ -8,7 +8,7 @@
 /*   Created: 2024/10/07 19:21:28 by pzau              #+#    #+#             */
 /*   Updated: 2024/10/07 19:21:46 by pzau             ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/* *************************************************************************** */
 
 #include "../header/header.h"
 
@@ -19,10 +19,10 @@ long	current_time(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-static int		philo_died(t_philo *philo, long	current)
+static int		philo_died(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->p_vars->all_mutexs.mutex_last_eat);
-	if ((current - philo->time_last) > (size_t)philo->p_vars->time_die)
+	if ((current_time() - philo->time_last) > (size_t)philo->p_vars->time_die + 3)
 	{
 		pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_last_eat);
 		print_all_messagers(philo, DEAD);
@@ -35,11 +35,28 @@ static int		philo_died(t_philo *philo, long	current)
 	return (0);
 }
 
+static int		philo_eat(t_philo *philo, int i)
+{
+	if (philo->p_vars->num_philo_aux > 0)
+	{
+		if (i < philo->p_vars->num_philo)
+		{
+			if (philo->eat_cont != philo->p_vars->num_philo_aux)
+				return (0);
+		}
+		else if (i == philo->p_vars->num_philo)
+		{
+			philo->p_vars->on_routine = 0;
+			return (1);
+		}
+	}
+	return (0);
+}
+
 void	*philo_monitoring(void *param)
 {
 	t_vars	*vars;
 	int				i;
-	long		current;
 
 	vars = (t_vars *)param;
 	i = 0;
@@ -57,30 +74,13 @@ void	*philo_monitoring(void *param)
 		i = 0;
 		while (i < vars->num_philo)
 		{
-			current = current_time();
-			if (philo_died(&vars->philosophers[i], current))
+			if (philo_died(&vars->philosophers[i]))
+				break ;
+			if (philo_eat(&vars->philosophers[i], i))
 				break ;
 			i++;
 		}
-		i = 0;
-		if (vars->num_philo_aux)
-		{
-			while (i < vars->num_philo)
-			{
-				if (vars->philosophers[i] != vars->num_philo_aux)
-				{
-					vars->num_philo_aux = vars->num_philo_aux;
-				}
-				else
-					i++;
-			}
-			if (i == vars->num_philo)
-			{
-				pthread_mutex_lock(&vars->all_mutexs.mew_mutex_died);
-				vars->on_routine = 0;
-				pthread_mutex_unlock(&vars->all_mutexs.mew_mutex_died);
-			}
-		}
+		
 	}
     pthread_mutex_unlock(&vars->all_mutexs.mutex_message);
 }

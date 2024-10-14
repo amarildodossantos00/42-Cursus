@@ -15,7 +15,7 @@
 static void     eating_action(t_philo *philo)
 {
     printf("[%ld]ms philo %d have eaten\n", current_time() - philo->time_init, philo->id);
-    philo->p_vars->philo_eat_cont++;
+    philo->eat_cont++;
 }
 
 void    print_all_messagers(t_philo *philo, int n)
@@ -45,7 +45,7 @@ static void     print_forks(t_philo *philo)
 {
     if ((philo->id % 2) == 0)
     {
-        usleep(1000);
+        //usleep(1000);
         pthread_mutex_lock(philo->left);
         print_all_messagers(philo, FORK);
         pthread_mutex_lock(philo->right);
@@ -63,15 +63,15 @@ static void     print_forks(t_philo *philo)
 static void     running_messagers(t_philo *philo)
 {
     print_forks(philo);
+    print_all_messagers(philo, EAT);
+    usleep(philo->p_vars->time_eat * 1000);
     pthread_mutex_lock(&philo->p_vars->all_mutexs.mutex_last_eat);
     philo->time_last = current_time();
     pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_last_eat);
-    print_all_messagers(philo, EAT);
-    usleep(philo->p_vars->time_eat * 1000);
     pthread_mutex_unlock(philo->right);
     pthread_mutex_unlock(philo->left);
-    usleep(philo->p_vars->time_sleep * 1000);
     print_all_messagers(philo, SLEEP);
+    usleep(philo->p_vars->time_sleep * 1000);
     print_all_messagers(philo, THINK);
 }
 
@@ -90,8 +90,6 @@ void    *philos_action(void *param)
         }
         pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_on_routine);
         //function for only one philosopher (put inside of a if and return one to break)
-        pthread_mutex_lock(&philo->p_vars->all_mutexs.mutex_one);
         running_messagers(philo);
-        pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_one);
     }
 }
