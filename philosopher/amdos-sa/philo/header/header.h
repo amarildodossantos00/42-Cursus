@@ -3,59 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pzau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:12:13 by pzau              #+#    #+#             */
-/*   Updated: 2024/10/10 13:05:23 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/10/04 17:42:25 by pzau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
+#ifndef	HEADER_H
 # define HEADER_H
 
+# define EAT 1
+# define SLEEP 2
+# define THINK 3
+# define DEAD 4
+# define FORK 5
+
 # include <stdio.h>
-# include <unistd.h>
+# include <unistd.h> 
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
 
-typedef struct s_vars	t_vars;
+typedef struct s_vars t_vars;
+
+typedef struct s_all_mutexs
+{
+    pthread_mutex_t mutex_on_routine;
+    pthread_mutex_t mutex_last_eat;
+    pthread_mutex_t mew_mutex_died;
+    pthread_mutex_t mutex_died;
+    pthread_mutex_t mutex_print_sms;
+    pthread_mutex_t mutex_one;
+    pthread_mutex_t mutex_message;
+}   t_all_mutexs;
 
 typedef struct s_philo
 {
-	int				id;
-	pthread_t		thread;
-	long			time_init;
-	long			time_last;
-	long				time_eat_cont;
-	int				death_occurred;
-	pthread_mutex_t	*left;
-	pthread_mutex_t	*right;
-	t_vars			*p_vars;
-}	t_philo;
+    int     id;
+    pthread_t    thread;
+    size_t      time_init;
+    size_t      time_last;
+    int         eat_cont;
+    pthread_mutex_t *left;
+    pthread_mutex_t *right;
+    t_vars      *p_vars;
+}   t_philo;
 
 typedef struct s_vars
 {
-	int				num_philo;
-	int				time_die;
-	int				time_eat;
-	int				time_sleep;
-	int				num_philo_aux;
-	int				on_routine;
-	t_philo			*philosophers;
-	pthread_mutex_t	*forks;
-}	t_vars;
+    int     num_philo;
+    int     time_die;
+    int     time_eat;
+    int     time_sleep;
+    int     num_philo_aux;
+    int     philo_eat_cont;
+    int     on_routine;
+    t_philo *philosophers;
+    t_all_mutexs    all_mutexs;
+    pthread_mutex_t *forks;
+    pthread_t    monitoring;
+}   t_vars;
 
-void	ft_initialize_args(int ac, char **av, t_vars *vars);
-void	*philos_action(void *param);
-void	ft_dispose_all(t_vars *vars);
-void	initial_aux(t_vars *vars);
-void	*monitor_philo(void *arg);
-int		ft_initialize_rest(t_vars *vars, int i);
-int		ft_check_error(int ac, char **av);
-int		ft_atoi(char *str);
-int		is_digit(char str);
-long	get_timestamp(void);
-long	get_elapsed_time(long start_time);
+void    ft_initialize_args(int ac, char **av, t_vars *vars);
+void    print_all_messagers(t_philo *philo, int n);
+void	*philo_monitoring(void *param);
+void    *philos_action(void *param);
+void    ft_dispose_all(t_vars *vars);
+int     ft_initialize_rest(t_vars *vars);
+int	    ft_check_error(int ac, char **av);
+int     ft_strlen(char *str);
+int     ft_atoi(char *str);
+long	current_time(void);
 
 #endif

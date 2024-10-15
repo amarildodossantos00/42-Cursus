@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pzau <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:10:29 by pzau              #+#    #+#             */
-/*   Updated: 2024/10/04 18:14:44 by pzau             ###   ########.fr       */
+/*   Updated: 2024/10/10 10:51:42 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int	main(int ac, char **av)
 {
-	t_vars	vars;
 	int			error;
+	int			i;
+	t_vars		vars;
+	pthread_t	monitor;
 
 	error = ft_check_error(ac, av);
 	if (error)
@@ -25,7 +27,16 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	ft_initialize_args(ac, av, &vars);
-	ft_initialize_rest(&vars);
+	ft_initialize_rest(&vars, 0);
+	if (pthread_create(&monitor, NULL, monitor_philo, (void *)&vars) != 0)
+	{
+		perror("Falha ao criar a thread de monitoramento");
+		while (i++ < vars.num_philo)
+			pthread_mutex_destroy(&vars.forks[i]);
+		free(vars.forks);
+		free(vars.philosophers);
+		return (-1);
+	}
 	ft_dispose_all(&vars);
 	return (0);
 }

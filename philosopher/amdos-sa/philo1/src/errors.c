@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pzau <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 12:56:17 by pzau              #+#    #+#             */
-/*   Updated: 2024/10/04 18:01:31 by pzau             ###   ########.fr       */
+/*   Updated: 2024/10/08 14:24:29 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/header.h"
-
-static int	is_digit(char str)
-{
-	if (str >= 48 && str <= 57)
-		return (0);
-	return (1);
-}
 
 static int	cheack_is_number(int ac, char **av)
 {
@@ -57,7 +50,7 @@ static int	cheack_num_vals(int ac, char **av)
 	return (0);
 }
 
-int     ft_check_error(int ac, char **av)
+int	ft_check_error(int ac, char **av)
 {
 	if (ac != 5 && ac != 6)
 	{

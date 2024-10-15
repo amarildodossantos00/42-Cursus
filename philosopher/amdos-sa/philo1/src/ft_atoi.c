@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   aux.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pzau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 12:10:29 by pzau              #+#    #+#             */
-/*   Updated: 2024/10/04 18:14:44 by pzau             ###   ########.fr       */
+/*   Created: 2024/10/04 14:00:21 by pzau              #+#    #+#             */
+/*   Updated: 2024/10/04 18:00:53 by pzau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/header.h"
 
-int	main(int ac, char **av)
+int	ft_atoi(char *str)
 {
-	t_vars	vars;
-	int			error;
+	int	result;
+	int	sign;
+	int	i;
 
-	error = ft_check_error(ac, av);
-	if (error)
+	i = 0;
+	result = 0;
+	sign = 1;
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		*str++;
+	if (*str == '-')
+		sign = -1;
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str >= '0' && *str <= '9')
 	{
-		printf("Usage: <num_philo> <time_die> <time_eat>");
-		printf(" <time_sleep> <n_time_philo_eat>\n");
-		return (1);
+		result = result * 10 + *str - '0';
+		str++;
 	}
-	ft_initialize_args(ac, av, &vars);
-	ft_initialize_rest(&vars);
-	ft_dispose_all(&vars);
-	return (0);
+	return (sign * result);
 }
