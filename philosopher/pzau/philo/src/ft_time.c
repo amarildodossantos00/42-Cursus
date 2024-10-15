@@ -35,23 +35,28 @@ static int		philo_died(t_philo *philo)
 	return (0);
 }
 
-static int		philo_eat(t_philo *philo, int i)
+static int philo_eat(t_vars *vars)
 {
-	if (philo->p_vars->num_philo_aux > 0)
+	int		i;
+
+    i = 0;
+	while (i < vars->num_philo)
 	{
-		if (i < philo->p_vars->num_philo)
+		pthread_mutex_lock(&vars->all_mutexs.mutex_have_eaten);
+		if (vars->all_eat[i] == 0)
 		{
-			if (philo->eat_cont != philo->p_vars->num_philo_aux)
-				return (0);
+			pthread_mutex_unlock(&vars->all_mutexs.mutex_have_eaten);
+			return (0);
 		}
-		else if (i == philo->p_vars->num_philo)
-		{
-			philo->p_vars->on_routine = 0;
-			return (1);
-		}
+		pthread_mutex_unlock(&vars->all_mutexs.mutex_have_eaten);
+		i++;
 	}
-	return (0);
+	pthread_mutex_lock(&vars->all_mutexs.mew_mutex_died);
+	vars->on_routine = 0;
+	pthread_mutex_unlock(&vars->all_mutexs.mew_mutex_died);
+	return (1);
 }
+
 
 void	*philo_monitoring(void *param)
 {
@@ -61,7 +66,7 @@ void	*philo_monitoring(void *param)
 	vars = (t_vars *)param;
 	i = 0;
     pthread_mutex_lock(&vars->all_mutexs.mutex_message);
-	while  (1)
+	while (1)
 	{
 		usleep(100);
     	pthread_mutex_lock(&vars->all_mutexs.mutex_on_routine);
@@ -76,11 +81,12 @@ void	*philo_monitoring(void *param)
 		{
 			if (philo_died(&vars->philosophers[i]))
 				break ;
-			if (philo_eat(&vars->philosophers[i], i))
-				break ;
+			if (vars->num_philo_aux)
+			{
+				if (philo_eat(vars))
+					break ;
+			}
 			i++;
 		}
-		
 	}
-    pthread_mutex_unlock(&vars->all_mutexs.mutex_message);
 }

@@ -28,7 +28,7 @@ void     ft_initialize_args(int ac, char **av, t_vars *vars)
     pthread_mutex_init(&vars->all_mutexs.mutex_died, NULL);
     pthread_mutex_init(&vars->all_mutexs.mutex_print_sms, NULL);
     pthread_mutex_init(&vars->all_mutexs.mutex_one, NULL);
-    pthread_mutex_init(&vars->all_mutexs.mutex_message, NULL);
+    pthread_mutex_init(&vars->all_mutexs.mutex_have_eaten, NULL);
 }
 
 int     ft_initialize_rest(t_vars *vars)
@@ -38,11 +38,13 @@ int     ft_initialize_rest(t_vars *vars)
     i = 0;
     vars->philosophers = malloc(sizeof(t_philo) * (vars->num_philo));
     vars->forks = malloc(sizeof(pthread_mutex_t) * (vars->num_philo));
+    vars->all_eat = malloc(sizeof(int) * (vars->num_philo));
     if (vars->philosophers == NULL || vars->forks == NULL)
         return (1);
     while (i < vars->num_philo)
     {
         pthread_mutex_init(&vars->forks[i], NULL);
+        vars->all_eat[i] = 0;
         i++;
     }
     i = 0;

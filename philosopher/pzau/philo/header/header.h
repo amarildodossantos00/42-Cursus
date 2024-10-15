@@ -36,6 +36,7 @@ typedef struct s_all_mutexs
     pthread_mutex_t mutex_print_sms;
     pthread_mutex_t mutex_one;
     pthread_mutex_t mutex_message;
+    pthread_mutex_t mutex_have_eaten;
 }   t_all_mutexs;
 
 typedef struct s_philo
@@ -45,6 +46,7 @@ typedef struct s_philo
     size_t      time_init;
     size_t      time_last;
     int         eat_cont;
+    int         meals_eaten;
     pthread_mutex_t *left;
     pthread_mutex_t *right;
     t_vars      *p_vars;
@@ -57,6 +59,7 @@ typedef struct s_vars
     int     time_eat;
     int     time_sleep;
     int     num_philo_aux;
+    int     *all_eat;
     int     on_routine;
     t_philo *philosophers;
     t_all_mutexs    all_mutexs;

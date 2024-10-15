@@ -41,6 +41,8 @@ void   ft_dispose_all(t_vars *vars)
     pthread_mutex_destroy(&vars->all_mutexs.mutex_print_sms);
     pthread_mutex_destroy(&vars->all_mutexs.mutex_one);
     pthread_mutex_destroy(&vars->all_mutexs.mutex_message);
+    pthread_mutex_destroy(&vars->all_mutexs.mutex_have_eaten);
     free(vars->philosophers);
     free(vars->forks);
+    free(vars->all_eat);
 }
