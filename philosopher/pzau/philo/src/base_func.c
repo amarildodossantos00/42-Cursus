@@ -32,6 +32,13 @@ static void     eating_action(t_philo *philo)
 
 void    print_all_messagers(t_philo *philo, int n)
 {
+    pthread_mutex_lock(&philo->p_vars->all_mutexs.mutex_have_eaten);
+    if (philo->p_vars->all_eat[philo->id -1] == 1)
+    {
+       pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_have_eaten);
+        return ;
+    }
+    pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_have_eaten);
     pthread_mutex_lock(&philo->p_vars->all_mutexs.mutex_on_routine);
     if (!philo->p_vars->on_routine)
     {
@@ -39,13 +46,7 @@ void    print_all_messagers(t_philo *philo, int n)
         return ;
     }
     pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_on_routine);
-    pthread_mutex_lock(&philo->p_vars->all_mutexs.mutex_have_eaten);
-    if (philo->p_vars->all_eat[philo->id -1] == 1)
-    {
-        pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_have_eaten);
-        return ;
-    }
-    pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_have_eaten);
+
     pthread_mutex_lock(&philo->p_vars->all_mutexs.mutex_print_sms);
     if (n == EAT)
         eating_action(philo);

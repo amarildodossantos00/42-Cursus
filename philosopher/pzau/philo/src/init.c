@@ -29,7 +29,6 @@ void     ft_initialize_args(int ac, char **av, t_vars *vars)
     pthread_mutex_init(&vars->all_mutexs.mutex_print_sms, NULL);
     pthread_mutex_init(&vars->all_mutexs.mutex_one, NULL);
     pthread_mutex_init(&vars->all_mutexs.mutex_have_eaten, NULL);
-    pthread_mutex_init(&vars->all_mutexs.mutex_message, NULL);
 }
 
 int     ft_initialize_rest(t_vars *vars)
