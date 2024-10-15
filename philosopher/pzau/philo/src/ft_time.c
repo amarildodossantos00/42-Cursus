@@ -65,7 +65,7 @@ void	*philo_monitoring(void *param)
 
 	vars = (t_vars *)param;
 	i = 0;
-    pthread_mutex_lock(&vars->all_mutexs.mutex_message);
+	pthread_mutex_lock(&vars->all_mutexs.mutex_message);
 	while (1)
 	{
 		usleep(100);
@@ -89,4 +89,5 @@ void	*philo_monitoring(void *param)
 			i++;
 		}
 	}
+	pthread_mutex_unlock(&vars->all_mutexs.mutex_message);
 }

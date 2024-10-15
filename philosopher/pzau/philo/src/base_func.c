@@ -104,7 +104,11 @@ void    *philos_action(void *param)
             break ;
         }
         pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_on_routine);
-        //function for only one philosopher (put inside of a if and return one to break)
+        if (philo->p_vars->num_philo == 1)
+        {
+            one_philosopher(philo);
+            break ;
+        }
         running_messagers(philo);
     }
 }

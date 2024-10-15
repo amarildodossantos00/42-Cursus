@@ -12,6 +12,14 @@
 
 #include "../header/header.h"
 
+void    one_philosopher(t_philo *philo)
+{
+    print_all_messagers(philo, FORK);
+    usleep(philo->p_vars->time_die * 1000);
+    print_all_messagers(philo, DEAD);
+    return ;
+}
+
 void   ft_dispose_all(t_vars *vars)
 {
     int     i;
@@ -34,14 +42,17 @@ void   ft_dispose_all(t_vars *vars)
         pthread_mutex_destroy(&vars->forks[i]);
         i++;
     }
-    pthread_mutex_destroy(&vars->all_mutexs.mutex_on_routine);
-    pthread_mutex_destroy(&vars->all_mutexs.mutex_last_eat);
-    pthread_mutex_destroy(&vars->all_mutexs.mew_mutex_died);
-    pthread_mutex_destroy(&vars->all_mutexs.mutex_died);
-    pthread_mutex_destroy(&vars->all_mutexs.mutex_print_sms);
-    pthread_mutex_destroy(&vars->all_mutexs.mutex_one);
-    pthread_mutex_destroy(&vars->all_mutexs.mutex_message);
-    pthread_mutex_destroy(&vars->all_mutexs.mutex_have_eaten);
+    if (vars->num_philo > 1)
+    {
+        pthread_mutex_destroy(&vars->all_mutexs.mutex_on_routine);
+        pthread_mutex_destroy(&vars->all_mutexs.mutex_last_eat);
+        pthread_mutex_destroy(&vars->all_mutexs.mew_mutex_died);
+        pthread_mutex_destroy(&vars->all_mutexs.mutex_died);
+        pthread_mutex_destroy(&vars->all_mutexs.mutex_print_sms);
+        pthread_mutex_destroy(&vars->all_mutexs.mutex_one);
+        pthread_mutex_destroy(&vars->all_mutexs.mutex_have_eaten);
+        pthread_mutex_destroy(&vars->all_mutexs.mutex_message);
+    }
     free(vars->philosophers);
     free(vars->forks);
     free(vars->all_eat);

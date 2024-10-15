@@ -68,6 +68,7 @@ typedef struct s_vars
 }   t_vars;
 
 void    ft_initialize_args(int ac, char **av, t_vars *vars);
+void    one_philosopher(t_philo *philo);
 void    print_all_messagers(t_philo *philo, int n);
 void	*philo_monitoring(void *param);
 void    *philos_action(void *param);
