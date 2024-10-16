@@ -49,7 +49,6 @@ typedef struct s_vars
 	int				time_sleep;
 	int				num_philo_aux;
 	int				on_routine;
-	int				stop;
 	t_philo			*philosophers;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	routine;
