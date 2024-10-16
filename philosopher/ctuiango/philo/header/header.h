@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   header.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctuiango <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/16 13:46:56 by ctuiango          #+#    #+#             */
+/*   Updated: 2024/10/16 13:47:04 by ctuiango         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
@@ -19,10 +29,8 @@ typedef struct s_vars	t_vars;
 
 typedef struct s_all_mutexs
 {
-	pthread_mutex_t	mutex_on_routine;
 	pthread_mutex_t	mutex_last_eat;
-	pthread_mutex_t	mew_mutex_died;
-	pthread_mutex_t	mutex_died;
+	pthread_mutex_t	mutex_on_routine;
 	pthread_mutex_t	mutex_print_sms;
 	pthread_mutex_t	mutex_one;
 	pthread_mutex_t	mutex_have_eaten;

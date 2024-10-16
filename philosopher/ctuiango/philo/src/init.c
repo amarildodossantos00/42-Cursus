@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctuiango <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/16 13:52:30 by ctuiango          #+#    #+#             */
+/*   Updated: 2024/10/16 13:52:38 by ctuiango         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../header/header.h"
 
@@ -12,10 +22,8 @@ void	ft_initialize_args(int ac, char **av, t_vars *vars)
 	vars->on_routine = 1;
 	if (ac == 6)
 		vars->num_philo_aux = ft_atoi(av[5]);
-	pthread_mutex_init(&vars->all_mutexs.mutex_on_routine, NULL);
 	pthread_mutex_init(&vars->all_mutexs.mutex_last_eat, NULL);
-	pthread_mutex_init(&vars->all_mutexs.mew_mutex_died, NULL);
-	pthread_mutex_init(&vars->all_mutexs.mutex_died, NULL);
+	pthread_mutex_init(&vars->all_mutexs.mutex_on_routine, NULL);
 	pthread_mutex_init(&vars->all_mutexs.mutex_print_sms, NULL);
 	pthread_mutex_init(&vars->all_mutexs.mutex_one, NULL);
 	pthread_mutex_init(&vars->all_mutexs.mutex_have_eaten, NULL);

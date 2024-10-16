@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   base_func.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctuiango <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/16 13:51:36 by ctuiango          #+#    #+#             */
+/*   Updated: 2024/10/16 13:51:46 by ctuiango         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../header/header.h"
 
@@ -41,13 +51,10 @@ static void	only_print(t_philo *philo, int n)
 
 void	print_all_messagers(t_philo *philo, int n)
 {
-	pthread_mutex_lock(&philo->p_vars->all_mutexs.mutex_have_eaten);
-	if (philo->p_vars->all_eat[philo->id -1] == 1)
+	if (philo->p_vars->all_eat[philo->id -1])
 	{
-		pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_have_eaten);
 		return ;
 	}
-	pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_have_eaten);
 	pthread_mutex_lock(&philo->p_vars->all_mutexs.mutex_on_routine);
 	if (!philo->p_vars->on_routine)
 	{

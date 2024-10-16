@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_time.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctuiango <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/16 13:52:50 by ctuiango          #+#    #+#             */
+/*   Updated: 2024/10/16 13:52:54 by ctuiango         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../header/header.h"
 
@@ -18,9 +28,9 @@ static int	philo_died(t_philo *philo)
 	{
 		pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_last_eat);
 		print_all_messagers(philo, DEAD);
-		pthread_mutex_lock(&philo->p_vars->all_mutexs.mew_mutex_died);
+		pthread_mutex_lock(&philo->p_vars->all_mutexs.mutex_on_routine);
 		philo->p_vars->on_routine = 0;
-		pthread_mutex_unlock(&philo->p_vars->all_mutexs.mew_mutex_died);
+		pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_on_routine);
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->p_vars->all_mutexs.mutex_last_eat);
@@ -31,21 +41,21 @@ static int	philo_eat(t_vars *vars)
 {
 	int	i;
 
+	pthread_mutex_lock(&vars->all_mutexs.mutex_have_eaten);
 	i = 0;
 	while (i < vars->num_philo)
 	{
-		pthread_mutex_lock(&vars->all_mutexs.mutex_have_eaten);
 		if (vars->all_eat[i] == 0)
 		{
 			pthread_mutex_unlock(&vars->all_mutexs.mutex_have_eaten);
 			return (0);
 		}
-		pthread_mutex_unlock(&vars->all_mutexs.mutex_have_eaten);
 		i++;
 	}
-	pthread_mutex_lock(&vars->all_mutexs.mew_mutex_died);
+	pthread_mutex_unlock(&vars->all_mutexs.mutex_have_eaten);
+	pthread_mutex_lock(&vars->all_mutexs.mutex_on_routine);
 	vars->on_routine = 0;
-	pthread_mutex_unlock(&vars->all_mutexs.mew_mutex_died);
+	pthread_mutex_unlock(&vars->all_mutexs.mutex_on_routine);
 	return (1);
 }
 

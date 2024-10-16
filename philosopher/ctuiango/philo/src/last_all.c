@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   last_all.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctuiango <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/16 13:53:18 by ctuiango          #+#    #+#             */
+/*   Updated: 2024/10/16 13:53:22 by ctuiango         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../header/header.h"
 
@@ -14,10 +24,8 @@ static void	destroy_all(t_vars *vars)
 {
 	if (vars->num_philo > 1)
 	{
-		pthread_mutex_destroy(&vars->all_mutexs.mutex_on_routine);
 		pthread_mutex_destroy(&vars->all_mutexs.mutex_last_eat);
-		pthread_mutex_destroy(&vars->all_mutexs.mew_mutex_died);
-		pthread_mutex_destroy(&vars->all_mutexs.mutex_died);
+		pthread_mutex_destroy(&vars->all_mutexs.mutex_on_routine);
 		pthread_mutex_destroy(&vars->all_mutexs.mutex_print_sms);
 		pthread_mutex_destroy(&vars->all_mutexs.mutex_one);
 		pthread_mutex_destroy(&vars->all_mutexs.mutex_have_eaten);
