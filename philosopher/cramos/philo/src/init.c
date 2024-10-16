@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cramos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/16 11:38:49 by cramos            #+#    #+#             */
+/*   Updated: 2024/10/16 11:38:51 by cramos           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/header.h"
 
 void	ft_initialize_args(int ac, char **av, t_vars *vars)
@@ -19,15 +31,23 @@ void	ft_initialize_args(int ac, char **av, t_vars *vars)
 	pthread_mutex_init(&vars->all_mutexs.mutex_have_eaten, NULL);
 }
 
-int	ft_initialize_rest(t_vars *vars)
+static int	allocate_resources(t_vars *vars)
 {
-	int	i;
+	vars->philosophers = malloc(sizeof(t_philo) * vars->num_philo);
+	vars->forks = malloc(sizeof(pthread_mutex_t) * vars->num_philo);
+	vars->all_eat = malloc(sizeof(int) * vars->num_philo);
+	if (vars->philosophers == NULL || vars->forks == NULL
+		|| vars->all_eat == NULL)
+	{
+		printf("Failed to allocate memory.\n");
+		return (1);
+	}
+	return (0);
+}
 
-	i = 0;
-	vars->philosophers = malloc(sizeof(t_philo) * (vars->num_philo));
-	vars->forks = malloc(sizeof(pthread_mutex_t) * (vars->num_philo));
-	vars->all_eat = malloc(sizeof(int) * (vars->num_philo));
-	if (vars->philosophers == NULL || vars->forks == NULL)
+int	ft_initialize_rest(t_vars *vars, int i)
+{
+	if (allocate_resources(vars))
 		return (1);
 	while (i < vars->num_philo)
 	{

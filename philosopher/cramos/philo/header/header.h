@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vcatete <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cramos <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 09:22:57 by vcatete           #+#    #+#             */
-/*   Updated: 2024/10/16 09:22:59 by vcatete          ###   ########.fr       */
+/*   Created: 2024/10/16 11:40:52 by cramos            #+#    #+#             */
+/*   Updated: 2024/10/16 11:40:55 by cramos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	print_all_messagers(t_philo *philo, int n);
 void	*philo_monitoring(void *param);
 void	*philos_action(void *param);
 void	ft_dispose_all(t_vars *vars);
-int		ft_initialize_rest(t_vars *vars);
+void	print_forks(t_philo *philo);
+int		ft_initialize_rest(t_vars *vars, int i);
 int		ft_check_error(int ac, char **av);
 int		ft_strlen(char *str);
 int		ft_atoi(char *str);

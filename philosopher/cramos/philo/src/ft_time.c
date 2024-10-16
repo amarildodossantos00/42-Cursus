@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_time.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cramos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/16 11:38:42 by cramos            #+#    #+#             */
+/*   Updated: 2024/10/16 11:38:43 by cramos           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/header.h"
 
 long	current_time(void)
@@ -47,6 +59,25 @@ static int	philo_eat(t_vars *vars)
 	return (1);
 }
 
+static int	whileing(t_vars *vars)
+{
+	int	i;
+
+	i = 0;
+	while (i < vars->num_philo)
+	{
+		if (philo_died(&vars->philosophers[i]))
+			return (1);
+		if (vars->num_philo_aux)
+		{
+			if (philo_eat(vars))
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 void	*philo_monitoring(void *param)
 {
 	t_vars	*vars;
@@ -64,17 +95,7 @@ void	*philo_monitoring(void *param)
 			break ;
 		}
 		pthread_mutex_unlock(&vars->all_mutexs.mutex_on_routine);
-		i = 0;
-		while (i < vars->num_philo)
-		{
-			if (philo_died(&vars->philosophers[i]))
-				break ;
-			if (vars->num_philo_aux)
-			{
-				if (philo_eat(vars))
-					break ;
-			}
-			i++;
-		}
+		if (whileing(vars))
+			break ;
 	}
 }
