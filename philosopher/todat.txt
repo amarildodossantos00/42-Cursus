@@ -1,2 +1,0 @@
-1 => Criar o Opcional av[6]
-	number_of_times_each_philosopher_must_eat (argumento opcional): Se todos os filósofos tiverem comido pelo menos number_of_times_each_philosopher_must_eat vezes, a simulação para.
