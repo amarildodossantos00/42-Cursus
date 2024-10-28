@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 13:33:46 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/10/28 18:51:20 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/05/18 10:05:14 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/05/18 10:05:16 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "../libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdio.h>
-# include <stdlib.h>
+#include "libft.h"
 
-#endif
+char	*ft_strrchr(const char *s, int c)
+{
+	int		count;
+	char	*str;
+	char	character;
+
+	str = (char *)s;
+	character = (unsigned char)c;
+	count = ft_strlen(str);
+	if (character == '\0')
+		return (&str[count]);
+	while (--count >= 0)
+		if (s[count] == character)
+			return (&str[count]);
+	return (0);
+}

@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 13:33:46 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/10/28 18:51:20 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/05/17 16:15:46 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/05/17 16:15:49 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "../libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdio.h>
-# include <stdlib.h>
+#include "libft.h"
 
-#endif
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	char		*ddest;
+	const char	*ssrc;
+
+	ddest = (char *)dest;
+	ssrc = (const char *)src;
+	while (n-- > 0)
+		*ddest++ = *ssrc++;
+	return (dest);
+}

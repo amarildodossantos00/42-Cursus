@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 13:33:46 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/10/28 18:51:20 by amdos-sa         ###   ########.fr       */
+/*   Created: 2024/05/18 09:41:53 by amdos-sa          #+#    #+#             */
+/*   Updated: 2024/05/18 09:41:55 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "../libft/libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdio.h>
-# include <stdlib.h>
+#include "libft.h"
 
-#endif
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	c;
+
+	if (n == 0)
+		return (0);
+	c = 0;
+	while ((s1[c] && s2[c]) != '\0' && s1[c] == s2[c] && c < n - 1)
+		c++;
+	return ((s1[c] - s2[c]));
+}
