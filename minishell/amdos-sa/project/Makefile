@@ -6,7 +6,7 @@
 #    By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/28 13:52:21 by amdos-sa          #+#    #+#              #
-#    Updated: 2024/10/28 18:54:52 by amdos-sa         ###   ########.fr        #
+#    Updated: 2024/10/29 15:12:30 by amdos-sa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,4 +45,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-

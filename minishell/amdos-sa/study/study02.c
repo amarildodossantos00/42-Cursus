@@ -5,6 +5,7 @@
 
 char *find_executable(char *command) {
     char *path = getenv("PATH");
+    printf("%s\n\n", path);
     char *dir = strtok(path, ":");
     while (dir) {
         char executable_path[1024];
