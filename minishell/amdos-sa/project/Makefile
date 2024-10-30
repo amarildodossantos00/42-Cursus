@@ -6,14 +6,14 @@
 #    By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/28 13:52:21 by amdos-sa          #+#    #+#              #
-#    Updated: 2024/10/29 15:12:30 by amdos-sa         ###   ########.fr        #
+#    Updated: 2024/10/30 14:16:22 by amdos-sa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
 FLAGS = -Wall -Wextra -Werror
-SRC = src/main.c
+SRC = src/main.c src/utils/sncat.c src/utils/ft_strtok.c src/execute.c
 OBJ = $(SRC:.c=.o)
 DELETE = rm -rf
 LIBFT_DIR = libft
