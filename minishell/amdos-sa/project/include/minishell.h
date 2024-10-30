@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:33:46 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/10/30 14:36:53 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:58:32 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <readline/history.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 char	*sncat(char *dest, const char *src, size_t n);
 char	*find_executable(char *command);
