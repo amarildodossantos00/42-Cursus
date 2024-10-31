@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:35:34 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/10/31 12:47:07 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:04:16 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(void)
 			add_history(command);
 		if (!ft_strncmp(command, "exit", ft_strlen(command)))
 		{
+			rl_clear_history();
 			free(command);
 			exit(0);
 		}
