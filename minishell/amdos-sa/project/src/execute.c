@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 12:07:32 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/10/31 08:09:45 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:47:34 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ char	*find_executable(char *command)
 	return (NULL);
 }
 
-void	execute_path(char *buff)
+void	execute_path(char *command)
 {
 	char	*executable;
 	char	*args[2];
 
-	executable = find_executable(buff);
+	executable = find_executable(command);
 	if (executable)
 	{
 		args[0] = executable;
