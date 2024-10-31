@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:33:46 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/10/30 15:58:32 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:12:40 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,14 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+typedef struct s_vars
+{
+	char	*executable;
+}	t_vars;
+
 char	*sncat(char *dest, const char *src, size_t n);
 char	*find_executable(char *command);
 char	*ft_strtok(char *str, const char *delim);
+void	execute_path(char *buff);
 
 #endif
