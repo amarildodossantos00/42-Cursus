@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:35:34 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/10/30 16:23:42 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/10/31 07:00:07 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,34 @@
 int	main(void)
 {
 	static char	*buff;
-	char *executable = find_executable("ls");
-	char *args[] = {executable, NULL};
+	char *executable;
+	char *args[2];
 	while (1)
 	{
 		buff = readline("minishell% ");
+		if (!buff)
+			break;
 		if (ft_strlen(buff) > 0)
 			add_history(buff);
-		if (!ft_strncmp(buff, "ls", ft_strlen(buff)))
-		{
-			free(buff);
-			if (executable)
-			{
-				execv(args[0], args);
-				perror("execv falhou");
-				free(executable);
-			} else
-				printf("Executable not found.\n");
-		}
-		if (!ft_strncmp(buff, "exit", ft_strlen(buff)))
+		if (!ft_strncmp(buff, "exit", 4))
 		{
 			free(buff);
 			exit(0);
 		}
-		else
-			printf("%s: command not found\n", buff);
-		free(buff);
-	}
-/*		if (executable)
+		executable = find_executable(buff);
+		if (executable)
 		{
+			args[0] = executable;
+			args[1] = NULL;
 			execv(args[0], args);
 			perror("execv falhou");
 			free(executable);
-		} else
-			printf("Executable not found.\n");*/
+		}
+		else
+			printf("Executable not found: %s\n", buff);
+		free(buff);
+		buff = NULL;
+		executable = NULL;
+	}
 	return (0);
 }
