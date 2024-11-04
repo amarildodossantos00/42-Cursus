@@ -5,7 +5,7 @@ Campus: 42 Luanda
 
 username: amdos-sa, pzau, cramos, ctuiango, vcatete
 
-coalition: Fénix-Dourada, Solaris, Aegis
+coalition: Aegis, Fénix-Dourada, Solaris
 
 
 This is about our projecs during the Communcore course :)
