@@ -6,7 +6,7 @@
 /*   By: amdos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:35:34 by amdos-sa          #+#    #+#             */
-/*   Updated: 2024/10/31 14:04:16 by amdos-sa         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:09:24 by amdos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int	main(void)
 {
 	static char	*command;
+	pid_t		pid;
 
+	signal(SIGINT, control_c);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		command = readline("minishell% ");
@@ -23,14 +26,22 @@ int	main(void)
 			break ;
 		if (ft_strlen(command) > 0)
 			add_history(command);
-		if (!ft_strncmp(command, "exit", ft_strlen(command)))
+		if (ft_strncmp(command, "exit", ft_strlen(command)) == 0)
 		{
 			rl_clear_history();
 			free(command);
-			exit(0);
+			exit (0);
 		}
-		execute_path(command);
-		printf("Executable not found: %s\n", command);
+		pid = fork();
+		if (pid < 0)
+			perror("Error\n");
+		else if (pid == 0)
+		{
+			execute_path(command);
+			printf("%s: command not found\n", command);
+		}
+		else
+			wait(NULL);
 		free(command);
 		command = NULL;
 	}
