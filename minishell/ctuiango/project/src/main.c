@@ -49,13 +49,14 @@ int	main(void)
 		perror("Error");
 		else if (pid == 0)
 		{
+			signal(SIGINT, SIG_DFL);
 			execute_path(command);
 			printf("Executable not found: %s\n", command);
 		}
 		else
 		{
-			int	status;
-			waitpid(pid, &status, 0);
+			//int	status;
+			waitpid(pid, NULL, 0);
 		}
 		free(command);
 		command = NULL;
