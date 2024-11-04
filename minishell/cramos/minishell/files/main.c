@@ -12,7 +12,7 @@
 
 #include "../header/header.h"
 
-void handle_sigint(int sig)
+void ctrl(int sig)
 {
     rl_on_new_line();
 
@@ -23,7 +23,7 @@ void handle_sigint(int sig)
 
 int main()
 {
-	signal(SIGINT, handle_sigint);
+	signal(SIGINT, ctrl);
     char *input;
 
 
