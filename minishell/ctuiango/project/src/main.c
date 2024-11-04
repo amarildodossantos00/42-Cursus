@@ -32,7 +32,10 @@ int	main(void)
 	{
 		command = readline("minishell% ");
 		if (!command)
+		{
+			printf("exit\n");
 			break ;
+		}
 		if (ft_strlen(command) > 0)
 			add_history(command);
 		if (strcmp(command, "exit") == 0) // ft_strlen(command)) == 0)
