@@ -1,0 +1,75 @@
+
+Lista de funcoes
+
+1-readline:
+	exibe um promp de espera para o usuario no terminal, geralmente aguarda pela entrada de texto e permite ao usuaraio editar a linha de entreda de uma forma interativa.
+	
+2-rl_clear_history:
+	remove todos os comandos armazenados no histórico de sessão atual.
+
+3-rl_on_new_line:
+	cria uma nova linha no terminal.
+	
+4-rl_replace_line:
+	você pode usar essa função para substituir a linha atual, seja para corrigir um erro ou para mostrar ao usuário algo diferente, como uma mensagem de erro ou uma atualização.
+	
+5-rl_redisplay:
+	rescreve o que voce digitou.
+	
+6-add_history:
+	adiciona no historico do terminal, de tudo quanto ja foi digitado.
+
+7-acces:
+	é usada para verificar as permissões de acesso de um arquivo ou diretório. Ela permite verificar se um determinado arquivo pode ser lido, escrito ou executado pelo processo atual, ou ainda se o arquivo existe no sistema de arquivos.
+	
+8-getcwd:
+	é uma função da biblioteca padrão C, definida em <unistd.h>, que permite obter o diretório de trabalho atual (também conhecido como "diretório atual" ou "diretório de trabalho do processo").
+	
+9-chdir:
+	é alterar o diretório de trabalho atual do processo. Após a chamada de chdir(), qualquer operação de arquivo que utilize um caminho relativo será feita em relação ao novo diretório de trabalho.
+
+10-stat:
+	definida em <sys/stat.h>, que fornece informações detalhadas sobre um arquivo ou diretório no sistema de arquivos. Ela permite obter atributos como tipo, permissões, tamanho, data de modificação, etc., sem abrir o arquivo propriamente dito.
+	
+11-lstat:
+	A função lstat (de "link status") é similar à função stat, que retorna informações sobre arquivos e diretórios, mas com a diferença de que, se o caminho fornecido for um link simbólico, o lstat retorna informações sobre o link simbólico em si, e não sobre o arquivo ou diretório que ele aponta.
+	
+12-fstat:
+	A função fstat permite que você obtenha informações sobre um arquivo já aberto, ao invés de obter essas informações a partir de um caminho de arquivo no sistema de arquivos. Ou seja, você fornece para a função um descritor de arquivo (um número inteiro que representa o arquivo aberto), e não o caminho do arquivo no sistema de arquivos.
+
+13-unlink:
+	remover arquivos do sistema de arquivos. Essencialmente, ela deleta um arquivo, mas de uma maneira específica: ela remove o nome do arquivo e sua associação ao conteúdo de dados, mas o arquivo pode continuar existindo no sistema até que não haja mais referências a ele.
+	
+14-execve:
+	essa funcao é capaz de substituir um processo por um novo.
+
+15-dup:
+	A função dup cria uma cópia de um descritor de arquivo existente, retornando o novo descritor, que pode ser usado da mesma forma que o original. O descritor copiado refere-se ao mesmo arquivo ou recurso (como um socket ou pipe) que o descritor original.
+
+16-dup2:
+	faz o mesmo que o dup mas com mais argumentos.
+	
+17-pipe:
+	Um pipe é um mecanismo de comunicação entre processos (IPC - Inter-Process Communication) que conecta a saída de um processo à entrada de outro. Ele é representado por dois descritores de arquivo.
+	
+18-opendir:
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
