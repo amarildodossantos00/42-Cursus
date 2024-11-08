@@ -53,23 +53,63 @@ Lista de funcoes
 	Um pipe é um mecanismo de comunicação entre processos (IPC - Inter-Process Communication) que conecta a saída de um processo à entrada de outro. Ele é representado por dois descritores de arquivo.
 	
 18-opendir:
+	A função opendir é usada em C para abrir um diretório e retornar um ponteiro para a estrutura DIR, que representa esse diretório aberto. Com ela, você pode ler o conteúdo do diretório usando readdir, e ao finalizar, deve fechá-lo com closedir.
 	
+19-readdir:
+	A função readdir é usada em C para ler o próximo item em um diretório que foi previamente aberto com opendir. Cada chamada de readdir retorna uma estrutura dirent que contém informações sobre um item do diretório (arquivo, subdiretório, etc.). Com isso, é possível iterar sobre o conteúdo de um diretório e listar todos os arquivos e subdiretórios.
 
+20-closedir:
+	A função closedir é usada em C para fechar um diretório previamente aberto com opendir. Ela libera os recursos associados ao ponteiro DIR, garantindo que o programa não cause vazamento de memória ao manipular diretórios.
 
+21-isatty:
+	A função isatty serve para checar se um descritor de arquivo (como entrada ou saída padrão) está conectado a um terminal (como o console do seu computador) ou a outro dispositivo, como um arquivo ou pipe.
+	1 (verdadeiro): Se o descritor está conectado a um terminal.
+	0 (falso): Se está conectado a algo diferente (como um arquivo).
+	
+22-ttyname:
+	A função ttyname é usada em C para obter o nome do terminal associado a um descritor de arquivo, como a entrada padrão (STDIN_FILENO), a saída padrão (STDOUT_FILENO) ou o erro padrão (STDERR_FILENO). Basicamente, ela retorna uma string com o caminho do terminal (como /dev/tty1), permitindo que o programa saiba exatamente qual terminal está em uso.
 
+23-ttyslot:
+	Um "slot de terminal" refere-se a uma posição ou entrada em um arquivo de sistema, como o /etc/utmp, que armazena informações sobre sessões de usuários ativas e terminais associados. Em sistemas Unix/Linux, esses slots são registros que ajudam o sistema a monitorar e gerenciar cada terminal ou sessão aberta por um usuário, especialmente em ambientes de múltiplos usuários e terminais.
+	Arquivo /etc/utmp: Esse arquivo armazena as informações de todas as sessões ativas, como o usuário logado, o terminal em uso e o horário de início da sessão. Cada sessão ativa tem um slot no arquivo /etc/utmp.
+	Posição no Arquivo: O slot é, na prática, a posição da entrada de uma sessão ou terminal no arquivo /etc/utmp.
+	
+24-ioctl:
+	A função ioctl (Input/Output Control) é uma chamada de sistema no C usada para enviar comandos específicos a dispositivos, como terminais, sockets ou drivers de hardware. Ela permite que o código faça operações de controle diretamente sobre um dispositivo, além de ler ou escrever dados, possibilitando configurações avançadas que não são acessíveis com funções de I/O comuns (read e write).
 
+25-getenv:
+	A função getenv em C é usada para obter o valor de uma variável de ambiente do sistema operacional. As variáveis de ambiente são usadas para armazenar informações de configuração que o sistema operacional e os programas podem acessar durante a execução, como o diretório de trabalho, configurações de idioma, configurações de caminho de arquivos executáveis, entre outras.
 
+26-tcsetattr:
+	A função tcsetattr em C é usada para alterar os atributos de um terminal. Esses atributos incluem configurações como o modo de entrada/saída do terminal, a velocidade de comunicação, os modos de controle de fluxo, entre outros. A função permite modificar o comportamento do terminal, tornando-o adequado para diferentes tipos de interação, como programas de linha de comando interativos ou manipulação direta de dispositivos de terminal.
 
+27-tcgetattr:
+	A função tcgetattr em C é usada para obter os atributos de configuração atuais de um terminal. Essa função é importante para que você possa ler as configurações de entrada e saída do terminal antes de modificá-las com funções como tcsetattr. Isso é útil, especialmente em programas que alteram o comportamento do terminal, pois você pode salvar as configurações atuais antes de alterá-las, para que possa restaurá-las depois.
 
+28-tgetent:
+	A função tgetent é parte da biblioteca termcap (e também disponível no ncurses), e é usada para acessar as informações sobre a configuração de um terminal específico a partir de um banco de dados. A função permite que um programa de terminal configure e interaja com o terminal de maneira mais robusta e com mais controle sobre suas capacidades e comportamentos.
+	A função tgetent consulta um banco de dados de terminais (tipicamente o arquivo /etc/termcap ou, em sistemas modernos, o banco de dados terminfo), para carregar as capacidades do terminal especificado (como cores, controle de cursor, etc.) para um buffer que é então utilizado pelas outras funções de manipulação de terminais.
+	
+29-tgetflag:
+	A função tgetflag é uma função da biblioteca termcap (ou ncurses), utilizada para verificar se um terminal específico suporta uma capacidade booleana. Ao contrário de outras funções da termcap que retornam valores numéricos ou strings, tgetflag retorna um valor booleano (1 ou 0), indicando se o terminal suporta ou não uma determinada capacidade.
+	Capacidades booleanas são aquelas que podem ser simplesmente "sim" ou "não". Por exemplo, um terminal pode ou não suportar o controle de cores, margens automáticas ou outras funcionalidades. O tgetflag é usado para testar esses tipos de capacidades.
 
+30-tgetnum:
+	A função tgetnum faz parte da biblioteca termcap (ou ncurses) e é utilizada para obter informações numéricas sobre as capacidades de um terminal. Diferente das funções que lidam com capacidades booleanas ou de string, tgetnum retorna valores inteiros, como o número de colunas, o número de linhas, ou outras propriedades numéricas de um terminal.
 
-
-
-
-
-
-
-
+31-tgetstr:
+	A função tgetstr é parte da biblioteca termcap (ou ncurses) e é utilizada para obter capacidades do terminal que retornam strings. Enquanto tgetnum retorna valores numéricos e tgetflag retorna valores booleanos, tgetstr é usada para recuperar informações sobre o terminal que são representadas como strings.
+	Explicação do Exemplo: Obtendo o Nome do Terminal, Carregando Informações do Terminal, Obtendo o Código de Backspace, Exibindo a String de Backspace.
+	
+32-tgoto:
+	A função tgoto usa uma string de controle que foi recuperada usando a função tgetstr (ou seja, uma string que define uma capacidade específica do terminal). Ela substitui os parâmetros de coluna e linha na string de controle fornecida e retorna a string formatada que pode ser enviada ao terminal para mover o cursor para a posição desejada.
+	tgoto é uma função que gera uma string de controle para mover o cursor em um terminal baseado em um código de controle (como "cm" para mover o cursor).
+	Ela utiliza os parâmetros de coluna e linha para substituir na string de controle fornecida, retornando a string formatada que pode ser enviada ao terminal.
+	A função é útil quando você precisa fazer operações de manipulação avançada do cursor ou formatação do terminal.
+	
+33-tputs:
+	A função tputs é uma parte importante da biblioteca termcap (ou ncurses) e é usada para enviar comandos de controle de terminal para a saída padrão. Ela é especialmente útil quando você precisa emitir sequências de controle de terminal para realizar ações como mover o cursor, limpar a tela ou alterar as cores de fundo e texto, entre outras operações.
+	A função tputs é usada para imprimir uma sequência de controle no terminal de maneira segura. O str é a sequência de controle que você deseja enviar (como mover o cursor ou limpar a tela), e tputs vai tratar da execução dessa sequência, chamando repetidamente a função fornecida (putc) para escrever os caracteres da string de controle no terminal.
 
 
 
