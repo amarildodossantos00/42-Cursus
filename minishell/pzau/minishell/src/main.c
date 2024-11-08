@@ -12,10 +12,29 @@
 
 #include "../header/header.h"
 
+static void	inicialize_args(t_vars *vars)
+{
+	const char **commands;
+	int num_commands;
+	int i;
+
+	i = 0;
+	commands = (const char *[]){"echo", "cd", "pwd", "export", "unset", "env", "exit"};
+	num_commands = 7;
+	vars->bibleoteca = malloc(sizeof(char *) * (num_commands + 1));
+	while (i < num_commands)
+	{
+		vars->bibleoteca[i] = strdup(commands[i]);
+		i++;
+	}
+
+}
+
 int	main(void)
 {
 	t_vars vars;
 
+	inicialize_args(&vars);
 	inicialize_all(&vars);
 	return (0);
 }

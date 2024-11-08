@@ -27,7 +27,8 @@
 
 typedef struct s_vars
 {
-	char *init;
+	char *input;
+	char **bibleoteca;
 }	t_vars;
 
 

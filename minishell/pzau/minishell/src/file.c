@@ -14,8 +14,11 @@
 
 void	inicialize_all(t_vars *vars)
 {
-	vars->init = "All done";
-
-	printf("%s\n", vars->init);
+	while (1)
+	{
+		vars->input = readline("minishell% ");
+		add_history(vars->input);
+		free(vars->input);
+	}
 	return ;
 }

@@ -26,7 +26,7 @@ OBJ = ${SRC:.c=.o}
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(NAME) $(OBJ) $(COMPILE)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(COMPILE)
 
 clean:
 	rm -f $(OBJ)
