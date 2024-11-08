@@ -1,0 +1,27 @@
+
+---headers---
+#include <term.h>  // Para usar as funções termcap
+#include <ncurses.h>  // Para usar a biblioteca ncurses
+---Compilar com---
+cc -o minishell minishell.c -ltermcap
+cc -o minishell minishell.c -lncurses
+
+
+---headers---
+#include <readline/readline.h>
+#include <readline/history.h>
+---Compilar com---
+cc -o minishell minishell.c -lreadline -lhistory
+
+
+---headers---
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <signal.h>
+
+
+---Compilação Geral---
+cc -o minishell minishell.c -lreadline -lhistory -lncurses -ltermcap
+
