@@ -2,16 +2,16 @@
 
 Building Minishell
 
-0- Parte Basica
+0- Parte Basica 
 
-1- Pegar as variaveis de ambinte e a PATH
+1- Pegar as variaveis de ambinte e a PATH (pzau)
 
-2- Manipular a PATH
+2- Manipular a PATH (amdos-sa)
 
-3- Manipulacão dos parametros
+3- Manipulacão dos parametros (amdos-sa)
 
-4- Build Builtins
+4- Build Builtins (CC)
 
-5- Redirecionamentos e PIPES
+5- Redirecionamentos e PIPES (quem sabe)
 
-6- Lidar com Futuros erros e imprevistos
+6- Lidar com Futuros erros e imprevistos (todos)
