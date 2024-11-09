@@ -19,10 +19,12 @@
 # include <stdlib.h>
 # include <signal.h>
 # include <unistd.h>
+# include <sys/wait.h>
 
 char	*sncat(char *dest, const char *src, size_t n);
 char	*find_executable(char *command);
 char	*ft_strtok(char *str, const char *delim);
 void	execute_path(char *buff);
+void	control_c(int sig);
 
 #endif

@@ -1,0 +1,17 @@
+
+
+Building Minishell
+
+0- Parte Basica
+
+1- Pegar as variaveis de ambinte e a PATH
+
+2- Manipular a PATH
+
+3- Manipulacão dos parametros
+
+4- Build Builtins
+
+5- Redirecionamentos e PIPES
+
+6- Lidar com Futuros erros e imprevistos

@@ -13,7 +13,7 @@
 NAME = minishell
 CC = cc
 FLAGS = -Wall -Wextra -Werror
-SRC = src/main.c src/utils/sncat.c src/utils/ft_strtok.c src/execute.c
+SRC = src/main.c src/utils/sncat.c src/utils/ft_strtok.c src/execute.c src/controls.c
 OBJ = $(SRC:.c=.o)
 DELETE = rm -rf
 LIBFT_DIR = libft

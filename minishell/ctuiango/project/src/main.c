@@ -13,21 +13,12 @@
 #include "../include/minishell.h"
 #include <sys/wait.h>
 
-
-void control_c(int sig)
-{
-	(void)sig;
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
-
 int	main(void)
 {
 	static char	*command;
 	pid_t	pid;
 	signal(SIGINT, control_c);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		command = readline("minishell% ");
@@ -38,7 +29,7 @@ int	main(void)
 		}
 		if (ft_strlen(command) > 0)
 			add_history(command);
-		if (strcmp(command, "exit") == 0) // ft_strlen(command)) == 0)
+		if (ft_strncmp(command, "exit", ft_strlen(command)) == 0)
 		{
 			rl_clear_history();
 			free(command);
@@ -46,12 +37,12 @@ int	main(void)
 		}
 		pid = fork();
 		if (pid < 0)
-		perror("Error");
+			perror("Error\n");
 		else if (pid == 0)
 		{
 			signal(SIGINT, SIG_DFL);
 			execute_path(command);
-			printf("Executable not found: %s\n", command);
+			printf("Command not found: %s\n", command);
 		}
 		else
 		{
