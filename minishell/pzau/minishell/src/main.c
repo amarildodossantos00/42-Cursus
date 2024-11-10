@@ -33,6 +33,7 @@ static void	inicialize_args(t_vars *vars)
 int	main(void)
 {
 	t_vars vars;
+	//extern char **environ;
 
 	inicialize_args(&vars);
 	inicialize_all(&vars);

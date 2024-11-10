@@ -8,7 +8,9 @@ COMPILE = -lreadline -lhistory
 
 SRC = src/main.c\
       	src/file.c\
+	src/get_variables.c\
 	libx/ft_strlen.c\
+	libx/ft_strncmp.c\
 
 OBJ = ${SRC:.c=.o}
 
