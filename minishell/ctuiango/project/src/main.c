@@ -17,6 +17,7 @@ int	main(void)
 {
 	static char	*command;
 	pid_t	pid;
+	char	*pwd = get
 	signal(SIGINT, control_c);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)

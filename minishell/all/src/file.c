@@ -9,7 +9,7 @@ static void	control_c(int sig)
 	rl_redisplay();
 }
 
-static int	crtl_all(t_vars *vars)
+static int	crtl_d(t_vars *vars)
 {
 	if (!vars->input)
 	{
@@ -27,7 +27,7 @@ void    call_prompt(t_vars *vars)
 	while (1)
 	{
 		vars->input = readline("minishell% ");
-		if (crtl_all(vars))
+		if (crtl_d(vars))
 			break ;
 		if (ft_strlen(vars->input) > 0)
 			add_history(vars->input);
