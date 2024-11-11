@@ -31,6 +31,8 @@ void    call_prompt(t_vars *vars)
 			break ;
 		if (ft_strlen(vars->input) > 0)
 			add_history(vars->input);
+		if (ft_strncmp(vars->input, "env", ft_strlen(vars->input)) == 0)
+			print_variables(vars);
 		free(vars->input);
 	}
 	return ;

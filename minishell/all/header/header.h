@@ -15,8 +15,14 @@
 typedef struct s_vars
 {
         char	*input;
+	char	**variables;
 }	t_vars;
 
 void	call_prompt(t_vars *vars);
+
+//pzau
+void	get_variables(t_vars *vars, char **environ);
+void    print_variables(t_vars *vars);
+//pzau
 
 #endif
