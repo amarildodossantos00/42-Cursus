@@ -11,6 +11,7 @@ SRC = src/main.c\
 	src/get_variables.c\
 	libx/ft_strlen.c\
 	libx/ft_strncmp.c\
+	src/commands.c\
 
 OBJ = ${SRC:.c=.o}
 

@@ -25,4 +25,8 @@ void	get_variables(t_vars *vars, char **environ);
 void    print_variables(t_vars *vars);
 //pzau
 
+//cc
+void	cd(t_vars *vars);
+void    pwd(t_vars *vars);
+//cc
 #endif
