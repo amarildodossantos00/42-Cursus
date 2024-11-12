@@ -38,9 +38,12 @@ void	pwd(t_vars *vars)
 	printf("%s\n", vars->input);
 }
 
-/*void	ft_exit(int signum)
+void	ft_exit(t_vars *vars)
 {
-	t_vars *vars;
-	free(vars->input);
-	exit(0);	
-}*/
+	if (ft_strncmp(vars->input, "exit", 4) == 0)
+	{
+		printf("exit\n");
+		exit(0);
+	}
+	
+}
