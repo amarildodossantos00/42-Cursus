@@ -16,6 +16,7 @@ SRC = src/main.c\
 	libx/ft_strchr.c\
 	libx/ft_strdup.c\
 	libx/ft_strcmp.c\
+	libx/ft_split.c\
 
 OBJ = ${SRC:.c=.o}
 
