@@ -36,20 +36,10 @@ void    call_prompt(t_vars *vars)
 		//pzau
 		if (ft_strncmp(vars->input, "env", ft_strlen(vars->input)) == 0)
 			print_variables(vars);
-
 		//cc
-		/*if (ft_strncmp(vars->input, "cd", ft_strlen(vars->input)) == 0)
-			cd(vars);
-		else if (ft_strncmp(vars->input, "cd ..", ft_strlen(vars->input)) == 0)
-			cd(vars);*/
-		 if (ft_strncmp(vars->input, "cd", 2) == 0)
-		 {
-            		if (strcmp(vars->input, "cd ..") == 0)
-                		vars->input = "..";
-            		else if (strcmp(vars->input, "cd") == 0)
-                		vars->input = NULL;
+		vars->matrix = ft_split(vars->input);
+		 if (ft_strncmp(vars->matrix[0], "cd", 2) == 0)
             		cd(vars);
-            	}
 		if (ft_strncmp(vars->input, "pwd", ft_strlen(vars->input)) == 0)
 			pwd(vars);
 		//cc
