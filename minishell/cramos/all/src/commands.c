@@ -20,13 +20,13 @@ static void	get_home(t_vars *vars)
 	}
 	vars->path = NULL;
 }
-void cd(t_vars *vars)
+void	cd(t_vars *vars)
 {
-	if (vars->input == NULL)	
+	if (vars->matrix[1] == NULL)	
 		get_home(vars);
-	else if (ft_strncmp(vars->matrix[1]), "..", 2) == 0)
+	else if (ft_strncmp(vars->matrix[1], "..", 2) == 0)
 		vars->path = vars->matrix[1];
-    	chdir(vars->path)
+    	chdir(vars->path);
 }
 
 void	pwd(t_vars *vars)
@@ -37,3 +37,10 @@ void	pwd(t_vars *vars)
 		perror("Caminho não encontrado\n");
 	printf("%s\n", vars->input);
 }
+
+/*void	ft_exit(int signum)
+{
+	t_vars *vars;
+	free(vars->input);
+	exit(0);	
+}*/

@@ -24,6 +24,7 @@ void    call_prompt(t_vars *vars)
 {
 	signal(SIGINT, control_c);
 	signal(SIGQUIT, SIG_IGN);
+	//signal(SIGTERM, ft_exit);
 
 	while (1)
 	{
@@ -38,13 +39,15 @@ void    call_prompt(t_vars *vars)
 			print_variables(vars);
 		//cc
 		vars->matrix = ft_split(vars->input);
-		 if (ft_strncmp(vars->matrix[0], "cd", 2) == 0)
+		if (ft_strncmp(vars->matrix[0], "cd", 2) == 0)
             		cd(vars);
 		if (ft_strncmp(vars->input, "pwd", ft_strlen(vars->input)) == 0)
 			pwd(vars);
+		//if (ft_strncmp(vars->input, "exit", 4) == 0);
+			//kill(getpid(), SIGTERM);
 		//cc
 
-		else if (ft_strncmp(vars->input, "unset", ft_strlen(vars->input)) == 0)
+		if(ft_strncmp(vars->input, "unset", ft_strlen(vars->input)) == 0)
 			remove_variable(vars, "PATH");
 		else if (ft_strncmp(vars->input, "export", ft_strlen(vars->input)) == 0)
 			add_variables(vars, "pzau");
