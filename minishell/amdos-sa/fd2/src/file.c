@@ -50,6 +50,7 @@ void	call_prompt(t_vars *vars)
 		}
 		else
 			wait(NULL);
+		//exit (1);
 		free(vars->input);
 		while (j++ < vars->cargs)
 			free(vars->args[j]);

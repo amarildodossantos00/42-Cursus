@@ -20,6 +20,7 @@ typedef struct s_vars
 {
 	char	*input;
 	char	*path;
+	char	*last_command;
 	char	**variables;
 	char	**args;
 	size_t	cargs;
