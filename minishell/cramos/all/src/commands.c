@@ -20,13 +20,17 @@ static void	get_home(t_vars *vars)
 	}
 	vars->path = NULL;
 }
+
 void	cd(t_vars *vars)
 {
 	if (vars->matrix[1] == NULL)	
 		get_home(vars);
 	else if (ft_strncmp(vars->matrix[1], "..", 2) == 0)
 		vars->path = vars->matrix[1];
-    	chdir(vars->path);
+	else
+		vars->path = vars->matrix[1];
+    	if (vars->path != NULL && chdir(vars->path) != 0)
+    		perror("cd");
 }
 
 void	pwd(t_vars *vars)
