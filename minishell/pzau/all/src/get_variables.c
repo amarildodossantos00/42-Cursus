@@ -149,11 +149,13 @@ void	update_last_comand(t_vars *vars)
 		if (equal_sign != NULL)
 		{
 			len = equal_sign - vars->variables[i];
-			if (ft_strncmp(vars->variables[i], "_", len) == 0)
+			if (ft_strncmp(vars->variables[i], "_", len) == 0 && len == 1)
 			{
-				if (vars->variables[i] != NULL)
+				if (vars->last_command != NULL)
+				{
 					free(vars->variables[i]);
-				vars->variables[i] = ft_strjoin("/usr/bin/", ft_strdup(vars->input));
+					vars->variables[i] = ft_strjoin("_=", vars->last_command);
+				}
 				return ;
 			}
 		}
