@@ -20,13 +20,17 @@ static void	get_home(t_vars *vars)
 	}
 	vars->path = NULL;
 }
+
 void	cd(t_vars *vars)
 {
 	if (vars->matrix[1] == NULL)	
 		get_home(vars);
 	else if (ft_strncmp(vars->matrix[1], "..", 2) == 0)
 		vars->path = vars->matrix[1];
-    	chdir(vars->path);
+	else
+		vars->path = vars->matrix[1];
+    	if (vars->path != NULL && chdir(vars->path) != 0)
+    		perror("cd");
 }
 
 void	pwd(t_vars *vars)
@@ -38,9 +42,12 @@ void	pwd(t_vars *vars)
 	printf("%s\n", vars->input);
 }
 
-/*void	ft_exit(int signum)
+void	ft_exit(t_vars *vars)
 {
-	t_vars *vars;
-	free(vars->input);
-	exit(0);	
-}*/
+	if (ft_strncmp(vars->input, "exit", 4) == 0)
+	{
+		printf("exit\n");
+		exit(0);
+	}
+	
+}

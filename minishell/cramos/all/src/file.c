@@ -30,6 +30,7 @@ void    call_prompt(t_vars *vars)
 	{
 		get_path(vars);
 		vars->input = readline("minishell% ");
+		ft_exit(vars);
 		if (crtl_all(vars))
 			break ;
 		if (ft_strlen(vars->input) > 0)
@@ -43,7 +44,8 @@ void    call_prompt(t_vars *vars)
             		cd(vars);
 		if (ft_strncmp(vars->input, "pwd", ft_strlen(vars->input)) == 0)
 			pwd(vars);
-		//if (ft_strncmp(vars->input, "exit", 4) == 0);
+		//if (ft_strncmp(vars->input, "exit", 4) == 0)
+			//ft_exit;
 			//kill(getpid(), SIGTERM);
 		//cc
 
