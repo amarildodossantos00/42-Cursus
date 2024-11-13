@@ -39,5 +39,6 @@ void    get_path(t_vars *vars);
 void	cd(t_vars *vars);
 void    pwd(t_vars *vars);
 void	ft_exit(t_vars *vars);
+void	echo(t_vars *vars);
 //cc
 #endif
