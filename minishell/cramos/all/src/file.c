@@ -11,12 +11,11 @@ static void	control_c(int sig)
 
 static int	crtl_all(t_vars *vars)
 {
-	if (vars->input == NULL)
+	if (!vars->input)
 	{
-		printf("sssss\n\n");
 		printf("exit\n");
 		liberar(vars);
-		exit(0);
+		return (1);
 	}
 	return (0);
 }
@@ -30,14 +29,14 @@ void    call_prompt(t_vars *vars)
 	{
 		get_path(vars);
 		vars->input = readline("minishell% ");
+		if (crtl_all(vars))
+			break ;
 		if(vars->input[0] == '\0')
 		{
 			free(vars->input);
 			continue ;
 		}
 		ft_exit(vars);
-		if (crtl_all(vars))
-			break ;
 		if (ft_strlen(vars->input) > 0)
 			add_history(vars->input);
 		//pzau
@@ -53,7 +52,7 @@ void    call_prompt(t_vars *vars)
 			echo(vars);
 		//cc
 
-		if(ft_strncmp(vars->input, "unset", ft_strlen(vars->input)) == 0)
+		else if(ft_strncmp(vars->input, "unset", ft_strlen(vars->input)) == 0)
 			remove_variable(vars, "PATH");
 		else if (ft_strncmp(vars->input, "export", ft_strlen(vars->input)) == 0)
 			add_variables(vars, "pzau");
