@@ -22,53 +22,50 @@ static int	crtl_all(t_vars *vars)
 
 void    call_prompt(t_vars *vars)
 {
-	int i;
 	pid_t		pid;
 	size_t		j;
 	signal(SIGINT, control_c);
 	signal(SIGQUIT, SIG_IGN);
 
-	i = 0;
 	while (1)
 	{
 		get_path(vars);
-		update_last_comand(vars);
+		//update_last_comand(vars);
 		vars->input = readline("minishell% ");
 		if (crtl_all(vars))
 			break ;
+		if(vars->input[0] == '\0')
+		{
+			free(vars->input);
+			continue ;
+		}
+		ft_exit(vars);
 		vars->cargs = count_args(vars->input);
 		vars->args = create_args(vars->input);
 		if (ft_strlen(vars->input) > 0)
 			add_history(vars->input);
 		//pzau
-		if(ft_strncmp(vars->input, "", ft_strlen(vars->input)) == 0)
-			i = 0;
-		else if (ft_strncmp(vars->input, "print", ft_strlen(vars->input)) == 0)
-			print_variables(vars);
-		else if (ft_strncmp(vars->input, "unset", ft_strlen(vars->input)) == 0)
-			remove_variable(vars, "PATH");
-		else if (ft_strncmp(vars->input, "export", ft_strlen(vars->input)) == 0)
-			add_variables(vars, "pzau");
-		else if (ft_strncmp(vars->input, "path", ft_strlen(vars->input)) == 0)
-			printf("%s\n", vars->path);
-		//pzau
-		
-		//amdos-sa
-		pid = fork();
-		if (pid < 0)
-			perror("Error\n");
-		else if ( pid == 0)
-		{
-			signal(SIGINT, SIG_DFL);
-			execute_path(vars);
-			printf("%s: command not found\n", vars->input);
-			exit(EXIT_FAILURE);
-		}
+		if (filter_commands(vars))
+			vars->ok = 1;
 		else
+		{
+			//amdos-sa
+			pid = fork();
+			if (pid < 0)
+				perror("Error\n");
+			else if ( pid == 0)
+			{
+				signal(SIGINT, SIG_DFL);
+				execute_path(vars);
+				printf("%s: command not found\n", vars->input);
+				exit(EXIT_FAILURE);
+			}
+			else
 			wait(NULL);
-		while (j++ < vars->cargs)
-			free(vars->args[j]);
-		free(vars->args);
+			while (j++ < vars->cargs)
+				free(vars->args[j]);
+			free(vars->args);
+		}
 		//amdos-sa
 		free(vars->input);
 	}

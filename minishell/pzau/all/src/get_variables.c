@@ -106,8 +106,6 @@ void	remove_variable(t_vars *vars, const char *var_name)
 		}
 		i++;
 	}
-	if (!found)
-		printf("Variavel %s nao encontrada\n", var_name);
 }
 
 void	add_variables(t_vars *vars, char *new_var)

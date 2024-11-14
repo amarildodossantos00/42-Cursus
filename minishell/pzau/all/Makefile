@@ -12,6 +12,9 @@ SRC = src/main.c\
 	src/liberar.c\
 	src/execute.c\
 	src/count_args.c\
+	src/commands.c\
+	src/echo.c\
+	src/filter_commands.c\
 	libx/ft_strlen.c\
 	libx/ft_strncmp.c\
 	libx/ft_strjoin.c\
@@ -21,6 +24,7 @@ SRC = src/main.c\
 	libx/ft_strcmp.c\
 	libx/ft_strtok.c\
 	libx/sncat.c\
+	libx/ft_split.c\
 
 OBJ = ${SRC:.c=.o}
 
