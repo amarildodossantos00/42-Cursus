@@ -106,6 +106,8 @@ void	remove_variable(t_vars *vars, const char *var_name)
 		}
 		i++;
 	}
+	if (!found)
+		printf("Variavel %s nao encontrada\n", var_name);
 }
 
 void	add_variables(t_vars *vars, char *new_var)
@@ -133,31 +135,3 @@ void	add_variables(t_vars *vars, char *new_var)
 	free(vars->variables);
 	vars->variables = new_array;
 }
-
-void	update_last_comand(t_vars *vars)
-{
-	int	i;
-        int	len;
-        char	*equal_sign;
-
-	i = 0;
-	while (vars->variables[i] != NULL)
-	{
-		equal_sign = ft_strchr(vars->variables[i], '=');
-		if (equal_sign != NULL)
-		{
-			len = equal_sign - vars->variables[i];
-			if (ft_strncmp(vars->variables[i], "_", len) == 0 && len == 1)
-			{
-				if (vars->last_command != NULL)
-				{
-					free(vars->variables[i]);
-					vars->variables[i] = ft_strjoin("_=", vars->last_command);
-				}
-				return ;
-			}
-		}
-		i++;
-	}
-}
-

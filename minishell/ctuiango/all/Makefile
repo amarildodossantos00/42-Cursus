@@ -10,20 +10,13 @@ SRC = src/main.c\
       	src/file.c\
 	src/get_variables.c\
 	src/liberar.c\
-	src/execute.c\
-	src/count_args.c\
-	src/commands.c\
-	src/echo.c\
-	src/filter_commands.c\
 	libx/ft_strlen.c\
 	libx/ft_strncmp.c\
-	libx/ft_strjoin.c\
-	libx/ft_strcpy.c\
+	src/commands.c\
+	src/echo.c\
 	libx/ft_strchr.c\
 	libx/ft_strdup.c\
 	libx/ft_strcmp.c\
-	libx/ft_strtok.c\
-	libx/sncat.c\
 	libx/ft_split.c\
 
 OBJ = ${SRC:.c=.o}
