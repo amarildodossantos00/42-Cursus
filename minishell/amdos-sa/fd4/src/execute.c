@@ -18,8 +18,6 @@ char	*find_executable(char *command, char *path)
 	char	*dir;
 	char	*executable;
 	char	*path_copy;
-	char	*pwd;
-	size_t	bar;
 	//14/11/2024 11:03
 	if (command[0] == '/' || command[0] == '.' || (command[0] == '.' && command[1] == '.'))
 	{
