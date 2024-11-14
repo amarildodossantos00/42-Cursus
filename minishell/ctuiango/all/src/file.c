@@ -9,7 +9,7 @@ static void	control_c(int sig)
 	rl_redisplay();
 }
 
-static int	crtl_d(t_vars *vars)
+static int	crtl_all(t_vars *vars)
 {
 	if (!vars->input)
 	{
@@ -29,14 +29,30 @@ void    call_prompt(t_vars *vars)
 	{
 		get_path(vars);
 		vars->input = readline("minishell% ");
-		if (crtl_d(vars))
+		if (crtl_all(vars))
 			break ;
+		if(vars->input[0] == '\0')
+		{
+			free(vars->input);
+			continue ;
+		}
+		ft_exit(vars);
 		if (ft_strlen(vars->input) > 0)
 			add_history(vars->input);
 		//pzau
 		if (ft_strncmp(vars->input, "env", ft_strlen(vars->input)) == 0)
 			print_variables(vars);
-		else if (ft_strncmp(vars->input, "unset", ft_strlen(vars->input)) == 0)
+		//cc
+		vars->matrix = ft_split(vars->input);
+		if (ft_strncmp(vars->matrix[0], "cd", 2) == 0)
+            		cd(vars);
+		if (ft_strncmp(vars->input, "pwd", ft_strlen(vars->input)) == 0)
+			pwd(vars);
+		if (ft_strncmp(vars->matrix[0], "echo", ft_strlen(vars->matrix[0])) == 0)
+			echo(vars);
+		//cc
+
+		else if(ft_strncmp(vars->input, "unset", ft_strlen(vars->input)) == 0)
 			remove_variable(vars, "PATH");
 		else if (ft_strncmp(vars->input, "export", ft_strlen(vars->input)) == 0)
 			add_variables(vars, "pzau");

@@ -21,6 +21,7 @@ typedef struct s_vars
         char	*input;
 	char	*path;
 	char	**variables;
+	char	**matrix;
 }	t_vars;
 
 void	call_prompt(t_vars *vars);
@@ -34,4 +35,10 @@ void    liberar(t_vars *vars);
 void    get_path(t_vars *vars);
 //pzau
 
+//cc
+void	cd(t_vars *vars);
+void    pwd(t_vars *vars);
+void	ft_exit(t_vars *vars);
+void	echo(t_vars *vars);
+//cc
 #endif

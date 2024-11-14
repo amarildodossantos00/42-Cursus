@@ -12,9 +12,12 @@ SRC = src/main.c\
 	src/liberar.c\
 	libx/ft_strlen.c\
 	libx/ft_strncmp.c\
+	src/commands.c\
+	src/echo.c\
 	libx/ft_strchr.c\
 	libx/ft_strdup.c\
 	libx/ft_strcmp.c\
+	libx/ft_split.c\
 
 OBJ = ${SRC:.c=.o}
 
