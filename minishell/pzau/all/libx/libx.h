@@ -12,5 +12,7 @@ char	*ft_strchr(const char *str, int c);
 char    *ft_strdup(char *src);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strcpy(char *dest, const char *src);
+char	*ft_strtok(char *str, const char *delim);
+char	*sncat(char *dest, const char *src, size_t n);
 
 #endif
