@@ -12,15 +12,6 @@ void	echo(t_vars *vars)
 		nl = 0;
 		i++;
 	}
-	/*int	j;
-	j = 0;
-	while (vars->matrix[j] != NULL)
-	{
-		//j = 0;
-		printf("matrix[%d]: %s\n", j, vars->matrix[j]);
-		j++;
-	}*/
-	
 	while (vars->matrix[i] != NULL)
 	{
 		printf("%s", vars->matrix[i]);
