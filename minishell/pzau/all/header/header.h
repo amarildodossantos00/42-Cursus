@@ -4,6 +4,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 # include <sys/wait.h>
 # include <signal.h>
 
@@ -38,8 +39,10 @@ void    remove_variable(t_vars *vars, const char *var_name);
 void    add_variables(t_vars *vars, char *new_str);
 void    print_variables(t_vars *vars);
 void    liberar(t_vars *vars);
+void    redirect_output(char *file);
+void    append_output(char *file);
 void    get_path(t_vars *vars);
-int filter_commands(t_vars *vars);
+int		filter_commands(t_vars *vars);
 //pzau
 
 //amdos-sa

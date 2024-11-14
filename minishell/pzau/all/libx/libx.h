@@ -15,5 +15,6 @@ char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strtok(char *str, const char *delim);
 char	*sncat(char *dest, const char *src, size_t n);
 char    **ft_split(char *str);
+char    **red_ft_split(char *str);
 
 #endif

@@ -15,6 +15,7 @@ SRC = src/main.c\
 	src/commands.c\
 	src/echo.c\
 	src/filter_commands.c\
+	src/redic.c\
 	libx/ft_strlen.c\
 	libx/ft_strncmp.c\
 	libx/ft_strjoin.c\
