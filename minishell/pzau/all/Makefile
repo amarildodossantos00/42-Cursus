@@ -12,6 +12,7 @@ SRC = src/main.c\
 	src/liberar.c\
 	src/execute.c\
 	src/count_args.c\
+	src/filter_commands.c\
 	libx/ft_strlen.c\
 	libx/ft_strncmp.c\
 	libx/ft_strjoin.c\

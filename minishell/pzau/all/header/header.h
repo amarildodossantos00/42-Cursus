@@ -18,12 +18,14 @@
 
 typedef struct s_vars
 {
-        char	*input;
+    char	*input;
 	char	*path;
+	char	*pwd;
 	char	**variables;
 	char	*last_command;
 	char	**args;
 	size_t	cargs;
+	int		ok;
 }	t_vars;
 
 void	call_prompt(t_vars *vars);
@@ -36,6 +38,8 @@ void    add_variables(t_vars *vars, char *new_str);
 void    print_variables(t_vars *vars);
 void    liberar(t_vars *vars);
 void    get_path(t_vars *vars);
+void	get_pwd(t_vars *vars);
+int filter_commands(t_vars *vars);
 //pzau
 
 //amdos-sa
