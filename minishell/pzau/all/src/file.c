@@ -32,7 +32,7 @@ void    call_prompt(t_vars *vars)
 	while (1)
 	{
 		get_path(vars);
-		update_last_comand(vars);
+		//update_last_comand(vars);
 		vars->input = readline("minishell% ");
 		if (crtl_all(vars))
 			break ;
