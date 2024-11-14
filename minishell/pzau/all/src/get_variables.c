@@ -36,29 +36,6 @@ void	get_path(t_vars *vars)
 	}
 }
 
-void	get_pwd(t_vars *vars)
-{
-	int	i;
-	int	len;
-	char	*equal_sign;
-
-	i = 0;
-	while (vars->variables[i] != NULL)
-	{
-		equal_sign = ft_strchr(vars->variables[i], '=');
-		if (equal_sign != NULL)
-		{
-			len = equal_sign - vars->variables[i];
-			if (ft_strncmp(vars->variables[i], "PWD", len) == 0 && len == 4)
-			{
-				vars->pwd = ft_strdup(equal_sign + 1);
-				return ;
-			}
-		}
-		i++;
-	}
-}
-
 void	get_variables(t_vars *vars, char **environ)
 {
 	int	i;
@@ -129,8 +106,6 @@ void	remove_variable(t_vars *vars, const char *var_name)
 		}
 		i++;
 	}
-	if (!found)
-		printf("Variavel %s nao encontrada\n", var_name);
 }
 
 void	add_variables(t_vars *vars, char *new_var)

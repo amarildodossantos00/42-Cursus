@@ -30,11 +30,16 @@ void    call_prompt(t_vars *vars)
 	while (1)
 	{
 		get_path(vars);
-		get_pwd(vars);
 		//update_last_comand(vars);
 		vars->input = readline("minishell% ");
 		if (crtl_all(vars))
 			break ;
+		if(vars->input[0] == '\0')
+		{
+			free(vars->input);
+			continue ;
+		}
+		ft_exit(vars);
 		vars->cargs = count_args(vars->input);
 		vars->args = create_args(vars->input);
 		if (ft_strlen(vars->input) > 0)

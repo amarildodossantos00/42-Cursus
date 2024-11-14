@@ -20,8 +20,9 @@ typedef struct s_vars
 {
     char	*input;
 	char	*path;
-	char	*pwd;
+	char	*home;
 	char	**variables;
+	char	**matrix;
 	char	*last_command;
 	char	**args;
 	size_t	cargs;
@@ -38,7 +39,6 @@ void    add_variables(t_vars *vars, char *new_str);
 void    print_variables(t_vars *vars);
 void    liberar(t_vars *vars);
 void    get_path(t_vars *vars);
-void	get_pwd(t_vars *vars);
 int filter_commands(t_vars *vars);
 //pzau
 
@@ -47,5 +47,12 @@ void	execute_path(t_vars *vars);
 int		count_args(char *input);
 char	**create_args(char *input);
 //amdos-sa
+
+//cc
+void	cd(t_vars *vars);
+void    pwd(t_vars *vars);
+void	ft_exit(t_vars *vars);
+void	echo(t_vars *vars);
+//cc
 
 #endif
