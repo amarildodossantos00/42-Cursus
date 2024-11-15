@@ -17,9 +17,10 @@ int filter_commands(t_vars *vars)
         add_variables(vars, "pzau");
         return (1);
     }
-    else if (ft_strncmp(vars->input, "path", ft_strlen(vars->input)) == 0)
+    else if (ft_strncmp(vars->input, "creat", ft_strlen(vars->input)) == 0)
     {
-        printf("%s\n", vars->path);
+        redirect_output("output.txt");
+        execlp("echo", "echo", "Hello, World!", NULL);
         return (1);
     }
     //cc
