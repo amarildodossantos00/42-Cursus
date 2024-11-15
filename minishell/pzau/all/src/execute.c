@@ -18,7 +18,14 @@ char	*find_executable(char *command, char *path)
 	char	*dir;
 	char	*executable;
 	char	*path_copy;
-
+	//14/11/2024 11:03
+	if (command[0] == '/' || command[0] == '.' || (command[0] == '.' && command[1] == '.'))
+	{
+		if (access(command, X_OK) == 0)
+			return (ft_strdup(command));
+		else
+			return ("none");
+	}
 	path_copy = ft_strdup(path);
 	if (!path_copy)
 		return (NULL);
@@ -43,18 +50,23 @@ void	execute_path(t_vars *vars)
 	char	*executable;
 
 	executable =  find_executable(vars->args[0], vars->path);
-	if (executable)
+	if (!executable)
+	{
+		printf("%s: command not found\n", vars->input);
+		exit(EXIT_FAILURE);
+	}
+	else if (executable == "none")
+	{
+		printf("bash: %s: No such file or directory\n", vars->input);
+		exit(EXIT_FAILURE);
+	}
+	else
 	{
 		vars->args[0] = executable;
 		vars->last_command = executable;
 		execv(executable, vars->args);
 		perror("execv falhou");
 		free(executable);
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		printf("%s: command not found\n", vars->args[0]);
 		exit(EXIT_FAILURE);
 	}
 }
