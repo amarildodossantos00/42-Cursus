@@ -40,5 +40,6 @@ void	cd(t_vars *vars);
 void    pwd(t_vars *vars);
 void	ft_exit(t_vars *vars);
 void	echo(t_vars *vars);
+void	remove_deli(char *s);
 //cc
 #endif

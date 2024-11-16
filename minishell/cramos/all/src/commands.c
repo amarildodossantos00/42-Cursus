@@ -49,5 +49,4 @@ void	ft_exit(t_vars *vars)
 		printf("exit\n");
 		exit(0);
 	}
-	
 }

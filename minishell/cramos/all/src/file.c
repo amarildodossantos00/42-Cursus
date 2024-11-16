@@ -37,6 +37,7 @@ void    call_prompt(t_vars *vars)
 			continue ;
 		}
 		ft_exit(vars);
+		remove_deli(vars->input);
 		if (ft_strlen(vars->input) > 0)
 			add_history(vars->input);
 		//pzau
@@ -48,7 +49,7 @@ void    call_prompt(t_vars *vars)
             		cd(vars);
 		if (ft_strncmp(vars->input, "pwd", ft_strlen(vars->input)) == 0)
 			pwd(vars);
-		if (ft_strncmp(vars->matrix[0], "echo", ft_strlen(vars->matrix[0])) == 0)
+		if (ft_strncmp(vars->matrix[0], "echo", 4) == 0)
 			echo(vars);
 		//cc
 
