@@ -2,7 +2,7 @@ NAME = minishell
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror
 
 COMPILE = -lreadline -lhistory
 
@@ -14,6 +14,7 @@ SRC = src/main.c\
 	libx/ft_strncmp.c\
 	src/commands.c\
 	src/echo.c\
+	src/ft_export.c\
 	libx/ft_strchr.c\
 	libx/ft_strdup.c\
 	libx/ft_strcmp.c\

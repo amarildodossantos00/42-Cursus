@@ -53,11 +53,11 @@ void    call_prompt(t_vars *vars)
 			echo(vars);
 		//cc
 
-		else if(ft_strncmp(vars->input, "unset", ft_strlen(vars->input)) == 0)
+		if(ft_strncmp(vars->input, "unset", ft_strlen(vars->input)) == 0)
 			remove_variable(vars, "PATH");
-		else if (ft_strncmp(vars->input, "export", ft_strlen(vars->input)) == 0)
-			add_variables(vars, "pzau");
-		else if (ft_strncmp(vars->input, "path", ft_strlen(vars->input)) == 0)
+		if (ft_strncmp(vars->matrix[0], "export", 6) == 0)
+		 	ft_export(vars, vars->matrix);
+		if (ft_strncmp(vars->input, "path", ft_strlen(vars->input)) == 0)
 			printf("%s\n", vars->path);
 		//pzau
 		free(vars->input);
