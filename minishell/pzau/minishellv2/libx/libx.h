@@ -18,5 +18,6 @@ char    **ft_split(char *str);
 char    **red_ft_split(char *str);
 void	*ft_memset(void *s, int c, size_t n);
 char    **ft_split_red(char *str);
+char    *ft_space(char *str);
 
 #endif

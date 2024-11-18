@@ -9,7 +9,7 @@ static void	control_c(int sig)
 	rl_redisplay();
 }
 
-static int	crtl_all(t_vars *vars)
+static int	crtl_d(t_vars *vars)
 {
 	if (!vars->input)
 	{
@@ -25,21 +25,21 @@ void    start_promp(t_vars *vars)
 	signal(SIGINT, control_c);
 	signal(SIGQUIT, SIG_IGN);
 
-    while (1)
-    {
-        get_path(vars);
-        vars->input = readline("minishell% ");
-        if (crtl_all(vars))
+	while (1)
+	{
+	get_path(vars);
+	vars->input = readline("minishell% ");
+	if (crtl_d(vars))
 			break ;
-        if(vars->input[0] == '\0')
-		{
-			free(vars->input);
-			continue ;
-		}
-        if (ft_strlen(vars->input) > 0)
-			add_history(vars->input);
-        read_readline(vars);
-        free(vars->input);
-    }
-    return ;
+	if(vars->input[0] == '\0')
+	{
+		free(vars->input);
+		continue ;
+	}
+	if (ft_strlen(vars->input) > 0)
+		add_history(vars->input);
+	read_readline(vars);
+	free(vars->input);
+	}
+	return ;
 }

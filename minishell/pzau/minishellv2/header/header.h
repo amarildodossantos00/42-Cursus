@@ -25,6 +25,7 @@ typedef struct s_vars
     char	*input;
 	char	*path;
 	char	*home;
+	int		terminal;
 	size_t	cargs;
 }	t_vars;
 
@@ -37,6 +38,8 @@ void    only_comands(t_vars *vars);
 void    build_builtins(t_vars *vars);
 void    redirecionamento(t_vars *vars);
 void    redirect_output(char *file);
+int		redirect_input(char *file);
+void    redirect_herdoc(char *delimiter);
 void    append_output(char *file);
 char	**org_red(const char *input);
 //pzau
