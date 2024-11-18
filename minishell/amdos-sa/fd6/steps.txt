@@ -1,0 +1,25 @@
+
+
+Pipes Minishell
+
+0- Entender como funciona o pipe +1
+
+1- Entender como implementar no Minishell
+
+2- Analisar as funcoes que irei precisar +1
+
+pipe: cria um canal de comunicação entre dois descritores de arquivos.
+fork: cria processos filhos.
+dup2: duplica descritores de arquivos.
+close: fecha descritores de arquivos.
+execve: executa os comandos.
+
+3- Comecar a estudar
+
+4- Implementar
+
+5- Refatorar
+
+6 - Adicionar na raiz
+
+7 - Refatorar

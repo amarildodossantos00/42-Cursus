@@ -1,6 +1,6 @@
 #include "../header/header.h"
 
-int	count_variables(char **environ)
+static int	count_variables(char **environ)
 {
 	int	count;
 
