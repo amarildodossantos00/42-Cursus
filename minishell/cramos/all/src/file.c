@@ -37,14 +37,15 @@ void    call_prompt(t_vars *vars)
 			continue ;
 		}
 		ft_exit(vars);
-		remove_deli(vars->input);
+		//remove_deli(vars->input);
 		if (ft_strlen(vars->input) > 0)
 			add_history(vars->input);
 		//pzau
 		if (ft_strncmp(vars->input, "env", ft_strlen(vars->input)) == 0)
 			print_variables(vars);
 		//cc
-		vars->matrix = ft_split(vars->input);
+		vars->matrix = ft_split_args(vars->input);
+
 		if (ft_strncmp(vars->matrix[0], "cd", 2) == 0)
             		cd(vars);
 		if (ft_strncmp(vars->input, "pwd", ft_strlen(vars->input)) == 0)

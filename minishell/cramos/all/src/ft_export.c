@@ -67,7 +67,7 @@ void	print_env(t_env *env_list)
 {
 	while (env_list)
 	{
-		printf("declare -x %s=%s\n", env_list->var, env_list->value);
+		printf("declare -x %s=\"%s\"\n", env_list->var, env_list->value);
 		env_list = env_list->next;
 	}
 }
@@ -86,9 +86,8 @@ void	ft_export(t_vars *vars, char **args)
 		{
 			char	*var = strtok(args[i], "=");
 			char	*value = strtok(NULL, "");
-			if (!var || !value)
-				 fprintf(stderr, "export: invalid format '%s'\n", args[i]);
-			else
+			remove_deli(value);
+			if(var && value)
 				add_and_update(&vars->env_ref, var, value);
 			i++;
 		}
