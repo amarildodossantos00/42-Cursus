@@ -6,6 +6,7 @@ int	count_args(char *input)
 	char input_copy[256];
 	size_t qnt;
 
+	ft_memset(input_copy, 0, sizeof(input_copy));
 	sncat(input_copy, input, ft_strlen(input));
 	aux = ft_strtok(input_copy, " ");
 	qnt = 0;

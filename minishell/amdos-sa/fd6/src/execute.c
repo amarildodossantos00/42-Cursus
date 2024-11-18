@@ -63,7 +63,7 @@ void	execute_path(t_vars *vars)
 	else
 	{
 		vars->args[0] = executable;
-		vars->last_command = executable;
+		//vars->last_command = executable;
 		execv(executable, vars->args);
 		perror("execv falhou");
 		free(executable);
