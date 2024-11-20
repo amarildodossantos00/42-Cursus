@@ -55,5 +55,6 @@ void	ft_remove(t_env **env_list, char *var);
 void	print_env(t_env *env_list);
 void	ft_export(t_vars *vars, char **args);
 t_env	*creat_node(char *var, char *value);
+t_env	*sort_list(t_env *lst);
 //cc
 #endif

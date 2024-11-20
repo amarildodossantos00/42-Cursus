@@ -37,7 +37,6 @@ void    call_prompt(t_vars *vars)
 			continue ;
 		}
 		ft_exit(vars);
-		//remove_deli(vars->input);
 		if (ft_strlen(vars->input) > 0)
 			add_history(vars->input);
 		//pzau

@@ -7,19 +7,28 @@ FLAGS = -Wall -Wextra -Werror
 COMPILE = -lreadline -lhistory
 
 SRC = src/main.c\
-      	src/file.c\
-	src/get_variables.c\
-	src/liberar.c\
+	src/file.c\
+	src/filev2.c\
+	src/filev3.c\
+	src/var_ambient.c\
+	src/count_args.c\
+	src/execute.c\
+	src/redic.c\
+	src/builtins/commands.c\
+	src/builtins/echo.c\
+	src/builtins/ft_export.c\
 	libx/ft_strlen.c\
 	libx/ft_strncmp.c\
-	src/commands.c\
-	src/echo.c\
-	src/ft_export.c\
+	libx/ft_strjoin.c\
+	libx/ft_strcpy.c\
 	libx/ft_strchr.c\
 	libx/ft_strdup.c\
 	libx/ft_strcmp.c\
+	libx/ft_strtok.c\
+	libx/sncat.c\
 	libx/ft_split.c\
-	libx/ft_split_args.c\
+	libx/ft_split_red.c\
+	libx/ft_memset.c\
 
 OBJ = ${SRC:.c=.o}
 
