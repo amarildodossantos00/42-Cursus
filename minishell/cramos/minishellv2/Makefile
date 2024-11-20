@@ -29,6 +29,10 @@ SRC = src/main.c\
 	libx/ft_split.c\
 	libx/ft_split_red.c\
 	libx/ft_memset.c\
+	libx/ft_split_args.c\
+	libx/ft_strlcpy.c\
+	libx/ft_substr.c\
+	libx/ft_strtrim.c\
 
 OBJ = ${SRC:.c=.o}
 

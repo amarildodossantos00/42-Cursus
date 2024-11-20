@@ -7,15 +7,15 @@ static   void	init_env(t_vars *vars)
 	char	*value;
 	int	count;
 
-	count = count_variables(vars->variables);
-	var = strtok(vars->variables[--count], "=");
-	value = strtok(NULL, "");
+	count = count_variables(vars->env);
+	var = ft_strtok(vars->env[--count], "=");
+	value = ft_strtok(NULL, "");
 	vars->env_ref = creat_node(var, value);
 	current = vars->env_ref;
 	while (--count)
 	{
-		var = strtok(vars->variables[count], "=");
-		value = strtok(NULL, "");
+		var = ft_strtok(vars->env[count], "=");
+		value = ft_strtok(NULL, "");
 		current->next = creat_node(var, value);
 		current = current->next;
 	}
@@ -48,8 +48,8 @@ int		main(void)
 {
     t_vars  vars;
 
-    init_env(&vars);
     init_values(&vars);
+    init_env(&vars);
     start_promp(&vars);
     return (0);
 }

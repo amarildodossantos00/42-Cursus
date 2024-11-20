@@ -56,9 +56,6 @@ void	env(t_vars *vars)
 
 void	ft_exit(t_vars *vars)
 {
-	if (ft_strncmp(vars->input, "exit", 4) == 0)
-	{
-		printf("exit\n");
-		exit(0);
-	}
+	printf("exit\n");
+	exit(0);
 }

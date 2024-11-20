@@ -1,5 +1,5 @@
 
-#include "../header/header.h"
+#include "../../header/header.h"
 
 t_env	*creat_node(char *var, char *value)
 {
@@ -12,6 +12,8 @@ t_env	*creat_node(char *var, char *value)
 	new->var = ft_strdup(var);
 	new->value = ft_strdup(value);
 	new->next = NULL;
+	free(var);
+	free(value);
 	return (new);
 }
 
@@ -95,8 +97,8 @@ void	ft_export(t_vars *vars, char **args)
 		i = 1;
 		while (args[i])
 		{
-			char	*var = strtok(args[i], "=");
-			char	*value = strtok(NULL, "");
+			char	*var = ft_strtok(args[i], "=");
+			char	*value = ft_strtok(NULL, "");
 			remove_deli(value);
 			if(var && value)
 				add_and_update(&vars->env_ref, var, value);

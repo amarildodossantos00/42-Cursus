@@ -67,6 +67,7 @@ void	print_env(t_env *env_list);
 void	add_and_update(t_env **env_list, char *var, char *value);
 t_env	*sort_list(t_env *list);
 t_env	*creat_node(char *var, char *value);
+int	count_variables(char **environ);
 
 //cc
 

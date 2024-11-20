@@ -21,7 +21,8 @@ static int  cheack_build_builtins(t_vars *vars)
 
 void    build_builtins(t_vars *vars)
 {
-    vars->matrix = ft_split(vars->input);
+    //vars->matrix = ft_split(vars->input);
+    vars->matrix = ft_split_args(vars->input);
     if (ft_strncmp(vars->input, "echo", 4) == 0)
         echo(vars);
     if (ft_strncmp(vars->input, "cd", 2) == 0)

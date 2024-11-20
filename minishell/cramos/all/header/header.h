@@ -54,7 +54,12 @@ void	add_and_update(t_env **env_list, char *var, char *value);
 void	ft_remove(t_env **env_list, char *var);
 void	print_env(t_env *env_list);
 void	ft_export(t_vars *vars, char **args);
+void    free_env_node(t_env *node);
+void    free_matrix(char **matrix);
+t_env   *init_env_list(char **envp);
 t_env	*creat_node(char *var, char *value);
 t_env	*sort_list(t_env *lst);
+t_env   *unset_env(t_env *head, const char *key);
+t_env   *add_env(t_env *head, const char *key, const char *value);
 //cc
 #endif
