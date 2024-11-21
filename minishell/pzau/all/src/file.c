@@ -40,6 +40,9 @@ void    call_prompt(t_vars *vars)
 			continue ;
 		}
 		ft_exit(vars);
+		//pzau
+		red_and_pipe(vars);
+		//pzau
 		vars->cargs = count_args(vars->input);
 		vars->args = create_args(vars->input);
 		if (ft_strlen(vars->input) > 0)

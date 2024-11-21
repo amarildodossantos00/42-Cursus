@@ -41,6 +41,7 @@ void    redirect_output(char *file);
 int		redirect_input(char *file);
 void    redirect_herdoc(char *delimiter);
 void    append_output(char *file);
+int     cheack_input_red(t_vars *vars, char *str, char **redic);
 char	**org_red(const char *input);
 //pzau
 

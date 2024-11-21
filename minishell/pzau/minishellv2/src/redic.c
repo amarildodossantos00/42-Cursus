@@ -1,5 +1,6 @@
 #include "../header/header.h"
 
+// files 1
 void    redirect_output(char *file)
 {
     int fd;
@@ -74,7 +75,10 @@ void    redirect_herdoc(char *delimiter)
     dup2(pipe_fd[0], STDIN_FILENO);
     close(pipe_fd[0]);
 }
+//files 1
 
+
+//files 2
 static char *add_spaces_around_operators(const char *input)
 {
     const char *operators = "><";
@@ -139,4 +143,72 @@ char **org_red(const char *input)
     free(normalized_input);
     return result;
 }
+//file 2
 
+//files 3
+static int more_than_two(char *new)
+{
+    int i;
+    char *str;
+
+    i = 0;
+    str = ft_space(new);
+    while (str[i])
+    {
+        if (str[i] == '>' && str[i + 1] == '>' && str[i + 2] == '>')
+            return (1);
+        i++;
+    }
+    free(str);
+    return (0);
+}
+
+static int  cheack_in_tree(char *new)
+{
+    char    *str;
+    int     i;
+
+    i = 0;
+    str = ft_space(new);
+    while (str[i])
+    {
+        if (str[i] == '<' && str[i + 1] == '<' && str[i + 2] == '<')
+            return (1);
+        if (str[i] == '<' && str[i + 1] == '<' && str[i + 2] != '<')
+            return (2);
+        i++;
+    }
+    free(str);
+    return (0);
+}
+
+int    cheack_input_red(t_vars *vars, char *str, char **redic)
+{
+    int     i;
+    char    *str1;
+    char    **new;
+
+    if (more_than_two(str))
+    {
+        printf("minishell: syntax error near unexpected token `>'\n");
+        return (1);
+    }
+    i = 0;
+    while (redic[i])
+    {
+        new = ft_split_red(redic[i]);
+        if (cheack_in_tree(redic[i]) == 1)
+        {
+            i++;
+            continue ;
+        }
+        if (cheack_in_tree(redic[i]) == 2)
+        {
+            str1 = ft_space(new[1]);
+            redirect_herdoc(str1);
+            free(str1);
+        }
+        i++;
+    }
+}
+// files 3

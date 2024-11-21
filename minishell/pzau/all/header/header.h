@@ -43,6 +43,7 @@ void    redirect_output(char *file);
 void    append_output(char *file);
 void    get_path(t_vars *vars);
 int		filter_commands(t_vars *vars);
+void    red_and_pipes(t_vars *vars);
 //pzau
 
 //amdos-sa
