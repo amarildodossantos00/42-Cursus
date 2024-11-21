@@ -1,6 +1,6 @@
 #include "../../header/header.h"
 
-void    free_env_node(t_env *node)
+static void    free_env_node(t_env *node)
 {
     if (node)
     {
@@ -10,7 +10,7 @@ void    free_env_node(t_env *node)
     }
 }
 
-t_env   *unset_env(t_env *head, char *var)
+static t_env   *unset_env(t_env *head, char *var)
 {
     t_env   *current;
     t_env   *previous;

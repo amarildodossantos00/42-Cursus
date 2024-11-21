@@ -69,8 +69,6 @@ t_env	*sort_list(t_env *list);
 t_env	*creat_node(char *var, char *value);
 int	count_variables(char **environ);
 //cc
-void    free_env_node(t_env *node);
-t_env   *unset_env(t_env *head, char *var);
 t_env	*ft_unset(t_env *head, char **vars);
 
 #endif
