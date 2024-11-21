@@ -17,6 +17,7 @@ SRC = src/main.c\
 	src/builtins/commands.c\
 	src/builtins/echo.c\
 	src/builtins/ft_export.c\
+	src/builtins/ft_unset.c\
 	libx/ft_strlen.c\
 	libx/ft_strncmp.c\
 	libx/ft_strjoin.c\

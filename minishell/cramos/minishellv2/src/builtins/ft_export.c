@@ -12,8 +12,6 @@ t_env	*creat_node(char *var, char *value)
 	new->var = ft_strdup(var);
 	new->value = ft_strdup(value);
 	new->next = NULL;
-	free(var);
-	free(value);
 	return (new);
 }
 
