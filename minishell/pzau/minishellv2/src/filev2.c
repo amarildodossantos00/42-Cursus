@@ -63,6 +63,8 @@ void    redirecionamento(t_vars *vars)
     i = 0;
     redic = org_red(vars->input);
     vars->terminal = dup(STDOUT_FILENO);
+    /*if (cheack_input_red(vars ,vars->input, redic))
+        return ;*/
     while (redic[i] != NULL)
     {
         command = ft_split_red(redic[i]);
@@ -74,13 +76,16 @@ void    redirecionamento(t_vars *vars)
         {
             if (redirect_input(ft_space(command[1])) == 1)
             {
-                printf("%s: No such file or directory\n", ft_space(command[1]));
                 dup2(vars->terminal, STDOUT_FILENO);
+                printf("%s: No such file or directory\n", ft_space(command[1]));
                 return ;
             }
         }
         else if (cheack_red(redic[i]) == 3)
-            printf("Not done yet !\n");
+        {
+            i++;
+            continue ; 
+        }
         i++;
     }
     command = ft_split_red(redic[0]);

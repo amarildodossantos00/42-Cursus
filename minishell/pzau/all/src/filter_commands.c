@@ -17,12 +17,6 @@ int filter_commands(t_vars *vars)
         add_variables(vars, "pzau");
         return (1);
     }
-    else if (ft_strncmp(vars->input, "creat", ft_strlen(vars->input)) == 0)
-    {
-        redirect_output("output.txt");
-        execlp("echo", "echo", "Hello, World!", NULL);
-        return (1);
-    }
     //cc
     vars->matrix = ft_split(vars->input);
     if (ft_strncmp(vars->matrix[0], "cd", 2) == 0)
@@ -35,8 +29,9 @@ int filter_commands(t_vars *vars)
         pwd(vars);
         return (1);
     }
-    if (ft_strncmp(vars->matrix[0], "echo", ft_strlen(vars->matrix[0])) == 0)
+    if (ft_strncmp(vars->matrix[0], "echo", 4) == 0)
     {
+        printf("%d\n", ft_strlen(vars->matrix[0]));
         echo(vars);
         return (1);
     }

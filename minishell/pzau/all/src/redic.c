@@ -27,3 +27,12 @@ void    append_output(char *file)
     dup2(fd, STDOUT_FILENO);
     close(fd);
 }
+
+void    red_and_pipes(t_vars *vars)
+{
+    int i;
+    char *str;
+
+    i = 0;
+    while ()
+}
