@@ -63,8 +63,10 @@ void    redirecionamento(t_vars *vars)
     i = 0;
     redic = org_red(vars->input);
     vars->terminal = dup(STDOUT_FILENO);
+    while (redic[i])
+        printf("%s\n", redic[i++]);
     /*if (cheack_input_red(vars ,vars->input, redic))
-        return ;*/
+        return ;
     while (redic[i] != NULL)
     {
         command = ft_split_red(redic[i]);
@@ -92,7 +94,7 @@ void    redirecionamento(t_vars *vars)
     vars->input = command[0];
     only_comands(vars);
     dup2(vars->terminal, STDOUT_FILENO);
-    close(vars->terminal);
+    close(vars->terminal);*/
 }
 
 void    read_readline(t_vars *vars)

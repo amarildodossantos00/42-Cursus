@@ -78,7 +78,7 @@ void    redirect_herdoc(char *delimiter)
 //files 1
 
 
-//files 2
+/*files 2
 static char *add_spaces_around_operators(const char *input)
 {
     const char *operators = "><";
@@ -143,7 +143,88 @@ char **org_red(const char *input)
     free(normalized_input);
     return result;
 }
-//file 2
+//file 2*/
+
+static char *add_spaces_around_operators(const char *input)
+{
+    const char *operators = "><";
+    size_t len = strlen(input);
+    char *output = malloc(len * 3 + 1); // Aloca espaço extra para os novos espaços
+    int j = 0;
+
+    for (size_t i = 0; i < len; i++) {
+        if (strchr(operators, input[i])) { // Detecta operadores
+            if (j > 0 && output[j - 1] != ' ') // Adiciona espaço antes
+                output[j++] = ' ';
+            output[j++] = input[i];
+            if (input[i + 1] == input[i]) { // Detecta operadores duplos
+                output[j++] = input[i++];
+            }
+            if (input[i + 1] != ' ') // Adiciona espaço depois
+                output[j++] = ' ';
+        } else {
+            output[j++] = input[i]; // Copia caracteres normais
+        }
+    }
+
+    output[j] = '\0';
+    return output;
+}
+
+char **org_red(const char *input)
+{
+    char **result = NULL;
+    int count = 0;
+    char *normalized_input = add_spaces_around_operators(input); // Normaliza a entrada
+    char *input_copy = strdup(normalized_input); // Cria uma cópia da entrada normalizada
+    char *token = strtok(input_copy, " ");
+    char buffer[256] = {0}; // Buffer para manter o grupo atual
+    int buffer_filled = 0;  // Indica se o buffer já está preenchido
+    char *prev = NULL;      // Armazena o último argumento ou operador
+
+    while (token) {
+        int is_operator = (strcmp(token, ">") == 0 || strcmp(token, "<") == 0 || 
+                           strcmp(token, ">>") == 0 || strcmp(token, "<<") == 0);
+
+        if (is_operator) {
+            if (prev) {
+                result = realloc(result, (count + 1) * sizeof(char *));
+                result[count++] = strdup(buffer); // Armazena o grupo atual
+            }
+            snprintf(buffer, sizeof(buffer), "%s", prev ? prev : ""); // Reinicia o buffer
+            strncat(buffer, " ", sizeof(buffer) - strlen(buffer) - 1);
+            strncat(buffer, token, sizeof(buffer) - strlen(buffer) - 1);
+            buffer_filled = 1;
+        } else {
+            if (buffer_filled) {
+                strncat(buffer, " ", sizeof(buffer) - strlen(buffer) - 1);
+                strncat(buffer, token, sizeof(buffer) - strlen(buffer) - 1);
+            } else {
+                snprintf(buffer, sizeof(buffer), "%s", token); // Inicia o primeiro grupo
+                buffer_filled = 1;
+            }
+        }
+
+        prev = token; // Atualiza o último token processado
+        token = strtok(NULL, " ");
+
+        if (!token && buffer_filled) { // Se é o último grupo
+            result = realloc(result, (count + 1) * sizeof(char *));
+            result[count++] = strdup(buffer); // Armazena o último grupo
+        }
+    }
+
+    result = realloc(result, (count + 1) * sizeof(char *));
+    result[count] = NULL;
+
+    free(input_copy);
+    free(normalized_input);
+    return result;
+}
+
+//file 2 test
+
+//file 2 test
 
 //files 3
 static int more_than_two(char *new)
@@ -184,17 +265,17 @@ static int  cheack_in_tree(char *new)
 
 int    cheack_input_red(t_vars *vars, char *str, char **redic)
 {
-    int     i;
+    //int     i;
     char    *str1;
-    char    **new;
+    //char    **new;
 
     if (more_than_two(str))
     {
         printf("minishell: syntax error near unexpected token `>'\n");
         return (1);
     }
-    i = 0;
-    while (redic[i])
+    //i = 0;
+    /*while (redic[i])
     {
         new = ft_split_red(redic[i]);
         if (cheack_in_tree(redic[i]) == 1)
@@ -209,6 +290,6 @@ int    cheack_input_red(t_vars *vars, char *str, char **redic)
             free(str1);
         }
         i++;
-    }
+    }*/
 }
 // files 3
