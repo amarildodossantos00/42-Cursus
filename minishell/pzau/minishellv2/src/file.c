@@ -28,6 +28,15 @@ void    start_promp(t_vars *vars)
 	while (1)
 	{
 	get_path(vars);
+	if (vars->env != NULL)
+	{
+		for (int i = 0; vars->env != NULL; i++)
+		{
+			printf("%s\n", vars->env[i]);
+		}
+	}
+	else
+		printf("Error\n");
 	vars->input = readline("minishell% ");
 	if (crtl_d(vars))
 			break ;

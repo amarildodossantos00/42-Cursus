@@ -1,5 +1,15 @@
 #include "../header/header.h"
 
+int	count_variables(char **environ)
+{
+	int	count;
+
+	count = 0;
+	while (environ[count] != NULL)
+		count++;
+	return (count);
+}
+
 int	count_args(char *input)
 {
 	char *aux;

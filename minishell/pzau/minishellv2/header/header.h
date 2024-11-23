@@ -17,15 +17,23 @@
 
 # include "../libx/libx.h"
 
+typedef struct	s_env
+{
+	char	*var;
+	char	*value;
+	struct s_env	*next;
+}	t_env;
+
 typedef struct s_vars
 {
 	char	**env;
 	char	**matrix;
 	char	**args;
-    char	*input;
+    	char	*input;
 	char	*path;
 	char	*home;
 	int		terminal;
+	t_env	*env_ref;
 	size_t	cargs;
 }	t_vars;
 
@@ -56,7 +64,15 @@ void	cd(t_vars *vars);
 void    pwd(t_vars *vars);
 void	ft_exit(t_vars *vars);
 void	echo(t_vars *vars);
+void	remove_deli(char *s);
 void	env(t_vars *vars);
+void	ft_export(t_vars *vars, char **args);
+void	print_env(t_env *env_list);
+void	add_and_update(t_env **env_list, char *var, char *value);
+t_env	*sort_list(t_env *list);
+t_env	*creat_node(char *var, char *value);
+t_env	*ft_unset(t_env *head, char **vars);
+int	count_variables(char **environ);
 //cc
 
 #endif

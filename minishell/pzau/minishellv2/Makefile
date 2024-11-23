@@ -16,6 +16,8 @@ SRC = src/main.c\
 	src/redic.c\
 	src/builtins/commands.c\
 	src/builtins/echo.c\
+	src/builtins/ft_export.c\
+	src/builtins/ft_unset.c\
 	libx/ft_strlen.c\
 	libx/ft_strncmp.c\
 	libx/ft_strjoin.c\
@@ -29,6 +31,10 @@ SRC = src/main.c\
 	libx/ft_split_red.c\
 	libx/ft_memset.c\
 	libx/ft_space.c\
+	libx/ft_substr.c\
+	libx/ft_strtrim.c\
+	libx/ft_split_args.c\
+	libx/ft_strlcpy.c\
 
 OBJ = ${SRC:.c=.o}
 
