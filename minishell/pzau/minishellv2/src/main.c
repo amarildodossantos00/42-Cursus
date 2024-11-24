@@ -1,6 +1,6 @@
 #include "../header/header.h"
 
-static   void	init_env(t_vars *vars)
+void	init_env(t_vars *vars)
 {
 	t_env	*current;
 	char	*var;

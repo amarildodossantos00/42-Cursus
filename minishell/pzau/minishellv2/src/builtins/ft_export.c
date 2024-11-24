@@ -102,6 +102,5 @@ void	ft_export(t_vars *vars, char **args)
 				add_and_update(&vars->env_ref, var, value);
 			i++;
 		}
-		
 	}
 }

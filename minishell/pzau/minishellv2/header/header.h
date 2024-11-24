@@ -29,7 +29,7 @@ typedef struct s_vars
 	char	**env;
 	char	**matrix;
 	char	**args;
-    	char	*input;
+    char	*input;
 	char	*path;
 	char	*home;
 	int		terminal;
@@ -39,18 +39,18 @@ typedef struct s_vars
 
 //pzau
 void    start_promp(t_vars *vars);
-void    read_readline(t_vars *vars);
-void	get_path(t_vars *vars);
-void    read_readline(t_vars *vars);
+void    append_output(char *file);
 void    only_comands(t_vars *vars);
+void    redirect_output(char *file);
+void    read_readline(t_vars *vars);
+void    read_readline(t_vars *vars);
 void    build_builtins(t_vars *vars);
 void    redirecionamento(t_vars *vars);
-void    redirect_output(char *file);
-int		redirect_input(char *file);
 void    redirect_herdoc(char *delimiter);
-void    append_output(char *file);
-int     cheack_input_red(t_vars *vars, char *str, char **redic);
+char	*get_path(t_vars *vars);
 char	**org_red(const char *input);
+int		redirect_input(char *file);
+int     cheack_input_red(t_vars *vars, char *str, char **redic);
 //pzau
 
 //amdos-sa
@@ -68,6 +68,7 @@ void	remove_deli(char *s);
 void	env(t_vars *vars);
 void	ft_export(t_vars *vars, char **args);
 void	print_env(t_env *env_list);
+void	init_env(t_vars *vars);
 void	add_and_update(t_env **env_list, char *var, char *value);
 t_env	*sort_list(t_env *list);
 t_env	*creat_node(char *var, char *value);
