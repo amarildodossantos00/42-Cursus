@@ -21,6 +21,7 @@ typedef struct	s_env
 {
 	char	*var;
 	char	*value;
+	int		exported;
 	struct s_env	*next;
 }	t_env;
 
@@ -64,11 +65,15 @@ void	remove_deli(char *s);
 void	env(t_vars *vars);
 void	ft_export(t_vars *vars, char **args);
 void	print_env(t_env *env_list);
-void	add_and_update(t_env **env_list, char *var, char *value);
+void	add_and_update(t_env **env_list, char *var, char *value, int exported);
 t_env	*sort_list(t_env *list);
 t_env	*creat_node(char *var, char *value);
 int	count_variables(char **environ);
 t_env	*ft_unset(t_env *head, char **vars);
+int export_var(t_vars *vars, char *input);
+void    expand_var(t_vars *vars);
+char    *return_name(char *str);
+void    search_var(t_vars *vars, char *var, int *p, int len);
 
 //cc
 

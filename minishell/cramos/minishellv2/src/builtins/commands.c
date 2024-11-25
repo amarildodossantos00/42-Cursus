@@ -48,14 +48,16 @@ void	env(t_vars *vars)
 	current = vars->env_ref;
 	while (current != NULL)
 	{
-		printf("%s=%s\n", current->var, current->value);
+			printf("%s=%s\n", current->var, current->value);
 		current = current->next;
 	}
 }
 
-
 void	ft_exit(t_vars *vars)
 {
 	printf("exit\n");
-	exit(0);
+	if (vars->matrix[1] != NULL)
+		exit(atoi(vars->matrix[1]));
+	else
+		exit(0);
 }
