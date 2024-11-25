@@ -34,6 +34,8 @@ static  void    init_values(t_vars *vars)
     vars->cargs = 0;
 }
 
+/*3: Atualizar a inicialização
+No início do programa (main), a lista de variáveis de ambiente é inicializada com as variáveis do sistema (usando o environ global). A função ensure_term_variable foi chamada logo após a inicialização para garantir que TERM esteja presente:*/
 int		main(void)
 {
     t_vars  vars;

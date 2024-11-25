@@ -1,8 +1,11 @@
-
+Explicação do que resolvi:
+O clear e outros comandos relacionados ao terminal dependem da variável de ambiente TERM, que especifica o tipo de terminal sendo usado.
+No minishell, as variáveis de ambiente estavam sendo gerenciadas manualmente usando a estrutura t_env. No entanto, a variável TERM não estava sendo configurada automaticamente.
+Quando o programa tentava usar clear, ele não encontrava a variável TERM e exibia o erro.
 
 Building Minishell
 
-0- Parte Basica 
+0- Parte Basica
 
 1- Pegar as variaveis de ambinte e a PATH (pzau)
 
