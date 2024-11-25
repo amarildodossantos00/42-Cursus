@@ -40,6 +40,8 @@ int		main(void)
 
     init_values(&vars);
     init_env(&vars);
+	ensure_term_variable(&vars);
+	vars.env = convert_env_list(vars.env_ref);
     start_promp(&vars);
     return (0);
 }

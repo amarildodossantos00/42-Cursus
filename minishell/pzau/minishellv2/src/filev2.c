@@ -65,6 +65,7 @@ void    redirecionamento(t_vars *vars)
     vars->terminal = dup(STDOUT_FILENO);
     while (redic[i])
         printf("%s\n", redic[i++]);
+    printf("\n");
     /*if (cheack_input_red(vars ,vars->input, redic))
         return ;
     while (redic[i] != NULL)

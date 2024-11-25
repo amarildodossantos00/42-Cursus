@@ -57,6 +57,8 @@ int     cheack_input_red(t_vars *vars, char *str, char **redic);
 void	execute_path(t_vars *vars);
 int		count_args(char *input);
 char	**create_args(char *input);
+void	ensure_term_variable(t_vars *vars);
+char	**convert_env_list(t_env *env_list);
 //amdos-sa
 
 //cc
