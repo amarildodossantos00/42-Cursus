@@ -1,0 +1,25 @@
+result.txt
+study00.c
+study01.c
+study02.c
+study03
+study03.c
+study04
+study04.c
+study05
+study05.c
+study06
+study06.c
+t01.txt
+4:27 study00.c
+-rw-r--r-- 1 amdos-sa 2024_luanda   494 Nov 18 15:15 study01.c
+-rw-r--r-- 1 amdos-sa 2024_luanda   466 Nov 20 10:32 study02.c
+-rwxr-xr-x 1 amdos-sa 2024_luanda 16328 Nov 21 12:28 study03
+-rw-r--r-- 1 amdos-sa 2024_luanda   569 Nov 21 12:28 study03.c
+-rwxr-xr-x 1 amdos-sa 2024_luanda 16264 Nov 21 13:19 study04
+-rw-r--r-- 1 amdos-sa 2024_luanda   956 Nov 21 13:19 study04.c
+-rwxr-xr-x 1 amdos-sa 2024_luanda 16224 Nov 22 10:45 study05
+-rw-r--r-- 1 amdos-sa 2024_luanda   724 Nov 22 10:50 study05.c
+-rwxr-xr-x 1 amdos-sa 2024_luanda 16128 Nov 22 13:00 study06
+-rw-r--r-- 1 amdos-sa 2024_luanda   424 Nov 22 12:59 study06.c
+-rw-r--r-- 1 amdos-sa 2024_luanda    27 Nov 18 11:15 t01.txt

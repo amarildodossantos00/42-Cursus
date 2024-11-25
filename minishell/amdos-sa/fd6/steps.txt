@@ -14,7 +14,7 @@ dup2: duplica descritores de arquivos.
 close: fecha descritores de arquivos.
 execve: executa os comandos.
 
-3- Comecar a estudar
+3- Comecar a estudar +1
 
 4- Implementar
 
