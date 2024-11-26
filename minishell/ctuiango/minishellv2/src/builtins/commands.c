@@ -43,19 +43,21 @@ void	pwd(t_vars *vars)
 
 void	env(t_vars *vars)
 {
-	int		i;
+	t_env *current;
 
-	i = 0;
-	while (vars->env[i] != NULL)
+	current = vars->env_ref;
+	while (current != NULL)
 	{
-		printf("%s\n", vars->env[i]);
-		i++;
+			printf("%s=%s\n", current->var, current->value);
+		current = current->next;
 	}
-	return ;
 }
 
 void	ft_exit(t_vars *vars)
 {
 	printf("exit\n");
-	exit(0);
+	if (vars->matrix[1] != NULL)
+		exit(atoi(vars->matrix[1]));
+	else
+		exit(0);
 }

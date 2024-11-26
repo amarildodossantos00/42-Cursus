@@ -21,17 +21,7 @@ static   void	init_env(t_vars *vars)
 	}
 }
 
-void	print_a(t_env *env_list)
-{
-	printf("%s\n", env_list->value);
-	while (env_list)
-	{
-		printf("declare -x %s=%s\n", env_list->var, env_list->value);
-		env_list = env_list->next;
-	}
-}
-
-static void	init_values(t_vars *vars)
+static  void    init_values(t_vars *vars)
 {
     extern char	**environ;
 
@@ -44,7 +34,7 @@ static void	init_values(t_vars *vars)
     vars->cargs = 0;
 }
 
-int	main(void)
+int		main(void)
 {
     t_vars  vars;
 

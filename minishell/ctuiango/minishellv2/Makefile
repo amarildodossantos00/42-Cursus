@@ -14,10 +14,12 @@ SRC = src/main.c\
 	src/count_args.c\
 	src/execute.c\
 	src/redic.c\
+	src/ft_expand_var.c\
 	src/builtins/commands.c\
 	src/builtins/echo.c\
 	src/builtins/ft_export.c\
 	src/builtins/ft_unset.c\
+	src/builtins/utils_exp.c\
 	libx/ft_strlen.c\
 	libx/ft_strncmp.c\
 	libx/ft_strjoin.c\
