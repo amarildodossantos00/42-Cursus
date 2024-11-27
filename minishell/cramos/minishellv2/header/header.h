@@ -7,6 +7,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <signal.h>
+# include <sys/stat.h>
 
 //pzau testes
 # include <string.h>

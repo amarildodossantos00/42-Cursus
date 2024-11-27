@@ -35,7 +35,6 @@ void    search_var(t_vars *vars, char *var, int *p, int len)
                     i++;
                     len++;
                 }
-                printf("erro1\n\n");
                 new_line[i] = '\0';
                 free(vars->input);
                 vars->input = new_line;
@@ -72,7 +71,7 @@ void    search_var(t_vars *vars, char *var, int *p, int len)
     {
         new_line[i] = '\0';
         free(vars->input);
-        vars->input = new_line; 
+        vars->input = new_line;
     }
 }   
 
@@ -81,9 +80,10 @@ char    *return_name(char *str)
     int		i;
     int		len;
     char    *var;
+
     i = 0;
     len = 0;
-    while (str[i] && (isdigit(str[i]) || isalpha(str[i]) || str[i] == '_'))
+    while (str[i] && (ft_isdigit(str[i]) || ft_isalpha(str[i]) || str[i] == '_'))
     {
         len++;
         i++;
