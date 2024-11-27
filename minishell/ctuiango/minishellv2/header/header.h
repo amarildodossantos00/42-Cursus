@@ -72,9 +72,9 @@ t_env	*creat_node(char *var, char *value);
 int	count_variables(char **environ);
 t_env	*ft_unset(t_env *head, char **vars);
 int export_var(t_vars *vars, char *input);
-void    expand_var(t_vars *vars);
+int    expand_var(t_vars *vars);
 char    *return_name(char *str);
-void    search_var(t_vars *vars, char *var, int *p, int len);
+int    search_var(t_vars *vars, char *var, int *p, int len);
 
 //cc
 
