@@ -87,19 +87,22 @@ void	ft_export(t_vars *vars, char **args)
 {
 	if (!args[1])
 		print_env(vars->env_ref);
-	
 	else
 	{
-		int	i;
-
-		i = 1;
+		int i = 1;
 		while (args[i])
 		{
-			char	*var = ft_strtok(args[i], "=");
-			char	*value = ft_strtok(NULL, "");
-			remove_deli(value);
-			if(var && value)
+			char *equal = ft_strchr(args[i], '=');
+			if (equal)
+			{
+				char *var = ft_substr(args[i], 0, equal - args[i]);
+				char *value = ft_strdup(equal + 1);
 				add_and_update(&vars->env_ref, var, value);
+				free(var);
+				free(value);
+			}
+			else
+				add_and_update(&vars->env_ref, args[i], "");
 			i++;
 		}
 	}

@@ -86,7 +86,7 @@ void    redirecionamento(t_vars *vars)
         else if (cheack_red(redic[i]) == 3)
         {
             i++;
-            continue ; 
+            continue ;
         }
         i++;
     }
@@ -101,9 +101,10 @@ void    read_readline(t_vars *vars)
 {
     int val;
 
+   expand_var(vars);
     val = cheak_string(vars);
     if (val == 1)
-        printf("pipe not done yet!\n");
+        execute_pipe(vars->input);
     else if (val == 2 || val == 3)
         redirecionamento(vars);
     else
