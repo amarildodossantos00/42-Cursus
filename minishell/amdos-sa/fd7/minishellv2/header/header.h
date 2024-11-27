@@ -7,6 +7,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <signal.h>
+# include <sys/stat.h>
 
 //pzau testes
 # include <string.h>
@@ -21,6 +22,7 @@ typedef struct	s_env
 {
 	char	*var;
 	char	*value;
+	int		exported;
 	struct s_env	*next;
 }	t_env;
 
@@ -59,6 +61,8 @@ int		count_args(char *input);
 char	**create_args(char *input);
 void	ensure_term_variable(t_vars *vars);
 char	**convert_env_list(t_env *env_list);
+char	**split_pipe(char *input);
+void	execute_pipe(char *input);
 //amdos-sa
 
 //cc
@@ -76,6 +80,10 @@ t_env	*sort_list(t_env *list);
 t_env	*creat_node(char *var, char *value);
 t_env	*ft_unset(t_env *head, char **vars);
 int	count_variables(char **environ);
+void    expand_var(t_vars *vars);
+char    *return_name(char *str);
+void    search_var(t_vars *vars, char *var, int *p, int len);
+int export_var(t_vars *vars, char *input);
 //cc
 
 #endif
