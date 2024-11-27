@@ -14,6 +14,7 @@ SRC = src/main.c\
 	src/count_args.c\
 	src/execute.c\
 	src/redic.c\
+	src/redicv2.c\
 	src/builtins/commands.c\
 	src/builtins/echo.c\
 	src/builtins/ft_export.c\
@@ -35,6 +36,7 @@ SRC = src/main.c\
 	libx/ft_strtrim.c\
 	libx/ft_split_args.c\
 	libx/ft_strlcpy.c\
+	libx/ft_count_words.c\
 
 OBJ = ${SRC:.c=.o}
 

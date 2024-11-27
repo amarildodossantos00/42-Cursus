@@ -48,37 +48,55 @@ int    redirect_input(char *file)
     return (0);
 }
 
-void    redirect_herdoc(char *delimiter)
+static void close_x(int *pipe_fd, int stdin_backup)
 {
-    int pipe_fd[2];
-    char    buffer[1024];
-    size_t	bytes_read;
-    size_t	delimiter_len;
-
-    delimiter_len = ft_strlen(delimiter);
-    if (pipe(pipe_fd) < 0)
-    {
-        perror("pipe");
-        return ;
-    }
-    while (1)
-    {
-        bytes_read = read(STDIN_FILENO, buffer, sizeof(buffer) - 1);
-        if (bytes_read <= 0)
-            break ;
-        buffer[bytes_read] = '\0';
-        if (ft_strncmp(buffer, delimiter, delimiter_len) == 0)
-            break ;
-        write(pipe_fd[1], buffer, bytes_read);
-    }
     close(pipe_fd[1]);
     dup2(pipe_fd[0], STDIN_FILENO);
     close(pipe_fd[0]);
+    dup2(stdin_backup, STDIN_FILENO);
+    close(stdin_backup);
 }
+
+void redirect_herdoc(t_vars *vars, char *delimiter)
+{
+    int     pipe_fd[2];
+    char    buffer[1024];
+    size_t  bytes_read;
+    size_t  delimiter_len;
+    int     stdin_backup;
+
+    delimiter_len = ft_strlen(delimiter);
+    stdin_backup = dup(STDIN_FILENO);
+    if (stdin_backup < 0)
+    {
+        perror("dup");
+        return;
+    }
+    if (pipe(pipe_fd) < 0)
+    {
+        perror("pipe");
+        return;
+    }
+    while (1)
+    {
+        write(STDOUT_FILENO, "> ", 2);
+        bytes_read = read(STDIN_FILENO, buffer, sizeof(buffer) - 1);
+        if (bytes_read <= 0)
+            break;
+        buffer[bytes_read] = '\0';
+        if (buffer[bytes_read - 1] == '\n')
+            buffer[bytes_read - 1] = '\0';
+
+        if (ft_strncmp(buffer, delimiter, delimiter_len) == 0)
+            break;
+        write(pipe_fd[1], buffer, bytes_read);
+        write(pipe_fd[1], "\n", 1);
+    }
+    close_x(pipe_fd, stdin_backup);
+}
+
 //files 1
 
-
-/*files 2
 static char *add_spaces_around_operators(const char *input)
 {
     const char *operators = "><";
@@ -86,23 +104,28 @@ static char *add_spaces_around_operators(const char *input)
     char *output = malloc(len * 3 + 1);
     int j = 0;
 
-    for (size_t i = 0; i < len; i++) {
-        if (strchr(operators, input[i])) {
+    for (size_t i = 0; i < len; i++)
+    {
+        if (strchr(operators, input[i]))
+        {
             if (j > 0 && output[j - 1] != ' ')
                 output[j++] = ' ';
             output[j++] = input[i];
-            if (input[i + 1] == input[i]) {
+            if (input[i + 1] == input[i])
+            {
                 output[j++] = input[i++];
             }
             if (input[i + 1] != ' ')
                 output[j++] = ' ';
-        } else {
+        }
+        else
+        {
             output[j++] = input[i];
         }
     }
 
     output[j] = '\0';
-    return output;
+    return (output);
 }
 
 char **org_red(const char *input)
@@ -112,105 +135,47 @@ char **org_red(const char *input)
     char *normalized_input = add_spaces_around_operators(input);
     char *input_copy = strdup(normalized_input);
     char *token = strtok(input_copy, " ");
+    char buffer[256] = {0};
+    int buffer_filled = 0;
     char *prev = NULL;
 
-    while (token) {
+    while (token)
+    {
         int is_operator = (strcmp(token, ">") == 0 || strcmp(token, "<") == 0 || 
                            strcmp(token, ">>") == 0 || strcmp(token, "<<") == 0);
 
-        if (is_operator && prev) {
-            char *next = strtok(NULL, " ");
-            if (next) {
-                char buffer[256];
-                snprintf(buffer, sizeof(buffer), "%s %s %s", prev, token, next);
-
+        if (is_operator)
+        {
+            if (prev)
+            {
                 result = realloc(result, (count + 1) * sizeof(char *));
                 result[count++] = strdup(buffer);
-
-                prev = next;
             }
-        } else if (!is_operator) {
-            prev = token;
-        }
-
-        token = strtok(NULL, " ");
-    }
-
-    result = realloc(result, (count + 1) * sizeof(char *));
-    result[count] = NULL;
-
-    free(input_copy);
-    free(normalized_input);
-    return result;
-}
-//file 2*/
-
-static char *add_spaces_around_operators(const char *input)
-{
-    const char *operators = "><";
-    size_t len = strlen(input);
-    char *output = malloc(len * 3 + 1); // Aloca espaço extra para os novos espaços
-    int j = 0;
-
-    for (size_t i = 0; i < len; i++) {
-        if (strchr(operators, input[i])) { // Detecta operadores
-            if (j > 0 && output[j - 1] != ' ') // Adiciona espaço antes
-                output[j++] = ' ';
-            output[j++] = input[i];
-            if (input[i + 1] == input[i]) { // Detecta operadores duplos
-                output[j++] = input[i++];
-            }
-            if (input[i + 1] != ' ') // Adiciona espaço depois
-                output[j++] = ' ';
-        } else {
-            output[j++] = input[i]; // Copia caracteres normais
-        }
-    }
-
-    output[j] = '\0';
-    return output;
-}
-
-char **org_red(const char *input)
-{
-    char **result = NULL;
-    int count = 0;
-    char *normalized_input = add_spaces_around_operators(input); // Normaliza a entrada
-    char *input_copy = strdup(normalized_input); // Cria uma cópia da entrada normalizada
-    char *token = strtok(input_copy, " ");
-    char buffer[256] = {0}; // Buffer para manter o grupo atual
-    int buffer_filled = 0;  // Indica se o buffer já está preenchido
-    char *prev = NULL;      // Armazena o último argumento ou operador
-
-    while (token) {
-        int is_operator = (strcmp(token, ">") == 0 || strcmp(token, "<") == 0 || 
-                           strcmp(token, ">>") == 0 || strcmp(token, "<<") == 0);
-
-        if (is_operator) {
-            if (prev) {
-                result = realloc(result, (count + 1) * sizeof(char *));
-                result[count++] = strdup(buffer); // Armazena o grupo atual
-            }
-            snprintf(buffer, sizeof(buffer), "%s", prev ? prev : ""); // Reinicia o buffer
+            snprintf(buffer, sizeof(buffer), "%s", prev ? prev : "");
             strncat(buffer, " ", sizeof(buffer) - strlen(buffer) - 1);
             strncat(buffer, token, sizeof(buffer) - strlen(buffer) - 1);
             buffer_filled = 1;
-        } else {
-            if (buffer_filled) {
+        }
+        else
+        {
+            if (buffer_filled)
+            {
                 strncat(buffer, " ", sizeof(buffer) - strlen(buffer) - 1);
                 strncat(buffer, token, sizeof(buffer) - strlen(buffer) - 1);
-            } else {
-                snprintf(buffer, sizeof(buffer), "%s", token); // Inicia o primeiro grupo
+            } else
+            {
+                snprintf(buffer, sizeof(buffer), "%s", token);
                 buffer_filled = 1;
             }
         }
 
-        prev = token; // Atualiza o último token processado
+        prev = token;
         token = strtok(NULL, " ");
 
-        if (!token && buffer_filled) { // Se é o último grupo
+        if (!token && buffer_filled)
+        {
             result = realloc(result, (count + 1) * sizeof(char *));
-            result[count++] = strdup(buffer); // Armazena o último grupo
+            result[count++] = strdup(buffer);
         }
     }
 
@@ -222,9 +187,6 @@ char **org_red(const char *input)
     return result;
 }
 
-//file 2 test
-
-//file 2 test
 
 //files 3
 static int more_than_two(char *new)
@@ -265,17 +227,17 @@ static int  cheack_in_tree(char *new)
 
 int    cheack_input_red(t_vars *vars, char *str, char **redic)
 {
-    //int     i;
+    int     i;
     char    *str1;
-    //char    **new;
+    char    **new;
 
     if (more_than_two(str))
     {
         printf("minishell: syntax error near unexpected token `>'\n");
         return (1);
     }
-    //i = 0;
-    /*while (redic[i])
+    i = 0;
+    while (redic[i])
     {
         new = ft_split_red(redic[i]);
         if (cheack_in_tree(redic[i]) == 1)
@@ -286,10 +248,10 @@ int    cheack_input_red(t_vars *vars, char *str, char **redic)
         if (cheack_in_tree(redic[i]) == 2)
         {
             str1 = ft_space(new[1]);
-            redirect_herdoc(str1);
+            redirect_herdoc(vars, str1);
             free(str1);
         }
         i++;
-    }*/
+    }
 }
 // files 3

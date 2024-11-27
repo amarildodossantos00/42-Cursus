@@ -30,6 +30,7 @@ static  void    init_values(t_vars *vars)
     vars->home = NULL;
     vars->matrix = NULL;
     vars->args = NULL;
+	vars->redic_filter = NULL;
     vars->env = environ;
     vars->cargs = 0;
 }

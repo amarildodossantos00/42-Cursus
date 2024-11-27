@@ -18,6 +18,7 @@ typedef struct s_split_token
 int	ft_strlen(char *str);
 int     ft_strcmp(char *s1, char *s2);
 int 	ft_strlen2(const char *str);
+int	count_words(const char *str);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strchr(const char *str, int c);
 char    *ft_strdup(char *src);

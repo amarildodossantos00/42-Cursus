@@ -29,6 +29,7 @@ typedef struct s_vars
 	char	**env;
 	char	**matrix;
 	char	**args;
+	char	**redic_filter;
     char	*input;
 	char	*path;
 	char	*home;
@@ -46,7 +47,7 @@ void    read_readline(t_vars *vars);
 void    read_readline(t_vars *vars);
 void    build_builtins(t_vars *vars);
 void    redirecionamento(t_vars *vars);
-void    redirect_herdoc(char *delimiter);
+void    redirect_herdoc(t_vars *vars, char *delimiter);
 char	*get_path(t_vars *vars);
 char	**org_red(const char *input);
 int		redirect_input(char *file);
