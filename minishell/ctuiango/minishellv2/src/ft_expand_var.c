@@ -1,5 +1,39 @@
 #include "../header/header.h"
 
+char    *replace_variable(char *input, int start, int len, char *replace)
+{
+    int new_line;
+    char    *new_input;
+
+    new_line = ft_strlen(input) - len, + ft_strlen(replace);
+    new_input = malloc(new_line + 1);
+    strncpy(new_input, input, start);
+    ft_strcpy(&new_input[start], replace);
+    ft_strcpy(&new_input[start + ft_strlen(replace)], &input[start + len]);
+    free(input);
+    return (new_input);
+}
+
+char    *replace_exit_status(char *input)
+{
+    int i;
+    //int	last_status = 0;
+
+    i = 0;
+    while (input[i])
+    {
+        if (input[i] == '$' && input[i + 1] == '?')
+        {
+            char *exit_status = ft_itoa(last_status); // Converta last_status para string
+            char *new_input = replace_variable(input, i, 2, exit_status); // Substitua "$?" pelo código de saída
+            free(exit_status);
+            return new_input;
+        }
+        i++;
+    }
+    return (input);
+}
+
 int    search_var(t_vars *vars, char *var, int *p, int len)
 {
     int		i;
@@ -111,6 +145,7 @@ int    expand_var(t_vars *vars)
     char    *var;
 
     i = 0;
+    vars->input = replace_exit_status(vars->input);
     while (vars->input[i])
     {
         if (vars->input[i] == '$' && vars->input[i + 1] != ' ' && vars->input[i + 1] != '\t' && vars->input[i + 1] != '\0')

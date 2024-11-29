@@ -37,7 +37,9 @@ static  void    init_values(t_vars *vars)
 int		main(void)
 {
     t_vars  vars;
+	int	last_status;
 
+	last_status = 0;
     init_values(&vars);
     init_env(&vars);
     start_promp(&vars);

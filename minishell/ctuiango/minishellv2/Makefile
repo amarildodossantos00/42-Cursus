@@ -36,6 +36,7 @@ SRC = src/main.c\
 	libx/ft_strlcpy.c\
 	libx/ft_substr.c\
 	libx/ft_strtrim.c\
+	libx/ft_itoa.c\
 
 OBJ = ${SRC:.c=.o}
 

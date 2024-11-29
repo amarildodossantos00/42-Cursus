@@ -34,5 +34,6 @@ char	**ft_split_args(char *str);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_itoa(int nbr);
 
 #endif

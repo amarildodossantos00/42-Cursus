@@ -18,6 +18,8 @@
 
 # include "../libx/libx.h"
 
+extern int	last_status;
+
 typedef struct	s_env
 {
 	char	*var;
@@ -44,7 +46,7 @@ void    read_readline(t_vars *vars);
 void	get_path(t_vars *vars);
 void    read_readline(t_vars *vars);
 void    only_comands(t_vars *vars);
-void    build_builtins(t_vars *vars);
+int    build_builtins(t_vars *vars);
 void    redirecionamento(t_vars *vars);
 void    redirect_output(char *file);
 void    append_output(char *file);
@@ -75,6 +77,7 @@ int export_var(t_vars *vars, char *input);
 int    expand_var(t_vars *vars);
 char    *return_name(char *str);
 int    search_var(t_vars *vars, char *var, int *p, int len);
+char    *replace_exit_status(char *input);
 
 //cc
 

@@ -26,9 +26,8 @@ static int  cheack_build_builtins(t_vars *vars)
     return (0);
 }
 
-void    build_builtins(t_vars *vars)
+int    build_builtins(t_vars *vars)
 {
-    //vars->matrix = ft_split(vars->input);
     vars->matrix = ft_split_args(vars->input);
    if (ft_strncmp(vars->input, "echo", 4) == 0)
         echo(vars);
@@ -50,6 +49,8 @@ void    all_commands(t_vars *vars)
 {
     pid_t		pid;
 	size_t		j;
+    int status;
+    //int	last_status = 0;
 
     vars->cargs = count_args(vars->input);
 	vars->args = create_args(vars->input);
@@ -62,13 +63,25 @@ void    all_commands(t_vars *vars)
         signal(SIGINT, SIG_DFL);
         execute_path(vars);
         printf("%s: command not found\n", vars->input);
-        exit(EXIT_FAILURE);
+        exit(127);
     }
     else
-    wait(NULL);
+    {
+        waitpid(pid, &status, 0);
+        if (WIFEXITED(status))
+            last_status = WEXITSTATUS(status);
+        else if (WEXITSTATUS(status))
+            last_status = 128 + WTERMSIG(status);
+    }
+    while (j++ < vars->cargs);
+        free(vars->args[j]);
+    free(vars->args);
+    /*else
+        wait(NULL);
     while (j++ < vars->cargs)
         free(vars->args[j]);
     free(vars->args);
+    */
 }
 
 void    only_comands(t_vars *vars)

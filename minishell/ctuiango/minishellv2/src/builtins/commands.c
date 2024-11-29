@@ -22,14 +22,26 @@ static void	get_home(t_vars *vars)
 
 void	cd(t_vars *vars)
 {
+	//int last_status;
 	if (vars->matrix[1] == NULL)	
 		get_home(vars);
 	else if (ft_strncmp(vars->matrix[1], "..", 2) == 0)
 		vars->home = vars->matrix[1];
 	else
+	{
 		vars->home = vars->matrix[1];
-    	if (vars->home != NULL && chdir(vars->home) != 0)
-    		perror("cd");
+		last_status = 1;
+	}
+    if (vars->home != NULL && chdir(vars->home) != 0)
+    {
+		perror("cd");
+		last_status = 1;
+		return ;
+	}
+	else
+		last_status = 0;
+	return ;
+		
 }
 
 void	pwd(t_vars *vars)
