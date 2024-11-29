@@ -1,5 +1,7 @@
 #include "../header/header.h"
 
+int	last_status;
+
 static   void	init_env(t_vars *vars)
 {
 	t_env	*current;
@@ -37,9 +39,7 @@ static  void    init_values(t_vars *vars)
 int		main(void)
 {
     t_vars  vars;
-	int	last_status;
 
-	last_status = 0;
     init_values(&vars);
     init_env(&vars);
     start_promp(&vars);
