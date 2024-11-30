@@ -24,7 +24,7 @@ char	*find_executable(char *command, char *path)
 		if (access(command, X_OK) == 0)
 			return (ft_strdup(command));
 		else
-			return (NULL);
+			return ("none");
 	}
 	path_copy = ft_strdup(path);
 	if (!path_copy)
@@ -33,11 +33,6 @@ char	*find_executable(char *command, char *path)
 	while (dir)
 	{
 		executable = build_executable_path(dir, command);
-		if (!executable)
-		{
-			free(path_copy);
-			return (NULL);
-		}
 		if (access(executable, X_OK) == 0)
 		{
 			free(path_copy);

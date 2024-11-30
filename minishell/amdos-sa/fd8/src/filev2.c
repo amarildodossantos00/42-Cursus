@@ -57,19 +57,20 @@ static int  cheack_red(char *str)
 void    redirecionamento(t_vars *vars)
 {
     int     i;
+    char    *str;
     char    **redic;
     char    **command;
 
     i = 0;
     redic = org_red(vars->input);
     vars->terminal = dup(STDOUT_FILENO);
-    while (redic[i])
-        printf("%s\n", redic[i++]);
-    /*if (cheack_input_red(vars ,vars->input, redic))
+    if (cheack_input_red(vars ,vars->input, redic))
         return ;
-    while (redic[i] != NULL)
+    /*while (redic[i] != NULL)
     {
         command = ft_split_red(redic[i]);
+        if (count_words(command[1]) > 1)
+            command = ft_split(ft_strjoin(" a ", command[1]));
         if (cheack_red(redic[i]) == 2)
             redirect_output(ft_space(command[1]));
         else if (cheack_red(redic[i]) == 1)
@@ -89,9 +90,27 @@ void    redirecionamento(t_vars *vars)
             continue ;
         }
         i++;
+        free(command);
     }
+    i = 0;
     command = ft_split_red(redic[0]);
-    vars->input = command[0];
+    str = command[0];
+    while (redic[i] != NULL)
+    {
+        command = ft_split_red(redic[i]);
+        if (count_words(command[1]) > 1)
+        {
+            command = ft_split(command[1]);
+            int j = 1;
+            while (command[j])
+            {
+                str = ft_strjoin(ft_strjoin(str, " "), command[j]);
+                j++;
+            }
+        }
+        i++;
+    }
+    vars->input = str;
     only_comands(vars);
     dup2(vars->terminal, STDOUT_FILENO);
     close(vars->terminal);*/
@@ -99,14 +118,13 @@ void    redirecionamento(t_vars *vars)
 
 void    read_readline(t_vars *vars)
 {
+	char	**env_array;
     int val;
-    char **env_array;
 
-    expand_var(vars);
     val = cheak_string(vars);
-    env_array = convert_env_list(vars->env_ref);
+	env_array = convert_env_list(vars->env_ref);
     if (val == 1)
-        execute_pipe(vars->input, vars->path, env_array);
+        execute_pipe(vars);
     else if (val == 2 || val == 3)
         redirecionamento(vars);
     else

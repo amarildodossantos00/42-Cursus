@@ -42,4 +42,3 @@ char **ft_split(char *str, const char *delimiters)
 	m[y] = NULL;
 	return m;
 }
-

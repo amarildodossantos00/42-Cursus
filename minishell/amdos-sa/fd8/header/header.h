@@ -7,7 +7,6 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <signal.h>
-# include <sys/stat.h>
 
 //pzau testes
 # include <string.h>
@@ -18,26 +17,32 @@
 
 # include "../libx/libx.h"
 
-typedef struct	s_env
+typedef struct s_env
 {
-	char	*var;
-	char	*value;
-	int		exported;
+	char		*var;
+	char		*value;
 	struct s_env	*next;
 }	t_env;
 
 typedef struct s_vars
 {
-	char	**env;
-	char	**matrix;
-	char	**args;
-    char	*input;
-	char	*path;
-	char	*home;
-	int		terminal;
-	t_env	*env_ref;
-	size_t	cargs;
+	char		**env;
+	char		**matrix;
+	char		**args;
+	char		**redic_filter;
+	char		*input;
+	char		*path;
+	char		*home;
+	int			terminal;
+	t_env		*env_ref;
+	size_t		cargs;
+
+	char		**commands;
+	int			input_fd;
+	int			fd[2];
+	pid_t		pid;
 }	t_vars;
+
 
 //pzau
 void    start_promp(t_vars *vars);
@@ -48,7 +53,7 @@ void    read_readline(t_vars *vars);
 void    read_readline(t_vars *vars);
 void    build_builtins(t_vars *vars);
 void    redirecionamento(t_vars *vars);
-void    redirect_herdoc(char *delimiter);
+void    redirect_herdoc(t_vars *vars, char *delimiter);
 char	*get_path(t_vars *vars);
 char	**org_red(const char *input);
 int		redirect_input(char *file);
@@ -56,15 +61,14 @@ int     cheack_input_red(t_vars *vars, char *str, char **redic);
 //pzau
 
 //amdos-sa
+char	*find_executable(char *command, char *path);
 void	execute_path(t_vars *vars);
 int		count_args(char *input);
 char	**create_args(char *input);
 void	ensure_term_variable(t_vars *vars);
 char	**convert_env_list(t_env *env_list);
 char	**split_pipe(char *input);
-void execute_pipe(char *input, char *path, char **env_ref);
-char	*build_executable_path(char *dir, char *command);
-char	*find_executable(char *command, char *path);
+void	execute_pipe(t_vars *vars);
 //amdos-sa
 
 //cc
@@ -82,10 +86,6 @@ t_env	*sort_list(t_env *list);
 t_env	*creat_node(char *var, char *value);
 t_env	*ft_unset(t_env *head, char **vars);
 int	count_variables(char **environ);
-void    expand_var(t_vars *vars);
-char    *return_name(char *str);
-void    search_var(t_vars *vars, char *var, int *p, int len);
-int export_var(t_vars *vars, char *input);
 //cc
 
 #endif
