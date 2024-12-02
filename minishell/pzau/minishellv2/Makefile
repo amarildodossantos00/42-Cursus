@@ -37,6 +37,9 @@ SRC = src/main.c\
 	libx/ft_split_args.c\
 	libx/ft_strlcpy.c\
 	libx/ft_count_words.c\
+	libx/ft_itoa.c\
+	libx/ft_memmove.c\
+	libx/ft_strlcat.c
 
 OBJ = ${SRC:.c=.o}
 

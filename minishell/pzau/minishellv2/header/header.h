@@ -52,6 +52,11 @@ char	*get_path(t_vars *vars);
 char	**org_red(const char *input);
 int		redirect_input(char *file);
 int     cheack_input_red(t_vars *vars, char *str, char **redic);
+
+size_t	count_digit_base(unsigned long n, unsigned int base);
+char	*gen_tmpfile_name(int cmd_nbr);
+void	write_and_close(int fd);
+void	write_heredoc(t_vars *vars, char *cmd, int fd);
 //pzau
 
 //amdos-sa
