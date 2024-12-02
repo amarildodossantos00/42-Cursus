@@ -39,7 +39,8 @@ void    read_readline(t_vars *vars)
 {
     int val;
 
-    expand_var(vars);
+    if (expand_var(vars))
+        return ;
     val = cheak_string(vars);
     if (val == 1)
         printf("pipe not done yet!\n");

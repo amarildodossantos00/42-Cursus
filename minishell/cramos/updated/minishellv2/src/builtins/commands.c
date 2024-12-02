@@ -29,11 +29,10 @@ void	cd(t_vars *vars)
 	else
 		vars->home = vars->matrix[1];
     	if (vars->home != NULL && chdir(vars->home) != 0)
-		{
-			perror("cd");
-			vars->exit_status = 1;
-		}
-
+	{
+		perror("cd");
+		vars->exit_status = 1;
+	}
 }
 
 void	pwd(t_vars *vars)
@@ -52,16 +51,14 @@ void	env(t_vars *vars)
 	current = vars->env_ref;
 	while (current != NULL)
 	{
-			printf("%s=%s\n", current->var, current->value);
+		printf("%s=%s\n", current->var, current->value);
 		current = current->next;
 	}
 }
 
+
 void	ft_exit(t_vars *vars)
 {
 	printf("exit\n");
-	if (vars->matrix[1] != NULL)
-		exit(atoi(vars->matrix[1]));
-	else
-		exit(0);
+	exit(0);
 }

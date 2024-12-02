@@ -1,6 +1,6 @@
 #include "../header/header.h"
 
-static   void	init_env(t_vars *vars)
+void	init_env(t_vars *vars)
 {
 	t_env	*current;
 	char	*var;
@@ -30,6 +30,7 @@ static  void    init_values(t_vars *vars)
     vars->home = NULL;
     vars->matrix = NULL;
     vars->args = NULL;
+    vars->redic_filter = NULL;
     vars->env = environ;
     vars->exit_status = 0;
     vars->cargs = 0;
@@ -41,6 +42,8 @@ int		main(void)
 
     init_values(&vars);
     init_env(&vars);
+    ensure_term_variable(&vars);
+    vars.env = convert_env_list(vars.env_ref);
     start_promp(&vars);
     return (0);
 }

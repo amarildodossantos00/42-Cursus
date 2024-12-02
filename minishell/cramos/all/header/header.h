@@ -59,7 +59,6 @@ void    free_matrix(char **matrix);
 t_env   *init_env_list(char **envp);
 t_env	*creat_node(char *var, char *value);
 t_env	*sort_list(t_env *lst);
-t_env   *unset_env(t_env *head, const char *key);
-t_env   *add_env(t_env *head, const char *key, const char *value);
+
 //cc
 #endif

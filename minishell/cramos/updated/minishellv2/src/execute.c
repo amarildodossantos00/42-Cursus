@@ -32,10 +32,9 @@ char	*find_executable(char *command, char *path)
 	dir = ft_strtok(path_copy, ":");
 	while (dir)
 	{
+		executable = build_executable_path(dir, command);
 		if (access(executable, X_OK) == 0)
 		{
-			executable = build_executable_path(dir, command);
-		
 			free(path_copy);
 			return(executable);
 		}
@@ -49,6 +48,7 @@ char	*find_executable(char *command, char *path)
 void	execute_path(t_vars *vars)
 {
 	char	*executable;
+	char	**env;
 
 	executable =  find_executable(vars->args[0], vars->path);
 	if (!executable)
@@ -65,7 +65,8 @@ void	execute_path(t_vars *vars)
 	{
 		vars->args[0] = executable;
 		//vars->last_command = executable;
-		execv(executable, vars->args);
+		env = convert_env_list(vars->env_ref);
+		execve(executable, vars->args, vars->env);
 		perror("execv falhou");
 		free(executable);
 		exit(EXIT_FAILURE);

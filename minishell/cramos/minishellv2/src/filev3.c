@@ -65,7 +65,7 @@ void    all_commands(t_vars *vars)
         exit(EXIT_FAILURE);
     }
     else
-    wait(NULL);
+   	 wait(NULL);
     while (j++ < vars->cargs)
         free(vars->args[j]);
     free(vars->args);

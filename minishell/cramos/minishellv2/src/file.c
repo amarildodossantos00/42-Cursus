@@ -38,7 +38,10 @@ void    start_promp(t_vars *vars)
 		}
         if (ft_strlen(vars->input) > 0)
 			add_history(vars->input);
+		expand_exit_status(vars);
         read_readline(vars);
+		if (vars->args && vars->args[0])
+            execute_command(vars, vars->args[0]);
         free(vars->input);
     }
     return ;
