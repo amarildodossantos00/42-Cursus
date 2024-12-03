@@ -53,7 +53,7 @@ void	execute_path(t_vars *vars)
 	executable =  find_executable(vars->args[0], vars->path);
 	if (!executable)
 	{
-		printf("%s: command not found\n", vars->input);
+		printf("%s: command1 not found\n", vars->input);
 		exit(EXIT_FAILURE);
 	}
 	else if (executable == "none")

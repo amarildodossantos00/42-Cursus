@@ -2,21 +2,19 @@
 
 void    execute_command(t_vars *vars, char *command)
 {
+    vars->exit_status = 0;
     if (!command || !vars->args || !vars->args[0])
     {
         vars->exit_status = 127;
         return ;
     }
-    
-    if (access(command, X_OK) != 0)
+    if (access(command, X_OK) == -1)
     {
         vars->exit_status = 127;
         return ;
     }
-
     pid_t pid = fork();
-    int status ;
-
+    int status;
     if (pid == 0)
     {
         if (execve(command, vars->args, vars->env) == -1)
@@ -25,7 +23,7 @@ void    execute_command(t_vars *vars, char *command)
             exit(127);
         }
     }
-    else if (pid > 0)
+    /*else if (pid > 0)
     {
         waitpid(pid, &status, 0);
         if (WIFEXITED(status))
@@ -34,7 +32,7 @@ void    execute_command(t_vars *vars, char *command)
             vars->exit_status = 128 + WTERMSIG(status);
         else
             vars->exit_status = 1;
-    }
+    }*/
     else
     {
         perror("fork");
@@ -56,7 +54,6 @@ void    expand_exit_status(t_vars *vars)
     exit = ft_itoa(vars->exit_status);
     if (!exit)
         return ;
-
     new_input = malloc(ft_strlen(vars->input) - 2 + ft_strlen(exit) + 1);
     if (!new_input)
     {

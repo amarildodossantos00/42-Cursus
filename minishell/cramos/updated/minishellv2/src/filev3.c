@@ -52,6 +52,7 @@ void    all_commands(t_vars *vars)
 
 	vars->cargs = count_args(vars->input);
 	vars->args = create_args(vars->input);
+	vars->exit_status = 0;
 	pid = fork();
 	j = 0;
 	if (pid < 0)
@@ -59,12 +60,21 @@ void    all_commands(t_vars *vars)
 	else if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
-		execute_path(vars);
-		printf("%s: command not found\n", vars->input);
-		exit(EXIT_FAILURE);
+		execute_command(vars, vars->args[0]); 
+		//execute_path(vars);
+		printf("%s: command2 not found\n", vars->args[0]);
+		exit(127);
 	}
 	else
-		wait(NULL);
+	{
+		waitpid(pid, &vars->exit_status, 0);
+        if (WIFEXITED(vars->exit_status))
+            vars->exit_status = WEXITSTATUS(vars->exit_status);
+        else if (WIFSIGNALED(vars->exit_status))
+            vars->exit_status = 128 + WTERMSIG(vars->exit_status);
+        else
+            vars->exit_status = 1;
+	}
 	while (j++ < vars->cargs)
 		free(vars->args[j]);
 	free(vars->args);

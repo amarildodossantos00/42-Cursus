@@ -27,22 +27,20 @@ void    start_promp(t_vars *vars)
 
 	while (1)
 	{
-	 get_path(vars);
-	vars->input = readline("minishell% ");
-	if (crtl_d(vars))
-		break ;
-	if(vars->input[0] == '\0')
-	{
+		vars->path = get_path(vars);
+		vars->input = readline("minishell% ");
+		if (crtl_d(vars))
+			break ;
+		if(vars->input[0] == '\0')
+		{
+			free(vars->input);
+			continue ;
+		}
+		if (ft_strlen(vars->input) > 0)
+			add_history(vars->input);
+		expand_exit_status(vars);
+		read_readline(vars);
 		free(vars->input);
-		continue ;
-	}
-	if (ft_strlen(vars->input) > 0)
-		add_history(vars->input);
-	expand_exit_status(vars);
-	read_readline(vars);
-	if (vars->args && vars->args[0])
-		execute_command(vars, vars->args[0]);
-	free(vars->input);
 	}
 	return ;
 }
