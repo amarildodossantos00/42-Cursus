@@ -111,9 +111,9 @@ void    redirecionamento(t_vars *vars)
         i++;
     }
     vars->input = str;
-    only_comands(vars);
+    only_comands(vars);*/
     dup2(vars->terminal, STDOUT_FILENO);
-    close(vars->terminal);*/
+    close(vars->terminal);
 }
 
 void    read_readline(t_vars *vars)
