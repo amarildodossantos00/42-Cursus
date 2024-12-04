@@ -15,7 +15,7 @@ t_env	*creat_node(char *var, char *value)
 	return (new);
 }
 
-void	add_and_update(t_env **env_list, char *var, char *value)
+void	add_and_update(t_env **env_list, char *var, char *value, int exported)
 {
 	t_env	*current = *env_list;
 
@@ -25,14 +25,16 @@ void	add_and_update(t_env **env_list, char *var, char *value)
 		{
 			free(current->value);
 			current->value = ft_strdup(value);
+			if (current->exported == 1)
+				current->exported = 1;
 			return ;
 		}
 		if (current->next == NULL)
-			break;
+			break ;
 		current = current->next;
 	}
 	t_env *new = creat_node(var, value);
-
+	new->exported = exported;
 	if (current == NULL)
 		*env_list = new;
 	else
@@ -78,28 +80,35 @@ void	print_env(t_env *env_list)
 	sort_list(env_list);
 	while (env_list)
 	{
-		printf("declare -x %s=\"%s\"\n", env_list->var, env_list->value);
+		if (env_list)
+			printf("declare -x %s=\"%s\"\n", env_list->var, env_list->value);
+		else
+			printf("declare -x %s\n", env_list->var);
 		env_list = env_list->next;
 	}
 }
+
 
 void	ft_export(t_vars *vars, char **args)
 {
 	if (!args[1])
 		print_env(vars->env_ref);
-	
 	else
 	{
-		int	i;
-
-		i = 1;
+		int i = 1;
 		while (args[i])
 		{
-			char	*var = ft_strtok(args[i], "=");
-			char	*value = ft_strtok(NULL, "");
-			remove_deli(value);
-			if(var && value)
-				add_and_update(&vars->env_ref, var, value);
+			char *equal = ft_strchr(args[i], '=');
+			if (equal)
+			{
+				char *var = ft_substr(args[i], 0, equal - args[i]);
+				char *value = ft_strdup(equal + 1);
+				add_and_update(&vars->env_ref, var, value, 1);
+				free(var);
+				free(value);
+			}
+			else
+				add_and_update(&vars->env_ref, args[i], "", 1);
 			i++;
 		}
 	}
