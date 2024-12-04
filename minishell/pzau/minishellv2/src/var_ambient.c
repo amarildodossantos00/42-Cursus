@@ -28,7 +28,7 @@ void ensure_term_variable(t_vars *vars)
 			return;
 		current = current->next;
 	}
-	add_and_update(&vars->env_ref, "TERM", "xterm-256color");
+	add_and_update(&vars->env_ref, "TERM", "xterm-256color", 0);
 }
 
 char **convert_env_list(t_env *env_list)

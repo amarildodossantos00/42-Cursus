@@ -66,7 +66,7 @@ void    redirecionamento(t_vars *vars)
     vars->terminal = dup(STDOUT_FILENO);
     if (cheack_input_red(vars ,vars->input, redic))
         return ;
-    /*while (redic[i] != NULL)
+    while (redic[i] != NULL)
     {
         command = ft_split_red(redic[i]);
         if (count_words(command[1]) > 1)
@@ -110,19 +110,30 @@ void    redirecionamento(t_vars *vars)
         }
         i++;
     }
+
+    /*if (vars->val_red > 0 && redic[0] != NULL)
+    {
+        char *file = ft_strjoin("/tmp/", ft_itoa(vars->val_red));
+        char *redstr = ft_strjoin(redic[0], " ");
+        redstr = ft_strjoin(redstr, ler_arquivo(file));
+        vars->input = redstr;
+        only_comands(vars);
+    }*/
     vars->input = str;
-    only_comands(vars);*/
+    only_comands(vars);
     dup2(vars->terminal, STDOUT_FILENO);
     close(vars->terminal);
 }
 
 void    read_readline(t_vars *vars)
 {
+    char	**env_array;
     int val;
 
     val = cheak_string(vars);
+    env_array = convert_env_list(vars->env_ref);
     if (val == 1)
-        printf("pipe not done yet!\n");
+        execute_pipe(vars);
     else if (val == 2 || val == 3)
         redirecionamento(vars);
     else
