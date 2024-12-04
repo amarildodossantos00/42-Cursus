@@ -61,7 +61,7 @@ void    all_commands(t_vars *vars)
 	{
 		signal(SIGINT, SIG_DFL);
 		execute_command(vars, vars->args[0]); 
-		//execute_path(vars);
+		execute_path(vars);
 		printf("%s: command2 not found\n", vars->args[0]);
 		exit(127);
 	}

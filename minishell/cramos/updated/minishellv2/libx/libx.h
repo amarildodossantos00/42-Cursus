@@ -21,6 +21,7 @@ int 	ft_strlen2(const char *str);
 int	count_words(const char *str);
 int	ft_isdigit(int c);
 int	ft_isalpha(int c);
+int	ft_atoi(const char *str);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strchr(const char *str, int c);
 char    *ft_strdup(char *src);
@@ -37,6 +38,9 @@ char	*ft_itoa(int n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split_args(char *str);
+char	*ft_strstr(const char *haystack, const char *needle);
+char	*ft_strncpy(char *dest, const char *src, size_t n);
+char    *ft_strcat(char *dest, const char *src);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 
 #endif

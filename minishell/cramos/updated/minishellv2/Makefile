@@ -43,6 +43,10 @@ SRC = src/main.c\
 	libx/ft_isalpha.c\
 	libx/ft_isdigit.c\
 	libx/ft_itoa.c\
+	libx/ft_atoi.c\
+	libx/ft_strstr.c\
+	libx/ft_strncpy.c\
+	libx/ft_strcat.c\
 
 OBJ = ${SRC:.c=.o}
 

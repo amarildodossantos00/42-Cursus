@@ -54,12 +54,12 @@ void	execute_path(t_vars *vars)
 	if (!executable)
 	{
 		printf("%s: command1 not found\n", vars->input);
-		exit(EXIT_FAILURE);
+		exit(127);
 	}
 	else if (executable == "none")
 	{
 		printf("bash: %s: No such file or directory\n", vars->input);
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 	else
 	{
