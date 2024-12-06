@@ -132,6 +132,8 @@ void    read_readline(t_vars *vars)
 
     val = cheak_string(vars);
     env_array = convert_env_list(vars->env_ref);
+    if (expand_var(vars))
+    	return ;
     if (val == 1)
         execute_pipe(vars);
     else if (val == 2 || val == 3)
