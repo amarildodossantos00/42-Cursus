@@ -15,10 +15,13 @@ typedef struct s_split_token
 	char	**mtx;
 }	t_split_token;
 
-
 int	ft_strlen(char *str);
-int ft_strlen2(const char *str);
 int     ft_strcmp(char *s1, char *s2);
+int 	ft_strlen2(const char *str);
+int	count_words(const char *str);
+int	ft_isdigit(int c);
+int	ft_isalpha(int c);
+int	ft_atoi(const char *str);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strchr(const char *str, int c);
 char    *ft_strdup(char *src);
@@ -30,10 +33,14 @@ char    **ft_split(char *str);
 char    **red_ft_split(char *str);
 void	*ft_memset(void *s, int c, size_t n);
 char    **ft_split_red(char *str);
-char	**ft_split_args(char *str);
-size_t	ft_strlcpy(char *dest, const char *src, size_t size);
+char    *ft_space(char *str);
+char	*ft_itoa(int n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strtrim(char const *s1, char const *set);
-char	*ft_itoa(int nbr);
+char	**ft_split_args(char *str);
+char	*ft_strstr(const char *haystack, const char *needle);
+char	*ft_strncpy(char *dest, const char *src, size_t n);
+char    *ft_strcat(char *dest, const char *src);
+size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 
 #endif

@@ -14,7 +14,9 @@ SRC = src/main.c\
 	src/count_args.c\
 	src/execute.c\
 	src/redic.c\
+	src/redicv2.c\
 	src/ft_expand_var.c\
+	src/expand_exit_status.c\
 	src/builtins/commands.c\
 	src/builtins/echo.c\
 	src/builtins/ft_export.c\
@@ -32,11 +34,19 @@ SRC = src/main.c\
 	libx/ft_split.c\
 	libx/ft_split_red.c\
 	libx/ft_memset.c\
-	libx/ft_split_args.c\
-	libx/ft_strlcpy.c\
+	libx/ft_space.c\
 	libx/ft_substr.c\
 	libx/ft_strtrim.c\
+	libx/ft_split_args.c\
+	libx/ft_strlcpy.c\
+	libx/ft_count_words.c\
+	libx/ft_isalpha.c\
+	libx/ft_isdigit.c\
 	libx/ft_itoa.c\
+	libx/ft_atoi.c\
+	libx/ft_strstr.c\
+	libx/ft_strncpy.c\
+	libx/ft_strcat.c\
 
 OBJ = ${SRC:.c=.o}
 

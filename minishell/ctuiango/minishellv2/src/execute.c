@@ -24,7 +24,7 @@ char	*find_executable(char *command, char *path)
 		if (access(command, X_OK) == 0)
 			return (ft_strdup(command));
 		else
-			return ("none");
+			return (NULL);
 	}
 	path_copy = ft_strdup(path);
 	if (!path_copy)
@@ -48,23 +48,25 @@ char	*find_executable(char *command, char *path)
 void	execute_path(t_vars *vars)
 {
 	char	*executable;
+	char	**env;
 
 	executable =  find_executable(vars->args[0], vars->path);
 	if (!executable)
 	{
-		printf("%s: command not found\n", vars->input);
-		exit(EXIT_FAILURE);
+		printf("%s: command1 not found\n", vars->input);
+		exit(127);
 	}
-	else if (executable == "none")
+	/*else if (executable == NULL)
 	{
-		printf("bash: %s: No such file or directory\n", vars->input);
-		exit(EXIT_FAILURE);
-	}
+		printf("bash: %s: No such file or 55directory\n", vars->input);
+		exit(1);
+	}*/
 	else
 	{
 		vars->args[0] = executable;
 		//vars->last_command = executable;
-		execv(executable, vars->args);
+		env = convert_env_list(vars->env_ref);
+		execve(executable, vars->args, vars->env);
 		perror("execv falhou");
 		free(executable);
 		exit(EXIT_FAILURE);

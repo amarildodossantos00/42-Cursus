@@ -2,7 +2,7 @@
 
 int	static red_deli(char c)
 {
-	return (c == '>');
+	return (c == '>' || c == '<');
 }
 
 char    **ft_split_red(char *str)

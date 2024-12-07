@@ -66,4 +66,5 @@ void	echo(t_vars *vars)
 	}
 	if (nl)
 		printf("\n");
+	//vars->exit_status = 0;
 }

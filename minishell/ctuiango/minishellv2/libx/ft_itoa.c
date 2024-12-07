@@ -1,11 +1,10 @@
-#include "../header/header.h"
+#include "libx.h"
 
-char	*ft_itoa(int nbr)
+static int	get_len(int n)
 {
-	int n = nbr;
-	int len = 0;
-	char *c;
+	int	len;
 
+	len = 0;
 	if (n <= 0)
 		len++;
 	while (n)
@@ -13,22 +12,37 @@ char	*ft_itoa(int nbr)
 		n /= 10;
 		len++;
 	}
-	c = malloc(sizeof(char) * (len + 1));
-	c[len] = '\0';
-	if (nbr == 0)
+	return (len);
+}
+
+static void	fill_str(char *res, int n, int len)
+{
+	if (n == 0)
+		res[0] = '0';
+	if (n < 0)
 	{
-		c[0] = '0';
-		return (c);
+		res[0] = '-';
+		n = -n;
 	}
-	if (nbr < 0)
+	while (n)
 	{
-		c[0] = '-';
-		nbr *= -1;
+		res[--len] = n % 10 + '0';
+		n /= 10;
 	}
-	while (nbr != '\0')
-	{
-		c[--len] = nbr % 10 + 48;
-		nbr /= 10;
-	}
-	return (c);
+}
+
+char	*ft_itoa(int n)
+{
+	int		len;
+	char	*res;
+
+	if (n == -2147483648)
+		return ("-2147483648");
+	len = get_len(n);
+	res = (char *)malloc(sizeof(char) * (len + 1));
+	if (res == NULL)
+		return (NULL);
+	res[len] = '\0';
+	fill_str(res, n, len);
+	return (res);
 }
