@@ -66,7 +66,7 @@ void    redirecionamento(t_vars *vars)
     vars->terminal = dup(STDOUT_FILENO);
     if (cheack_input_red(vars ,vars->input, redic))
         return ;
-    while (redic[i] != NULL)
+    /*while (redic[i] != NULL)
     {
         command = ft_split_red(redic[i]);
         if (count_words(command[1]) > 1)
@@ -91,7 +91,7 @@ void    redirecionamento(t_vars *vars)
         }
         i++;
         free(command);
-    }
+    }*/
     i = 0;
     command = ft_split_red(redic[0]);
     str = command[0];
@@ -111,16 +111,34 @@ void    redirecionamento(t_vars *vars)
         i++;
     }
 
-    /*if (vars->val_red > 0 && redic[0] != NULL)
+    if (vars->val_red > 0 && redic[0] != NULL)
     {
+        int fd;
+        int  pid;
+        extern char **environ;
+
+        pid = fork();
         char *file = ft_strjoin("/tmp/", ft_itoa(vars->val_red));
-        char *redstr = ft_strjoin(redic[0], " ");
-        redstr = ft_strjoin(redstr, ler_arquivo(file));
-        vars->input = redstr;
-        only_comands(vars);
-    }*/
-    vars->input = str;
-    only_comands(vars);
+        if (pid == 0)
+        {
+            fd = open(file, O_RDONLY);
+            if (fd < 0)
+                perror("Error opening the file");
+            dup2(fd, 0);
+            close(fd);
+            char *str2 = find_executable(redic[0], vars->path);
+            char   **str1 = malloc(sizeof(char *) * 3);
+            str1[0] = redic[0];
+            str1[1] = "we";
+            str1[2] = NULL;
+            printf("Check here\n");
+            execve(str2, str1, NULL);
+        }
+        else
+            wait(NULL);
+    }
+    /*vars->input = str;
+    only_comands(vars);*/
     dup2(vars->terminal, STDOUT_FILENO);
     close(vars->terminal);
 }

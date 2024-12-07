@@ -202,9 +202,9 @@ int    cheack_input_red(t_vars *vars, char *str, char **redic)
         printf("minishell: syntax error near unexpected token `>'\n");
         return (1);
     }
-    int child = fork();
-    if (child == 0)
-    {
+    //int child = fork();
+    //if (child == 0)
+    //{
         i = 0;
         while (redic[i])
         {
@@ -223,11 +223,11 @@ int    cheack_input_red(t_vars *vars, char *str, char **redic)
                 free(str1);
             }
             i++;
-        }
-        exit(0);
+       // }
+        //exit(0);
     }
-    int status;
-    wait(&status);
+    //int status;
+    //wait(&status);
     i = 0;
     vars->val_red = 0;
     while (redic[i])
@@ -247,11 +247,9 @@ void	write_heredoc(t_vars *vars, char *cmd, int fd)
 	line = readline("> ");
 	while (ft_strcmp(line, cmd))
 	{
-		size = ft_strlen(line);
-		if (size == 0)
-			write(fd, "\n", 1);
-		else
-			write(fd, line, ft_strlen(line));
+		//size = ft_strlen(line);
+		write(fd, line, ft_strlen(line));
+        write (fd, "\n", 1);
 		free(line);
 		line = readline("> ");
 		if (!ft_strcmp(line, cmd))
@@ -261,5 +259,6 @@ void	write_heredoc(t_vars *vars, char *cmd, int fd)
 			break ;
 		}
 	}
+    
 }
 // files 3
