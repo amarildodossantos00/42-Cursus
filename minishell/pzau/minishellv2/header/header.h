@@ -100,6 +100,7 @@ char    *return_name(char *str);
 int    search_var(t_vars *vars, char *var, int *p, int len);
 void	expand_exit_status(t_vars *vars);
 void	execute_command(t_vars *vars, char *command);
+int	trigger_promp(int val);
 //cc
 
 #endif

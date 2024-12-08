@@ -52,12 +52,14 @@ void    all_commands(t_vars *vars)
 
 	vars->cargs = count_args(vars->input);
 	vars->args = create_args(vars->input);
+	trigger_promp(1);
 	pid = fork();
 	j = 0;
 	if (pid < 0)
 		perror("Error\n");
 	else if (pid == 0)
 	{
+		trigger_promp(2);
 		signal(SIGINT, SIG_DFL);
 		execute_path(vars);
 		printf("%s: command not found\n", vars->input);
@@ -67,6 +69,7 @@ void    all_commands(t_vars *vars)
 		wait(NULL);
 	while (j++ < vars->cargs)
 		free(vars->args[j]);
+	trigger_promp(1);
 	free(vars->args);
 }
 

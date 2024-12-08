@@ -1,12 +1,24 @@
 #include "../header/header.h"
 
+int	trigger_promp(int val)
+{
+	static int	status = 0;
+	
+	if (val != -1)
+		status = val;
+	return (status);
+}
+
 static void	control_c(int sig)
 {
 	(void)sig;
 	printf("\n");
 	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	if (trigger_promp(-1) > 1)
+	{
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
 
 static int	crtl_d(t_vars *vars)
@@ -39,6 +51,7 @@ void    start_promp(t_vars *vars)
 		if (ft_strlen(vars->input) > 0)
 			add_history(vars->input);
 		read_readline(vars);
+		trigger_promp(2);
 		free(vars->input);
 	}
 	return ;
