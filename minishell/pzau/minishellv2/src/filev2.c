@@ -127,11 +127,9 @@ void    redirecionamento(t_vars *vars)
             dup2(fd, 0);
             close(fd);
             char *str2 = find_executable(redic[0], vars->path);
-            char   **str1 = malloc(sizeof(char *) * 3);
+            char   **str1 = malloc(sizeof(char *) * 2);
             str1[0] = redic[0];
-            str1[1] = "we";
-            str1[2] = NULL;
-            printf("Check here\n");
+            str1[1] = NULL;
             execve(str2, str1, NULL);
         }
         else
