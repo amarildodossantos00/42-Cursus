@@ -5,7 +5,7 @@ void	init_env(t_vars *vars)
 	t_env	*current;
 	char	*var;
 	char	*value;
-	int	count;
+	int     count;
 
 	count = count_variables(vars->env);
 	var = ft_strtok(vars->env[--count], "=");
@@ -45,5 +45,7 @@ int		main(void)
     ensure_term_variable(&vars);
     vars.env = convert_env_list(vars.env_ref);
     start_promp(&vars);
+    free_env(vars.env_ref);
+    free_array(vars.env);
     return (0);
 }

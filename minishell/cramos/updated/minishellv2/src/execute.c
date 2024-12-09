@@ -66,7 +66,7 @@ void	execute_path(t_vars *vars)
 		vars->args[0] = executable;
 		//vars->last_command = executable;
 		env = convert_env_list(vars->env_ref);
-		execve(executable, vars->args, vars->env);
+		execve(executable, vars->args, env);
 		perror("execv falhou");
 		free(executable);
 		exit(EXIT_FAILURE);
