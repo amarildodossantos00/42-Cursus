@@ -50,6 +50,19 @@ static int  cheack_red(char *str)
     return (0);
 }
 
+static int  check_one_red(char **str)
+{
+    int i;
+
+    i = 1;
+    while (str[i])
+    {
+        if (cheack_red(str[i]) != 3)
+            return (0);
+        i++;
+    }
+    return (1);
+}
 
 void    redirecionamento(t_vars *vars)
 {
@@ -87,7 +100,7 @@ void    redirecionamento(t_vars *vars)
         else
             wait(NULL);
     }
-
+    
     while (redic[i] != NULL)
     {
         command = ft_split_red(redic[i]);
@@ -114,6 +127,7 @@ void    redirecionamento(t_vars *vars)
         i++;
         free(command);
     }
+
     i = 0;
     command = ft_split_red(redic[0]);
     str = command[0];
@@ -133,7 +147,8 @@ void    redirecionamento(t_vars *vars)
         i++;
     }
     vars->input = str;
-    only_comands(vars);
+    if (!check_one_red(redic))
+        only_comands(vars);
     dup2(vars->terminal, STDOUT_FILENO);
     close(vars->terminal);
 }
