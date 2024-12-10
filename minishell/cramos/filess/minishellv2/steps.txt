@@ -1,0 +1,91 @@
+Explicação do que resolvi:
+O clear e outros comandos relacionados ao terminal dependem da variável de ambiente TERM, que especifica o tipo de terminal sendo usado.
+No minishell, as variáveis de ambiente estavam sendo gerenciadas manualmente usando a estrutura t_env. No entanto, a variável TERM não estava sendo configurada automaticamente.
+Quando o programa tentava usar clear, ele não encontrava a variável TERM e exibia o erro.
+
+Building Minishell
+
+0- Parte Basica
+
+1- Pegar as variaveis de ambinte e a PATH (pzau)
+
+2- Manipular a PATH (amdos-sa)
+
+3- Manipulacão dos parametros (amdos-sa)
+
+4- Build Builtins (CC)
+
+5- Redirecionamentos e PIPES (quem sabe)
+
+6- Lidar com Futuros erros e imprevistos (todos)
+
+
+
+ver mais tarde
+
+/*files 2
+static char *add_spaces_around_operators(const char *input)
+{
+    const char *operators = "><";
+    size_t len = strlen(input);
+    char *output = malloc(len * 3 + 1);
+    int j = 0;
+
+    for (size_t i = 0; i < len; i++) {
+        if (strchr(operators, input[i])) {
+            if (j > 0 && output[j - 1] != ' ')
+                output[j++] = ' ';
+            output[j++] = input[i];
+            if (input[i + 1] == input[i]) {
+                output[j++] = input[i++];
+            }
+            if (input[i + 1] != ' ')
+                output[j++] = ' ';
+        } else {
+            output[j++] = input[i];
+        }
+    }
+
+    output[j] = '\0';
+    return output;
+}
+
+char **org_red(const char *input)
+{
+    char **result = NULL;
+    int count = 0;
+    char *normalized_input = add_spaces_around_operators(input);
+    char *input_copy = strdup(normalized_input);
+    char *token = strtok(input_copy, " ");
+    char *prev = NULL;
+
+    while (token) {
+        int is_operator = (strcmp(token, ">") == 0 || strcmp(token, "<") == 0 || 
+                           strcmp(token, ">>") == 0 || strcmp(token, "<<") == 0);
+
+        if (is_operator && prev) {
+            char *next = strtok(NULL, " ");
+            if (next) {
+                char buffer[256];
+                snprintf(buffer, sizeof(buffer), "%s %s %s", prev, token, next);
+
+                result = realloc(result, (count + 1) * sizeof(char *));
+                result[count++] = strdup(buffer);
+
+                prev = next;
+            }
+        } else if (!is_operator) {
+            prev = token;
+        }
+
+        token = strtok(NULL, " ");
+    }
+
+    result = realloc(result, (count + 1) * sizeof(char *));
+    result[count] = NULL;
+
+    free(input_copy);
+    free(normalized_input);
+    return result;
+}
+//file 2*/

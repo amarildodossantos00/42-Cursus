@@ -1,16 +1,16 @@
 #include "../../header/header.h"
 
-void    free_env(t_env *env)
+void free_env(t_env *env_ref)
 {
-    t_env *tmp;
+    t_env *temp;
 
-    while (env)
+    while (env_ref)
     {
-        tmp = env;
-        env = env->next;
-        free(tmp->var);
-        free(tmp->value);
-        free(tmp);
+        temp = env_ref->next;
+        free(env_ref->var);
+        free(env_ref->value);
+        free(env_ref);
+        env_ref = temp;
     }
 }
 
