@@ -25,7 +25,7 @@ static int  cheak_string(t_vars *vars)
     return (0);
 }
 
-static int  cheack_red(char *str)
+int  cheack_red(char *str)
 {
     int i;
 
