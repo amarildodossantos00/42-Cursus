@@ -19,6 +19,13 @@ void	execute_pipe(t_vars *vars)
 	i = 0;
 	while (i < num_cmds)
 	{
+			if (cheack_red(vars->commands[i]))
+			{
+				printf("ok\n");
+				exit(5);
+				exit(5);
+				exit(5);
+			}
 		pipe(vars->fd);
 		vars->pid = fork();
 		if (vars->pid == 0)
@@ -27,6 +34,7 @@ void	execute_pipe(t_vars *vars)
 			if (vars->commands[i + 1])
 				dup2(vars->fd[1], STDOUT_FILENO);
 			close(vars->fd[0]);
+			close(vars->fd[1]);
 			args = ft_split_del(vars->commands[i], " ");
 			executable = find_executable(args[0], vars->path);
 			if (!executable)

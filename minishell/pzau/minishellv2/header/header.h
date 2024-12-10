@@ -66,6 +66,8 @@ char	*gen_tmpfile_name(int cmd_nbr);
 void	write_and_close(int fd);
 void	write_heredoc(t_vars *vars, char *cmd, int fd);
 char	*ler_arquivo(char* caminho_arquivo);
+
+int  cheack_red(char *str);
 //pzau
 
 //amdos-sa
