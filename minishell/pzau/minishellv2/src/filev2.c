@@ -64,7 +64,7 @@ static int  check_one_red(char **str)
     return (1);
 }
 
-void    redirecionamento(t_vars *vars)
+void    redirecionamento(t_vars *vars, int state)
 {
     int     i;
     char    *str;
@@ -73,7 +73,8 @@ void    redirecionamento(t_vars *vars)
 
     i = 0;
     redic = org_red(vars->input);
-    vars->terminal = dup(STDOUT_FILENO);
+    if (state == 0)
+        vars->terminal = dup(STDOUT_FILENO);
     if (cheack_input_red(vars ,vars->input, redic))
         return ;
     if (vars->val_red > 0 && redic[0] != NULL)
@@ -100,7 +101,7 @@ void    redirecionamento(t_vars *vars)
         else
             wait(NULL);
     }
-    
+
     while (redic[i] != NULL)
     {
         command = ft_split_red(redic[i]);
@@ -122,7 +123,7 @@ void    redirecionamento(t_vars *vars)
         else if (cheack_red(redic[i]) == 3)
         {
             i++;
-            continue ; 
+            continue ;
         }
         i++;
         free(command);
@@ -149,8 +150,11 @@ void    redirecionamento(t_vars *vars)
     vars->input = str;
     if (!check_one_red(redic))
         only_comands(vars);
-    dup2(vars->terminal, STDOUT_FILENO);
-    close(vars->terminal);
+    if (state == 0)
+    {
+        dup2(vars->terminal, STDOUT_FILENO);
+        close(vars->terminal);
+    }
 }
 
 void    read_readline(t_vars *vars)
@@ -165,7 +169,7 @@ void    read_readline(t_vars *vars)
     if (val == 1)
         execute_pipe(vars);
     else if (val == 2 || val == 3)
-        redirecionamento(vars);
+        redirecionamento(vars, 0);
     else
         only_comands(vars);
     return ;

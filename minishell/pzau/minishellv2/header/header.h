@@ -54,7 +54,7 @@ void    redirect_output(char *file);
 void    read_readline(t_vars *vars);
 void    read_readline(t_vars *vars);
 void    build_builtins(t_vars *vars);
-void    redirecionamento(t_vars *vars);
+void    redirecionamento(t_vars *vars, int state);
 void    redirect_herdoc(t_vars *vars, char *delimiter);
 char	*get_path(t_vars *vars);
 char	**org_red(char *input);
