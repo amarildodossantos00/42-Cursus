@@ -1,50 +1,40 @@
 #include "../header/header.h"
 
-
 static void	get_home(t_vars *vars)
 {
 	int	i;
-	//int	l;
 	char	*equal;
 	
 	i = 0;
-	while(vars->variables[i] != NULL)
+	while(vars->env[i] != NULL)
 	{
-		equal = ft_strchr(vars->variables[i], '=');
-		if (equal != NULL && strncmp(vars->variables[i], "HOME",
-			equal - vars->variables[i]) == 0 && (equal - vars->variables[i]) == 4)
+		equal = ft_strchr(vars->env[i], '=');
+		if (equal != NULL && strncmp(vars->env[i], "HOME",
+			equal - vars->env[i]) == 0 && (equal - vars->env[i]) == 4)
 		{
-			//l = equal - vars->variables[i];
-			//if (ft_strncmp(vars->variables[i], "HOME", l) == 0 && l == 4)
-			//{
-				//if ()
-			//}
-			vars->path = equal + 1;
+			vars->home = equal + 1;
 			return ;
 		}
 		i++;
 	}
-	vars->path = NULL;
+	vars->home = NULL;
 }
-void cd(t_vars *vars)
+
+void	cd(t_vars *vars)
 {
-	if (vars->input == NULL || strcmp(vars->input, "") == 0)
-	{
-		//char	*home;
-		//vars->home = getenv("HOME");
+	if (vars->matrix[1] == NULL)	
 		get_home(vars);
-		if (vars->path == NULL)
-			fprintf(stderr, "cd: variável HOME não definida\n");
-		else if (chdir(vars->path) != 0)
-			perror("cd");
+	else if (ft_strncmp(vars->matrix[1], "..", 2) == 0)
+		vars->home = vars->matrix[1];
+	else
+		vars->home = vars->matrix[1];
+    if (vars->home != NULL && chdir(vars->home) != 0)
+	{
+		perror("cd");
+		vars->exit_status = 1;
 	}
-    	else 
-    	{
-    		if (chdir(vars->input) != 0)
-    			perror("cd");
-    	}
-	/*else if (chdir("..") != 0)
-		perror("Erro ao mudar de directorio\n");*/
+	else
+		vars->exit_status = 0;
 }
 
 void	pwd(t_vars *vars)

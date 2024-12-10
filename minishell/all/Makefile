@@ -15,6 +15,10 @@ SRC = src/main.c\
 	src/commands.c\
 	libx/ft_strchr.c\
 	libx/ft_strdup.c\
+	libx/ft_split_args.c\
+	libx/ft_substr.c\
+	libx/ft_strtrim.c\
+	libx/ft_strlcpy.c\
 	libx/ft_strcmp.c\
 
 OBJ = ${SRC:.c=.o}

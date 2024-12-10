@@ -1,5 +1,50 @@
 #include "../header/header.h"
 
+static int  cheack_build_builtins(t_vars *vars)
+{
+	/*if (ft_strncmp(vars->input, "echo", 4) == 0 &&
+		(vars->input[4] == '\0' || vars->input[4] == ' '))
+		return (1);*/
+	if (ft_strncmp(vars->input, "cd", 2) == 0 &&
+		(vars->input[2] == '\0' || vars->input[2] == ' '))
+		return (1);
+	if (ft_strncmp(vars->input, "pwd", 3) == 0 &&
+		(vars->input[3] == '\0' || vars->input[3] == ' '))
+		return (1);
+	/*if (ft_strncmp(vars->input, "export", 6) == 0 &&
+		(vars->input[6] == '\0' || vars->input[6] == ' '))
+		return (1);
+	if (ft_strncmp(vars->input, "unset", 5) == 0 &&
+		(vars->input[5] == '\0' || vars->input[5] == ' '))
+		return (1);
+	if (ft_strncmp(vars->input, "env", 3) == 0 &&
+		(vars->input[3] == '\0' || vars->input[3] == ' '))
+		return (1);
+	if (ft_strncmp(vars->input, "exit", 4) == 0 &&
+		(vars->input[4] == '\0' || vars->input[4] == ' '))
+		return (1);*/
+	return (0);
+}
+
+void    build_builtins(t_vars *vars)
+{
+    vars->matrix = ft_split_args(vars->input);
+    //if (ft_strncmp(vars->input, "echo", 4) == 0)
+        //echo(vars);
+    if (ft_strncmp(vars->input, "cd", 2) == 0)
+        cd(vars);
+    if (ft_strncmp(vars->input, "pwd", 3) == 0)
+        pwd(vars);
+    /*if (ft_strncmp(vars->input, "export", 6) == 0)
+        ft_export(vars, vars->matrix);
+    if (ft_strncmp(vars->input, "unset", 5) == 0)
+        ft_unset(vars->env_ref, &vars->matrix[1]);
+    if (ft_strncmp(vars->input, "env", 3) == 0)
+        env(vars);
+    if (ft_strncmp(vars->input, "exit", 4) == 0)
+        ft_exit(vars);*/
+}
+
 static void	control_c(int sig)
 {
 	(void)sig;
@@ -34,32 +79,8 @@ void    call_prompt(t_vars *vars)
 		if (ft_strlen(vars->input) > 0)
 			add_history(vars->input);
 		//pzau
-		if (ft_strncmp(vars->input, "env", ft_strlen(vars->input)) == 0)
-			print_variables(vars);
-
-		//cc
-		/*if (ft_strncmp(vars->input, "cd", ft_strlen(vars->input)) == 0)
-			cd(vars);
-		else if (ft_strncmp(vars->input, "cd ..", ft_strlen(vars->input)) == 0)
-			cd(vars);*/
-		 if (ft_strncmp(vars->input, "cd", 2) == 0)
-		 {
-            		if (strcmp(vars->input, "cd ..") == 0)
-                		vars->input = "..";
-            		else if (strcmp(vars->input, "cd") == 0)
-                		vars->input = NULL;
-            		cd(vars);
-            	}
-		if (ft_strncmp(vars->input, "pwd", ft_strlen(vars->input)) == 0)
-			pwd(vars);
-		//cc
-
-		else if (ft_strncmp(vars->input, "unset", ft_strlen(vars->input)) == 0)
-			remove_variable(vars, "PATH");
-		else if (ft_strncmp(vars->input, "export", ft_strlen(vars->input)) == 0)
-			add_variables(vars, "pzau");
-		else if (ft_strncmp(vars->input, "path", ft_strlen(vars->input)) == 0)
-			printf("%s\n", vars->path);
+		if (cheack_build_builtins(vars))
+        		build_builtins(vars);
 		//pzau
 		free(vars->input);
 	}

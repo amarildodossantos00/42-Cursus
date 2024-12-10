@@ -18,6 +18,10 @@
 
 typedef struct s_vars
 {
+	char	**env;
+	char	*home;
+	char	**matrix;
+	int	exit_status;
         char	*input;
 	char	*path;
 	char	**variables;
