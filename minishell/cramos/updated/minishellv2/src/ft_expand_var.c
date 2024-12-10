@@ -80,7 +80,7 @@ int    search_var(t_vars *vars, char *var, int *p, int len)
         free(vars->input);
         vars->input = new_line;
     }
-}   
+}
 
 char    *return_name(char *str)
 {

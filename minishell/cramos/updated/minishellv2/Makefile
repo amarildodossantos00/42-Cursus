@@ -22,6 +22,7 @@ SRC = src/main.c\
 	src/builtins/ft_export.c\
 	src/builtins/ft_unset.c\
 	src/builtins/utils_exp.c\
+	src/builtins/ft_free.c\
 	libx/ft_strlen.c\
 	libx/ft_strncmp.c\
 	libx/ft_strjoin.c\
