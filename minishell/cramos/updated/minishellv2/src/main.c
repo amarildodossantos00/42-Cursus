@@ -12,7 +12,7 @@ void	init_env(t_vars *vars)
 	value = ft_strtok(NULL, "");
 	vars->env_ref = creat_node(var, value);
 	current = vars->env_ref;
-	while (--count)
+	while (--count >= 0)
 	{
 		var = ft_strtok(vars->env[count], "=");
 		value = ft_strtok(NULL, "");
