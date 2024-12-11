@@ -64,7 +64,7 @@ static int  check_one_red(char **str)
     return (1);
 }
 
-void    redirecionamento(t_vars *vars, int state)
+void    redirecionamento(t_vars *vars, int status)
 {
     int     i;
     char    *str;
@@ -73,11 +73,10 @@ void    redirecionamento(t_vars *vars, int state)
 
     i = 0;
     redic = org_red(vars->input);
-    if (state == 0)
-        vars->terminal = dup(STDOUT_FILENO);
+    vars->terminal = dup(STDOUT_FILENO);
     if (cheack_input_red(vars ,vars->input, redic))
         return ;
-    if (vars->val_red > 0 && redic[0] != NULL)
+    if (vars->val_red > 0 && redic[0] != NULL && status != 1)
     {
         int fd;
         int  pid;
@@ -101,7 +100,6 @@ void    redirecionamento(t_vars *vars, int state)
         else
             wait(NULL);
     }
-
     while (redic[i] != NULL)
     {
         command = ft_split_red(redic[i]);
@@ -128,7 +126,6 @@ void    redirecionamento(t_vars *vars, int state)
         i++;
         free(command);
     }
-
     i = 0;
     command = ft_split_red(redic[0]);
     str = command[0];
@@ -150,11 +147,9 @@ void    redirecionamento(t_vars *vars, int state)
     vars->input = str;
     if (!check_one_red(redic))
         only_comands(vars);
-    if (state == 0)
-    {
-        dup2(vars->terminal, STDOUT_FILENO);
-        close(vars->terminal);
-    }
+
+    dup2(vars->terminal, STDOUT_FILENO);
+    close(vars->terminal);
 }
 
 void    read_readline(t_vars *vars)

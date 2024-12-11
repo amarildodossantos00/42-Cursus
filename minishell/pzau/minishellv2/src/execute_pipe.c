@@ -16,30 +16,31 @@ void execute_pipe(t_vars *vars)
 	num_cmds = 0;
 	while (vars->commands[num_cmds])
 		num_cmds++;
-
-	vars->input_fd = STDIN_FILENO;  // Entrada padrão inicial
+	vars->input_fd = STDIN_FILENO;
 
 	i = 0;
-	while (i < num_cmds) {
-		// Verificar redirecionamento antes de processar o comando
-		if (cheack_red(vars->commands[i]) > 0) {
+	while (i < num_cmds)
+	{
+		if (cheack_red(vars->commands[i]) > 0)
+		{
 			vars->input = vars->commands[i];
 			redirecionamento(vars, 1);
-			printf("ok\n");
-    		exit(1);  // Encerra o programa completamente
+			i++;
+			continue ;
 		}
 
-		if (pipe(vars->fd) == -1) {
+		if (pipe(vars->fd) == -1)
+		{
 			perror("pipe");
 			exit(1);
 		}
 
 		vars->pid = fork();
-		if (vars->pid == 0) {
-			// Processo filho
-			dup2(vars->input_fd, STDIN_FILENO);  // Entrada do pipe
+		if (vars->pid == 0)
+		{
+			dup2(vars->input_fd, STDIN_FILENO);
 			if (vars->commands[i + 1]) {
-				dup2(vars->fd[1], STDOUT_FILENO);  // Saída do pipe
+				dup2(vars->fd[1], STDOUT_FILENO);
 			}
 			close(vars->fd[0]);
 			close(vars->fd[1]);
@@ -53,22 +54,21 @@ void execute_pipe(t_vars *vars)
 			execve(executable, args, vars->env);
 			perror("execve");
 			exit(1);
-		} else if (vars->pid < 0) {
-			// Erro no fork
+		} else if (vars->pid < 0)
+		{
 			perror("fork");
 			exit(1);
 		}
 
-		// Processo pai
-		close(vars->fd[1]);  // Fechar a escrita no pipe
-		vars->input_fd = vars->fd[0];  // Atualizar entrada para o próximo comando
+		close(vars->fd[1]);
+		vars->input_fd = vars->fd[0];
 
 		i++;
 	}
 
 	i = 0;
 	while (i < num_cmds) {
-		wait(NULL);  // Aguarda o término dos processos filhos
+		wait(NULL);
 		i++;
 	}
 

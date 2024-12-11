@@ -202,53 +202,45 @@ int    cheack_input_red(t_vars *vars, char *str, char **redic)
         printf("minishell: syntax error near unexpected token `>'\n");
         return (1);
     }
-    //int child = fork();
-    //if (child == 0)
-    //{
-        i = 0;
-        while (redic[i])
+    i = 0;
+    while (redic[i])
+    {
+        new = ft_split_red(redic[i]);
+        if (cheack_in_tree(redic[i]) == 1)
         {
-            //printf("qualquer coisaaaa");
-            new = ft_split_red(redic[i]);
-            if (cheack_in_tree(redic[i]) == 1)
-            {
-                i++;
-                continue ;
-            }
-            if (cheack_in_tree(redic[i]) == 2)
-            {
-                str1 = ft_space(new[1]);
-                tmp_file = gen_tmpfile_name(i);
-                int child = fork();
-                if (child == 0)
-                {
-                    heredoc_fd = open(tmp_file, O_CREAT | O_RDWR | O_TRUNC, 0777);
-                    write_heredoc(vars, str1, heredoc_fd);
-                }
-                else
-                {
-                    signal(SIGINT, SIG_IGN);
-                    waitpid(child, &vars->exit_status, 0);
-                    if (WIFEXITED(vars->exit_status))
-                    {
-                        vars->exit_status = WEXITSTATUS(vars->exit_status);
-                        if (vars->exit_status == 32)
-                        {
-                            vars->exit_status = 130;
-                            return (1);
-                        }
-                    }
-                    else if (WIFSIGNALED(vars->exit_status))
-                        vars->exit_status = 128 + WTERMSIG(vars->exit_status);
-                    free(str1);
-                }
-            }
             i++;
+            continue ;
         }
-       // }
-        //exit(0);
-    //int status;
-    //wait(&status);
+        if (cheack_in_tree(redic[i]) == 2)
+        {
+            str1 = ft_space(new[1]);
+            tmp_file = gen_tmpfile_name(i);
+            int child = fork();
+            if (child == 0)
+            {
+                heredoc_fd = open(tmp_file, O_CREAT | O_RDWR | O_TRUNC, 0777);
+                write_heredoc(vars, str1, heredoc_fd);
+            }
+            else
+            {
+                signal(SIGINT, SIG_IGN);
+                waitpid(child, &vars->exit_status, 0);
+                if (WIFEXITED(vars->exit_status))
+                {
+                    vars->exit_status = WEXITSTATUS(vars->exit_status);
+                    if (vars->exit_status == 32)
+                    {
+                        vars->exit_status = 130;
+                        return (1);
+                    }
+                }
+                else if (WIFSIGNALED(vars->exit_status))
+                    vars->exit_status = 128 + WTERMSIG(vars->exit_status);
+                free(str1);
+            }
+        }
+        i++;
+    }
     i = 0;
     vars->val_red = 0;
     while (redic[i])
@@ -287,6 +279,12 @@ void	write_heredoc(t_vars *vars, char *cmd, int fd)
 	{
         signal(SIGINT, cntrl_cntrl_c);
 		line = readline("> ");
+        if (ft_strcmp(line, cmd) == 0)
+		{
+			free(line);
+			close(fd);
+			exit (0);
+		}
         if (g_sig == 2)
         {
             free(line);
@@ -296,12 +294,6 @@ void	write_heredoc(t_vars *vars, char *cmd, int fd)
         cntrl_d(line, cmd, fd);
 		write(fd, line, ft_strlen(line));
         write (fd, "\n", 1);
-		if (ft_strcmp(line, cmd) == 0)
-		{
-			free(line);
-			close(fd);
-			exit (0);
-		}
 		free(line);
 	}  
 }
