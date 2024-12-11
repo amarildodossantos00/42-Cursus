@@ -1,12 +1,5 @@
 #include "libx.h"
 
-static int ft_isspace(char c)
-{
-        return (c == ' ' || c == '\t' || 
-            c == '\n' || c == '\v' || 
-            c == '\f' || c == '\r');
-}
-
 int count_words(const char *str)
 {
     int count;

@@ -2,32 +2,39 @@
 
 static int  cheack_build_builtins(t_vars *vars)
 {
-	if (ft_strncmp(vars->input, "echo", 4) == 0 &&
-		(vars->input[4] == '\0' || vars->input[4] == ' '))
+	char	*space_trim;
+
+	space_trim = ft_trim(vars->input);
+	if (!space_trim)
+		return (0);
+	if (ft_strncmp(space_trim, "echo", 4) == 0 &&
+		(space_trim[4] == '\0' || space_trim[4] == ' '))
 		return (1);
-	if (ft_strncmp(vars->input, "cd", 2) == 0 &&
-		(vars->input[2] == '\0' || vars->input[2] == ' '))
+	if (ft_strncmp(space_trim, "cd", 2) == 0 &&
+		(space_trim[2] == '\0' || space_trim[2] == ' '))
 		return (1);
-	if (ft_strncmp(vars->input, "pwd", 3) == 0 &&
-		(vars->input[3] == '\0' || vars->input[3] == ' '))
+	if (ft_strncmp(space_trim, "pwd", 3) == 0 &&
+		(space_trim[3] == '\0' || space_trim[3] == ' '))
 		return (1);
-	if (ft_strncmp(vars->input, "export", 6) == 0 &&
-		(vars->input[6] == '\0' || vars->input[6] == ' '))
+	if (ft_strncmp(space_trim, "export", 6) == 0 &&
+		(space_trim[6] == '\0' || space_trim[6] == ' '))
 		return (1);
-	if (ft_strncmp(vars->input, "unset", 5) == 0 &&
-		(vars->input[5] == '\0' || vars->input[5] == ' '))
+	if (ft_strncmp(space_trim, "unset", 5) == 0 &&
+		(space_trim[5] == '\0' || space_trim[5] == ' '))
 		return (1);
-	if (ft_strncmp(vars->input, "env", 3) == 0 &&
-		(vars->input[3] == '\0' || vars->input[3] == ' '))
+	if (ft_strncmp(space_trim, "env", 3) == 0 &&
+		(space_trim[3] == '\0' || space_trim[3] == ' '))
 		return (1);
-	if (ft_strncmp(vars->input, "exit", 4) == 0 &&
-		(vars->input[4] == '\0' || vars->input[4] == ' '))
+	if (ft_strncmp(space_trim, "exit", 4) == 0 &&
+		(space_trim[4] == '\0' || space_trim[4] == ' '))
 		return (1);
+	free(space_trim);
 	return (0);
 }
 
 void    build_builtins(t_vars *vars)
 {
+	vars->input = ft_trim(vars->input);
     vars->matrix = ft_split(vars->input);
     if (ft_strncmp(vars->input, "echo", 4) == 0)
         echo(vars);
@@ -43,6 +50,7 @@ void    build_builtins(t_vars *vars)
         env(vars);
     if (ft_strncmp(vars->input, "exit", 4) == 0)
         ft_exit(vars);
+	free(vars->input);
 }
 
 void    all_commands(t_vars *vars)

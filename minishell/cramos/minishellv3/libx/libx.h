@@ -17,14 +17,16 @@ typedef struct s_split_token
 
 int		ft_strlen(char *str);
 int     ft_strcmp(char *s1, char *s2);
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);
+int		ft_isspace(int c);
 int 	ft_strlen2(const char *str);
 int		count_words(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_itoa(int n);
 char	*ft_strchr(const char *str, int c);
+char    *ft_trim(char *str);
 char    *ft_strdup(char *src);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strcpy(char *dest, const char *src);
@@ -38,9 +40,9 @@ char    *ft_space(char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split_args(char *str);
-size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 void	*ft_memmove(void *dest, const void *src, size_t len);
 size_t	ft_strlcat(char *dest, char *src, size_t size);
+size_t  ft_strlcpy(char *dst, char *src, size_t dstsize);
 char **ft_split_del(char *str, const char *delimiters);
 
 
