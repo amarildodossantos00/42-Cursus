@@ -271,7 +271,7 @@ static void cntrl_d(char *str, char *cmd, int fd)
         exit(0);
     }
 }
-int g_sig;
+
 static void cntrl_cntrl_c(int sig)
 {
     g_sig = sig;

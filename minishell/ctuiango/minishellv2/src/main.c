@@ -1,5 +1,7 @@
 #include "../header/header.h"
 
+int g_sig;
+
 void	init_env(t_vars *vars)
 {
 	t_env	*current;

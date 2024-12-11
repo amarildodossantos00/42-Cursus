@@ -18,6 +18,8 @@
 
 # include "../libx/libx.h"
 
+extern int	g_sig;
+
 typedef struct	s_env
 {
 	char	*var;
