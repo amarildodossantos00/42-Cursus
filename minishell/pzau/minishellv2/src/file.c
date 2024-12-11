@@ -50,6 +50,7 @@ void    start_promp(t_vars *vars)
 		}
 		if (ft_strlen(vars->input) > 0)
 			add_history(vars->input);
+		expand_exit_status(vars);
 		read_readline(vars);
 		trigger_promp(2);
 		free(vars->input);

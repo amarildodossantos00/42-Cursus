@@ -208,6 +208,7 @@ int    cheack_input_red(t_vars *vars, char *str, char **redic)
         i = 0;
         while (redic[i])
         {
+            //printf("qualquer coisaaaa");
             new = ft_split_red(redic[i]);
             if (cheack_in_tree(redic[i]) == 1)
             {
@@ -218,14 +219,34 @@ int    cheack_input_red(t_vars *vars, char *str, char **redic)
             {
                 str1 = ft_space(new[1]);
                 tmp_file = gen_tmpfile_name(i);
-                heredoc_fd = open(tmp_file, O_CREAT | O_RDWR | O_TRUNC, 0777);
-                write_heredoc(vars, str1, heredoc_fd);
-                free(str1);
+                int child = fork();
+                if (child == 0)
+                {
+                    heredoc_fd = open(tmp_file, O_CREAT | O_RDWR | O_TRUNC, 0777);
+                    write_heredoc(vars, str1, heredoc_fd);
+                }
+                else
+                {
+                    signal(SIGINT, SIG_IGN);
+                    waitpid(child, &vars->exit_status, 0);
+                    if (WIFEXITED(vars->exit_status))
+                    {
+                        vars->exit_status = WEXITSTATUS(vars->exit_status);
+                        if (vars->exit_status == 32)
+                        {
+                            vars->exit_status = 130;
+                            return (1);
+                        }
+                    }
+                    else if (WIFSIGNALED(vars->exit_status))
+                        vars->exit_status = 128 + WTERMSIG(vars->exit_status);
+                    free(str1);
+                }
             }
             i++;
+        }
        // }
         //exit(0);
-    }
     //int status;
     //wait(&status);
     i = 0;
@@ -239,26 +260,49 @@ int    cheack_input_red(t_vars *vars, char *str, char **redic)
     return (0);
 }
 
+static void cntrl_d(char *str, char *cmd, int fd)
+{
+    if (str == NULL)
+    {
+        write(2, "\nminishell: warning: here-document delimited by end-of-file (wanted `", 69);
+        write(2, cmd, ft_strlen(cmd));
+        write(2, "')\n", 3);
+        close(fd);
+        exit(0);
+    }
+}
+int g_sig;
+static void cntrl_cntrl_c(int sig)
+{
+    g_sig = sig;
+    write(1, "\n", 1);
+    close(0);
+}
+
 void	write_heredoc(t_vars *vars, char *cmd, int fd)
 {
 	char			*line;
-	unsigned int	size;
 
-	line = readline("> ");
-	while (ft_strcmp(line, cmd))
+	while (1)
 	{
-		//size = ft_strlen(line);
+        signal(SIGINT, cntrl_cntrl_c);
+		line = readline("> ");
+        if (g_sig == 2)
+        {
+            free(line);
+            close(fd);
+            exit(32);
+        }
+        cntrl_d(line, cmd, fd);
 		write(fd, line, ft_strlen(line));
         write (fd, "\n", 1);
-		free(line);
-		line = readline("> ");
-		if (!ft_strcmp(line, cmd))
+		if (ft_strcmp(line, cmd) == 0)
 		{
 			free(line);
-			write_and_close(fd);
-			break ;
+			close(fd);
+			exit (0);
 		}
-	}
-    
+		free(line);
+	}  
 }
 // files 3
