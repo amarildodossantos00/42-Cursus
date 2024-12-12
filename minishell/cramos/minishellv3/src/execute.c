@@ -53,12 +53,12 @@ void	execute_path(t_vars *vars)
 	executable =  find_executable(vars->args[0], vars->path);
 	if (!executable)
 	{
-		printf("%s: command not found\n", vars->input);
+		printf("%s: command not found\n", vars->args[0]);
 		exit(127);
 	}
 	else if (executable == NULL)
 	{
-		printf("minishell: %s: No such file or directory\n", vars->input);
+		printf("minishell: %s: No such file or directory\n", vars->args[0]);
 		exit(1);
 	}
 	else

@@ -47,7 +47,7 @@ void execute_pipe(t_vars *vars)
 			args = ft_split_del(vars->commands[i], " ");
 			executable = find_executable(args[0], vars->path);
 			if (!executable) {
-				fprintf(stderr, "%s: command not found\n", args[0]);
+				printf("%s: command not found\n", args[0]);
 				exit(127);
 			}
 			execve(executable, args, vars->env);
