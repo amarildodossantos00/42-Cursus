@@ -16,13 +16,14 @@ SRC = src/main.c\
 	src/redic.c\
 	src/redicv2.c\
 	src/execute_pipe.c\
+	src/ft_expand_var.c\
+	src/expand_exit_status.c\
+	src/builtins/utils_exp.c\
 	src/builtins/commands.c\
 	src/builtins/echo.c\
 	src/builtins/ft_export.c\
 	src/builtins/ft_unset.c\
-	src/builtins/utils_exp.c\
-	src/expand_exit_status.c\
-	src/ft_expand_var.c\
+	src/free/filev1.c\
 	libx/ft_strlen.c\
 	libx/ft_strncmp.c\
 	libx/ft_strjoin.c\
