@@ -34,6 +34,7 @@ char	*ft_strtok(char *str, const char *delim);
 char	*sncat(char *dest, const char *src, size_t n);
 char    **ft_split(char *str);
 char    **red_ft_split(char *str);
+char	*ft_strncpy(char *dst, const char *src, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
 char    **ft_split_red(char *str);
 char    *ft_space(char *str);
@@ -42,7 +43,7 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split_args(char *str);
 void	*ft_memmove(void *dest, const void *src, size_t len);
 size_t	ft_strlcat(char *dest, char *src, size_t size);
-size_t  ft_strlcpy(char *dst, char *src, size_t dstsize);
+size_t  ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char **ft_split_del(char *str, const char *delimiters);
 
 

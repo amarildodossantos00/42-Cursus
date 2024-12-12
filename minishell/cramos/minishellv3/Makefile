@@ -50,7 +50,7 @@ SRC = src/main.c\
 	libx/ft_atoi.c\
 	libx/ft_trim.c\
 	libx/ft_isspace.c\
-	libx/ft_strlcpy.c\
+	libx/ft_strncpy.c\
 
 OBJ = ${SRC:.c=.o}
 

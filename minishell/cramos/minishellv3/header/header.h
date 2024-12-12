@@ -8,6 +8,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <sys/stat.h>
+# include <stddef.h>
 
 //pzau testes
 # include <string.h>
@@ -95,14 +96,14 @@ void	add_and_update(t_env **env_list, char *var, char *value, int exported);
 t_env	*sort_list(t_env *list);
 t_env	*creat_node(char *var, char *value);
 t_env	*ft_unset(t_env *head, char **vars);
-int	count_variables(char **environ);
-int export_var(t_vars *vars, char *input);
+int		count_variables(char **environ);
+int		export_var(t_vars *vars, char *input);
 int    expand_var(t_vars *vars);
 char    *return_name(char *str);
 int    search_var(t_vars *vars, char *var, int *p, int len);
 void	expand_exit_status(t_vars *vars);
 void	execute_command(t_vars *vars, char *command);
-int	trigger_promp(int val);
+int		trigger_promp(int val);
 //cc
 
 #endif
