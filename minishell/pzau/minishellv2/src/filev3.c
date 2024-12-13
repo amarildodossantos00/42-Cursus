@@ -43,6 +43,7 @@ void    build_builtins(t_vars *vars)
         env(vars);
     if (ft_strncmp(vars->input, "exit", 4) == 0)
         ft_exit(vars);
+	free_split(vars->matrix);
 }
 
 void    all_commands(t_vars *vars)
@@ -78,8 +79,11 @@ void    all_commands(t_vars *vars)
             vars->exit_status = 1;
 	}
 	trigger_promp(1);
-	while (j++ < vars->cargs)
+	while (j < vars->cargs)
+	{
 		free(vars->args[j]);
+		j++;
+	}
 	free(vars->args);
 }
 

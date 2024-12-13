@@ -34,7 +34,7 @@ char	**create_args(char *input)
 	size_t j;
 	size_t k;
 	char *aux;
-	char input_copy[256];
+	char *input_copy;
 
 	i = 0;
 	k = 0;
@@ -42,6 +42,7 @@ char	**create_args(char *input)
 	char **args = malloc((j + 1) * sizeof(char *));
 	if (!args)
 		return NULL;
+	input_copy = malloc(ft_strlen(input) + 1);
 	ft_strcpy(input_copy, input);
 	aux = ft_strtok(input_copy, " ");
 	while (aux)
@@ -59,5 +60,6 @@ char	**create_args(char *input)
 		i++;
 	}
 	args[i] = NULL;
+	free(input_copy);
 	return (args);
 }

@@ -20,6 +20,8 @@ Building Minishell
 6- Lidar com Futuros erros e imprevistos (todos)
 
 
+alias c="make re && clear && valgrind --leak-check=full ./minishell"
+
 
 ver mais tarde
 

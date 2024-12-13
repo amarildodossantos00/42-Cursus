@@ -67,5 +67,8 @@ void	env(t_vars *vars)
 void	ft_exit(t_vars *vars)
 {
 	printf("exit\n");
+	free_env(vars->env_ref);
+	free_convert_env_list(vars->env);
+	free_split(vars->matrix);
 	exit(0);
 }

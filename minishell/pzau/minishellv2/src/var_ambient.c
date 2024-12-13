@@ -38,16 +38,15 @@ char **convert_env_list(t_env *env_list)
 	char **env;
 	char *temp;
 
+	
 	while (current)
 	{
 		count++;
 		current = current->next;
 	}
-
 	env = malloc(sizeof(char *) * (count + 1));
 	if (!env)
 		return (NULL);
-
 	current = env_list;
 	count = 0;
 	while (current)
@@ -59,6 +58,5 @@ char **convert_env_list(t_env *env_list)
 		count++;
 	}
 	env[count] = NULL;
-
 	return (env);
 }

@@ -41,5 +41,6 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 void	*ft_memmove(void *dest, const void *src, size_t len);
 size_t	ft_strlcat(char *dest, char *src, size_t size);
 char **ft_split_del(char *str, const char *delimiters);
+char *ft_strcat(char *s1, const char *s2);
 
 #endif
