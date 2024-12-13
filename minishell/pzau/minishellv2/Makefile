@@ -49,6 +49,8 @@ SRC = src/main.c\
 	libx/ft_isdigit.c\
 	libx/ft_split_del.c\
 	libx/ft_strcat.c\
+	libx/ft_isalnum.c\
+	libx/ft_atoi.c\
 
 OBJ = ${SRC:.c=.o}
 

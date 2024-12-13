@@ -98,7 +98,7 @@ t_env	*sort_list(t_env *list);
 t_env	*creat_node(char *var, char *value);
 t_env	*ft_unset(t_env *head, char **vars);
 int	count_variables(char **environ);
-int export_var(t_vars *vars, char *input);
+int     is_valid_identifier(const char *var);
 int    expand_var(t_vars *vars);
 char    *return_name(char *str);
 int    search_var(t_vars *vars, char *var, int *p, int len);

@@ -285,7 +285,8 @@ void	write_heredoc(t_vars *vars, char *cmd, int fd)
 	while (1)
 	{
         signal(SIGINT, cntrl_cntrl_c);
-		line = readline("> ");
+	line = readline("> ");
+	cntrl_d(line, cmd, fd);
         if (ft_strcmp(line, cmd) == 0)
 		{
 			free(line);
@@ -298,8 +299,7 @@ void	write_heredoc(t_vars *vars, char *cmd, int fd)
             close(fd);
             exit(32);
         }
-        cntrl_d(line, cmd, fd);
-		write(fd, line, ft_strlen(line));
+	write(fd, line, ft_strlen(line));
         write (fd, "\n", 1);
 		free(line);
 	}  

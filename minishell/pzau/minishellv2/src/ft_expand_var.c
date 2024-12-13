@@ -8,12 +8,16 @@ int    search_var(t_vars *vars, char *var, int *p, int len)
     char    *new_line;
 
     i = 0;
+    j = 0;
     tmp = vars->env_ref;
+    new_line = NULL;
     while (tmp)
     {
         if (ft_strcmp(tmp->var, var) == 0)
         {
-            new_line = malloc(sizeof(char) * ft_strlen(vars->input) - ft_strlen(var) + ft_strlen(tmp->value));
+            new_line = malloc(sizeof(char) * (ft_strlen(vars->input) - ft_strlen(var) + ft_strlen(tmp->value) + 1));
+            if (!new_line)
+                return (1);
             while (i < *p)
             {
                 new_line[i] = vars->input[i];
@@ -31,7 +35,6 @@ int    search_var(t_vars *vars, char *var, int *p, int len)
             if (stat(tmp->value, &path_stat) == 0 && S_ISDIR(path_stat.st_mode))
             {
                 printf("bash: %s: Is a directory\n", tmp->value);
-                free(new_line);
                 return (1);
             }
             if (ft_strlen(vars->input) > len && vars->input[len])
@@ -48,7 +51,7 @@ int    search_var(t_vars *vars, char *var, int *p, int len)
             }
             else
             {
-               new_line[i] = '\0';
+                new_line[i] = '\0';
                 free(vars->input);
                 vars->input = new_line; 
             }
@@ -56,7 +59,9 @@ int    search_var(t_vars *vars, char *var, int *p, int len)
         }
         tmp = tmp->next;
     }
-    new_line = malloc(sizeof(char) * ft_strlen(vars->input) - ft_strlen(var));
+    new_line = malloc(sizeof(char) * (ft_strlen(vars->input) - ft_strlen(var) + 1));
+    if (!new_line)
+        return (1);
     while (i < *p)
     {
         new_line[i] = vars->input[i];
@@ -73,14 +78,17 @@ int    search_var(t_vars *vars, char *var, int *p, int len)
         new_line[i] = '\0';
         free(vars->input);
         vars->input = new_line;
+        free(new_line);
     }
     else
     {
         new_line[i] = '\0';
         free(vars->input);
         vars->input = new_line;
+        free(new_line);
     }
-}   
+    return (0);
+}
 
 char    *return_name(char *str)
 {
@@ -118,8 +126,14 @@ int    expand_var(t_vars *vars)
         {
             var = return_name(&vars->input[i + 1]);
             if (search_var(vars, var, &i, ft_strlen(var) + i + 1))
+            {
+                free(var);
                 return (1);
+            }
         }
         i++;
     }
+    free(var);
+    var = NULL;
+    return (0);
 }

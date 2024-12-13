@@ -89,8 +89,6 @@ void    all_commands(t_vars *vars)
 
 void    only_comands(t_vars *vars)
 {
-	if (export_var(vars, vars->input))
-		return ;
     if (cheack_build_builtins(vars))
         build_builtins(vars);
     else

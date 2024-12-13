@@ -5,6 +5,8 @@ static int  cheak_string(t_vars *vars)
     int i;
 
     i = 0;
+    if (vars->input[i] == '$' && vars->input[i + 1] != ' ' && vars->input[i + 1] != '\t' && vars->input[i + 1] != '\0')
+        return (4);
     while (vars->input[i])
     {
         if (vars->input[i] == '|')
@@ -126,6 +128,7 @@ void    redirecionamento(t_vars *vars, int status)
             {
                 dup2(vars->terminal, STDOUT_FILENO);
                 printf("%s: No such file or directory\n", str_space);
+                free(str_space);
                 free_split(command);
                 return ;
             }
@@ -133,6 +136,7 @@ void    redirecionamento(t_vars *vars, int status)
         else if (cheack_red(redic[i]) == 3)
         {
             i++;
+            free(str_space);
             free_split(command);
             continue ;
         }
@@ -174,19 +178,21 @@ void    redirecionamento(t_vars *vars, int status)
 
 void    read_readline(t_vars *vars)
 {
-    char	**env_array;
+    //char	**env_array;
     int val;
    
+    val = 0;
     val = cheak_string(vars);
-    //env_array = convert_env_list(vars->env_ref);
-    if (expand_var(vars))
+    if (val == 4)
+    {
+        expand_var(vars);
     	return ;
+    }
     if (val == 1)
         execute_pipe(vars);
     else if (val == 2 || val == 3)
         redirecionamento(vars, 0);
     else
         only_comands(vars);
-	//free_convert_env_list(env_array);
     return ;
 }

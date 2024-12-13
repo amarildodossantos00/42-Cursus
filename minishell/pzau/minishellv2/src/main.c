@@ -33,6 +33,12 @@ static  void    init_values(t_vars *vars)
 	vars->redic_filter = NULL;
     vars->env = environ;
     vars->cargs = 0;
+	vars->redic_filter = NULL;
+	vars->commands = NULL;
+	vars->terminal = 0;
+	vars->exit_status = 0;
+	vars->val_red = 0;
+	vars->input_fd = 0;
 }
 
 int		main(void)
