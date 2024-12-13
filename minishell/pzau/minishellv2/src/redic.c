@@ -99,7 +99,7 @@ char **org_red(char *input)
     normalized_input = add_spaces_around_operators(input);
     input_copy = ft_strdup(normalized_input);
     token = ft_strtok(input_copy, " ");
-    ft_memset(buffer, 0, ft_strlen(buffer));
+    ft_memset(buffer, 0, 256);
     buffer_filled = 0;
     prev = NULL;
     while (token)
@@ -180,9 +180,15 @@ static int  cheack_in_tree(char *new)
     while (str[i])
     {
         if (str[i] == '<' && str[i + 1] == '<' && str[i + 2] == '<')
+        {
+            free(str);
             return (1);
+        }
         else if (str[i] == '<' && str[i + 1] == '<' && str[i + 2] != '<')
+        {
+            free(str);
             return (2);
+        }
         i++;
     }
     free(str);
@@ -239,6 +245,7 @@ int    cheack_input_red(t_vars *vars, char *str, char **redic)
                 free(str1);
             }
         }
+        free_split(new);
         i++;
     }
     i = 0;

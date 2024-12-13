@@ -37,6 +37,7 @@ void    start_promp(t_vars *vars)
 	signal(SIGINT, control_c);
 	signal(SIGQUIT, SIG_IGN);
 
+	trigger_promp(2);
 	while (1)
 	{
 		vars->path = get_path(vars);

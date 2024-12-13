@@ -52,7 +52,6 @@ void    append_output(char *file);
 void    only_comands(t_vars *vars);
 void    redirect_output(char *file);
 void    read_readline(t_vars *vars);
-void    read_readline(t_vars *vars);
 void    build_builtins(t_vars *vars);
 void    redirecionamento(t_vars *vars, int status);
 void    redirect_herdoc(t_vars *vars, char *delimiter);
@@ -66,8 +65,11 @@ char	*gen_tmpfile_name(int cmd_nbr);
 void	write_and_close(int fd);
 void	write_heredoc(t_vars *vars, char *cmd, int fd);
 char	*ler_arquivo(char* caminho_arquivo);
+int  	cheack_red(char *str);
 
-int  cheack_red(char *str);
+void    free_convert_env_list(char **env);
+void	free_env(t_env *env);
+void    free_split(char **str);
 //pzau
 
 //amdos-sa

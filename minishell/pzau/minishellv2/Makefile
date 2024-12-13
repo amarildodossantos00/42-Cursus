@@ -48,13 +48,14 @@ SRC = src/main.c\
 	libx/ft_isalpha.c\
 	libx/ft_isdigit.c\
 	libx/ft_split_del.c\
+	libx/ft_strcat.c\
 
 OBJ = ${SRC:.c=.o}
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(COMPILE)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(COMPILE) -g
 
 clean:
 	rm -f $(OBJ)
