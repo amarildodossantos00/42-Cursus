@@ -88,7 +88,6 @@ void	print_env(t_env *env_list)
 	}
 }
 
-
 void	ft_export(t_vars *vars, char **args)
 {
 	if (!args[1])
@@ -98,17 +97,32 @@ void	ft_export(t_vars *vars, char **args)
 		int i = 1;
 		while (args[i])
 		{
-			char *equal = ft_strchr(args[i], '=');
+			char	*var;
+			char	*value;
+			char	*equal = ft_strchr(args[i], '=');
+
 			if (equal)
 			{
-				char *var = ft_substr(args[i], 0, equal - args[i]);
-				char *value = ft_strdup(equal + 1);
-				add_and_update(&vars->env_ref, var, value, 1);
-				free(var);
-				free(value);
+				var = ft_substr(args[i], 0, equal - args[i]);
+				value = ft_strdup(equal + 1);
 			}
 			else
-				add_and_update(&vars->env_ref, args[i], "", 1);
+			{
+				var = ft_strdup(args[i]);
+				value = ft_strdup("");
+			}
+			if (!is_valid_identifier(var))
+			{
+				printf("bash: export: `%s': not a valid identifier\n", args[i]);
+				vars->exit_status = 1;
+				free(var);
+				free(value);
+				i++;
+				continue ;
+			}
+			add_and_update(&vars->env_ref, var, value, 1);
+			free(var);
+			free(value);
 			i++;
 		}
 	}

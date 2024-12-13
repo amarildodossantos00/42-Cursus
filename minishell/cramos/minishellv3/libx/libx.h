@@ -22,6 +22,7 @@ int		ft_isdigit(int c);
 int		ft_isalpha(int c);
 int		ft_isspace(int c);
 int 	ft_strlen2(const char *str);
+int	ft_isalnum(int c);
 int		count_words(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_itoa(int n);

@@ -34,10 +34,10 @@ static int	crtl_d(t_vars *vars)
 
 void    start_promp(t_vars *vars)
 {
+	signal(SIGINT, control_c);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		signal(SIGINT, control_c);
-		signal(SIGQUIT, SIG_IGN);
 		vars->path = get_path(vars);
 		vars->input = readline("minishell% ");
 		if (crtl_d(vars))

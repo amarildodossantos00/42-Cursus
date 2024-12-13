@@ -51,6 +51,7 @@ SRC = src/main.c\
 	libx/ft_trim.c\
 	libx/ft_isspace.c\
 	libx/ft_strncpy.c\
+	libx/ft_isalnum.c\
 
 OBJ = ${SRC:.c=.o}
 
