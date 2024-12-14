@@ -1,17 +1,19 @@
 #include "libx.h"
 
-int	static deli(char c)
+static int	deli(char c)
 {
 	return (c == ' ' || c == '\t' || c == '\n');
 }
 
-char    **ft_split(char *str)
+char	**ft_split(char *str)
 {
-	int x;
-	int y = 0;
-	int l = 0;
-	char **m;
+	int		x;
+	int		y;
+	int		l;
+	char	**m;
 
+	y = 0;
+	l = 0;
 	while (*str && deli(*str))
 		str++;
 	while (str[l])

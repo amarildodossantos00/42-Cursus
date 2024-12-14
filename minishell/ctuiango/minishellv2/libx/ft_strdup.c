@@ -2,7 +2,7 @@
 
 char	*ft_strdup(char *src)
 {
-	int	len;
+	int		len;
 	char	*str;
 
 	len = 0;

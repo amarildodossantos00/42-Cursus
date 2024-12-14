@@ -1,36 +1,38 @@
 #include "libx.h"
 
-static int deli(char c, const char *delimiters)
+static int	deli(char c, const char *delimiters)
 {
-    while (*delimiters)
-    {
-        if (c == *delimiters)
-            return 1;
-        delimiters++;
-    }
-    return 0;
+	while (*delimiters)
+	{
+		if (c == *delimiters)
+			return (1);
+		delimiters++;
+	}
+	return (0);
 }
 
-char **ft_split_del(char *str, const char *delimiters)
+char	**ft_split_del(char *str, const char *delimiters)
 {
-	int x;
-	int y = 0;
-	int l = 0;
-	char **m;
+	int		x;
+	int		y;
+	int		l;
+	char	**m;
 
+	l = 0;
+	y = 0;
 	while (*str && deli(*str, delimiters))
 		str++;
 	while (str[l])
 		l++;
 	m = malloc(sizeof(char *) * (l + 1));
 	if (!m)
-		return NULL;
+		return (NULL);
 	while (*str)
 	{
 		x = 0;
 		m[y] = malloc(sizeof(char) * (l + 1));
 		if (!m[y])
-			return NULL;
+			return (NULL);
 		while (*str && !deli(*str, delimiters))
 			m[y][x++] = *(str++);
 		while (*str && deli(*str, delimiters))
@@ -39,5 +41,5 @@ char **ft_split_del(char *str, const char *delimiters)
 		y++;
 	}
 	m[y] = NULL;
-	return m;
+	return (m);
 }

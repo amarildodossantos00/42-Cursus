@@ -1,17 +1,19 @@
 #include "libx.h"
 
-int	static red_deli(char c)
+static int	red_deli(char c)
 {
 	return (c == '>' || c == '<');
 }
 
-char    **ft_split_red(char *str)
+char	**ft_split_red(char *str)
 {
-	int x;
-	int y = 0;
-	int l = 0;
-	char **m;
+	int		x;
+	int		y;
+	int		l;
+	char	**m;
 
+	y = 0;
+	l = 0;
 	while (*str && red_deli(*str))
 		str++;
 	while (str[l])

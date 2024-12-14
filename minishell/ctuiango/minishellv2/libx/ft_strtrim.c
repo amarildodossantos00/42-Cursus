@@ -3,6 +3,7 @@
 static int	ft_check_set(char const c, char const *set)
 {
 	int	i;
+
 	i = 0;
 	while (set[i] != '\0')
 	{
@@ -12,10 +13,12 @@ static int	ft_check_set(char const c, char const *set)
 	}
 	return (0);
 }
+
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	size;
 	char	*new;
+
 	if (!s1 || !set)
 		return (NULL);
 	while (s1)
