@@ -25,14 +25,10 @@ char	**ft_split_del(char *str, const char *delimiters)
 	while (str[l])
 		l++;
 	m = malloc(sizeof(char *) * (l + 1));
-	if (!m)
-		return (NULL);
 	while (*str)
 	{
 		x = 0;
 		m[y] = malloc(sizeof(char) * (l + 1));
-		if (!m[y])
-			return (NULL);
 		while (*str && !deli(*str, delimiters))
 			m[y][x++] = *(str++);
 		while (*str && deli(*str, delimiters))

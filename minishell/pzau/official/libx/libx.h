@@ -54,5 +54,4 @@ char	*ft_strcat(char *s1, const char *s2);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlcat(char *dest, char *src, size_t size);
 
-
 #endif

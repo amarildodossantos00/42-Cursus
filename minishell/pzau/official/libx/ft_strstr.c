@@ -1,6 +1,6 @@
 #include "libx.h"
 
-char *ft_strstr(char *haystack, char *needle)
+char	*ft_strstr(char *haystack, char *needle)
 {
 	char	*h;
 	char	*n;
@@ -25,4 +25,3 @@ char *ft_strstr(char *haystack, char *needle)
 	}
 	return (NULL);
 }
-

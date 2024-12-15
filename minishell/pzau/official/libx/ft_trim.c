@@ -8,7 +8,7 @@ char	*ft_trim(char *str)
 
 	start = 0;
 	if (!str)
-		return NULL;
+		return (NULL);
 	end = ft_strlen(str);
 	while (str[start] && ft_isspace(str[start]))
 		start++;
@@ -16,7 +16,7 @@ char	*ft_trim(char *str)
 		end--;
 	trimmed = malloc(end - start + 1);
 	if (!trimmed)
-		return NULL;
+		return (NULL);
 	ft_strncpy(trimmed, &str[start], end - start);
 	trimmed[end - start] = '\0';
 	return (trimmed);

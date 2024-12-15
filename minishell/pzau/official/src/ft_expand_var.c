@@ -148,14 +148,14 @@ void	double_quotes(t_vars *vars, char **str, int *i)
 	(*i)++;
 	while ((*str)[*i] && (*str)[*i] != '"')
 	{
-		if ((*str)[*i] != '\0' && (*str)[*i] == '$')
+		if ((*str)[*i] == '$')
 		{
-			/*if ((*str)[*i + 1] == '"' || is_special((*str)[*i + 1]))
+			if ((*str)[*i + 1] == '"' || is_special((*str)[*i + 1]))
 			{
 				(*i)++;
 				continue ;
-			}*/
-			//dollar_sign(vars, str, i);
+			}
+			dollar_sign(vars, str, i);
 			continue ;
 		}
 		(*i)++;

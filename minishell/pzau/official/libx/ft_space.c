@@ -11,11 +11,10 @@ char	*ft_space(char *str)
 		return (NULL);
 	i = 0;
 	count = 0;
-	while (str[i])
+	while (str[i++])
 	{
 		if (str[i] != ' ')
 			count++;
-		i++;
 	}
 	new = malloc(sizeof(char) * (count + 1));
 	i = 0;
