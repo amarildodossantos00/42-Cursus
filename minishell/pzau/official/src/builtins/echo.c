@@ -2,10 +2,10 @@
 
 void	remove_deli(char *s)
 {
-	int	i;
-	int	j;
 	char	deli;
-	
+	int		i;
+	int		j;
+
 	i = 0;
 	j = 0;
 	deli = '\0';
@@ -25,14 +25,13 @@ void	remove_deli(char *s)
 static int	ignore(char **s)
 {
 	int	i;
-	
+	int	j;
+
 	i = 1;
 	while (s[i])
 	{
 		if (s[i][0] == '-' && s[i][1] == 'n')
 		{
-			int	j;
-			
 			j = 2;
 			while (s[i][j] == 'n')
 				j++;
@@ -66,5 +65,4 @@ void	echo(t_vars *vars)
 	}
 	if (nl)
 		printf("\n");
-	//vars->exit_status = 0;
 }

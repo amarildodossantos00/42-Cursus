@@ -7,19 +7,32 @@ FLAGS = -Wall -Wextra -Werror
 COMPILE = -lreadline -lhistory
 
 SRC = src/main.c\
+	src/filev1.c\
+	src/filev2.c\
+	src/filev3.c\
+	src/var_ambient.c\
 	src/count_args.c\
+	src/execute.c\
+	src/ft_expand_var.c\
+	src/expand_exit_status.c\
+	src/builtins/utils_exp.c\
 	src/builtins/commands.c\
+	src/builtins/commandsv1.c\
 	src/builtins/echo.c\
 	src/builtins/ft_export.c\
 	src/builtins/ft_unset.c\
-	src/builtins/utils_exp.c\
-	src/liberar/file.c\
+	src/red_and_pipe/filev1.c\
+	src/red_and_pipe/filev2.c\
+	src/red_and_pipe/filev3.c\
+	src/red_and_pipe/execute_pipe.c\
+	src/free/filev1.c\
 	libx/ft_strlen.c\
 	libx/ft_strncmp.c\
 	libx/ft_strjoin.c\
 	libx/ft_strcpy.c\
 	libx/ft_strchr.c\
 	libx/ft_strdup.c\
+	libx/ft_strdupv2.c\
 	libx/ft_strcmp.c\
 	libx/ft_strtok.c\
 	libx/sncat.c\
@@ -38,13 +51,22 @@ SRC = src/main.c\
 	libx/ft_isalpha.c\
 	libx/ft_isdigit.c\
 	libx/ft_split_del.c\
+	libx/ft_strcat.c\
+	libx/ft_isalnum.c\
+	libx/ft_strncpy.c\
+	libx/ft_strstr.c\
+	libx/ft_atoi.c\
+	libx/ft_trim.c\
+	libx/ft_isspace.c\
+	libx/ft_strnfill.c\
+	libx/ft_split_args_aux.c\
 
 OBJ = ${SRC:.c=.o}
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(COMPILE)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(COMPILE) -g
 
 clean:
 	rm -f $(OBJ)
