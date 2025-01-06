@@ -1,6 +1,6 @@
 #include "../header/header.h"
 
-static int	cheack_build_builtins(t_vars *vars)
+int	cheack_build_builtins(t_vars *vars)
 {
 	if (ft_strncmp(vars->input, "echo", 4) == 0
 		&& (vars->input[4] == '\0' || vars->input[4] == ' '))

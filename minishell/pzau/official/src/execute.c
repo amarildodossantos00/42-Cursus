@@ -1,5 +1,33 @@
 #include "../header/header.h"
 
+static char *without_qoutes(char *str)
+{
+	char	*new_str;
+	int		n;
+	int		i;
+	int		j;
+
+	n = 0;
+	i = 0;
+	j = ft_strlen(str) - 1;
+	new_str = malloc(sizeof(char) * ft_strlen(str) + 1);
+	while (str[i] != "'")
+		i++;
+	while (str[j])
+	{
+		if (str[j] != "'")
+			break ;
+		j--;
+	}
+	while (i < j)
+	{
+		new_str[n] = str[i];
+		n++;
+		i++;
+	}
+	return (new_str);
+}
+
 char	*build_executable_path(char *dir, char *command)
 {
 	char	executable_path[256];
@@ -47,9 +75,12 @@ char	*find_executable(char *command, char *path)
 void	execute_path(t_vars *vars)
 {
 	char	*executable;
+	char	*new_str;
 	char	**env;
 
-	executable = find_executable(vars->args[0], vars->path);
+	new_str = without_qoutes(vars->args[0]);
+	executable = find_executable(new_str, vars->path);
+	free(new_str);
 	if (!executable)
 	{
 		printf("%s: command not found\n", vars->input);

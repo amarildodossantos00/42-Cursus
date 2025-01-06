@@ -91,6 +91,7 @@ int		count_variables(char **environ);
 int		is_valid_identifier(const char *var);
 int		expand_var(t_vars *vars);
 int		search_var(t_vars *vars, char *var, int *p, int len);
+int		cheack_build_builtins(t_vars *vars);
 int		trigger_promp(int val);
 
 #endif

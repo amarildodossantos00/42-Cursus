@@ -31,7 +31,9 @@ void	read_readline(t_vars *vars)
 
 	val = cheak_string(vars);
 	expand_var(vars);
-	if (val == 1)
+	if (cheack_build_builtins(vars))
+		build_builtins(vars);
+	else if (val == 1)
 		execute_pipe(vars);
 	else if (val == 2 || val == 3)
 		redirecionamento(vars, 0);
