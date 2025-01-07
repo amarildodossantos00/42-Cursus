@@ -1,31 +1,63 @@
 #include "../header/header.h"
 
-static char *without_qoutes(char *str)
+static char *without_qoutes(char *input)
 {
-	char	*new_str;
-	int		n;
-	int		i;
-	int		j;
+    char *result = malloc(ft_strlen(input) + 1);
+    if (!result)
+        return NULL;
 
-	n = 0;
-	i = 0;
-	j = ft_strlen(str) - 1;
-	new_str = malloc(sizeof(char) * ft_strlen(str) + 1);
-	while (str[i] != "'")
-		i++;
-	while (str[j])
+    int i = 0, j = 0;
+    int in_single_quote = 0;
+    int in_double_quote = 0;
+
+    while (input[i])
 	{
-		if (str[j] != "'")
-			break ;
-		j--;
-	}
-	while (i < j)
+        if (input[i] == '\'' && !in_double_quote)
+		{
+            in_single_quote = !in_single_quote;
+            i++;
+            continue;
+        } else if (input[i] == '"' && !in_single_quote)
+		{
+            in_double_quote = !in_double_quote;
+            i++;
+            continue;
+        } else if (input[i] == '$' && in_double_quote)
+		{
+            char *start = &input[i + 1];
+            int var_len = 0;
+            while (start[var_len] && (ft_isalnum(start[var_len]) || start[var_len] == '_'))
+                var_len++;
+            if (var_len > 0)
+			{
+                char var_name[var_len + 1];
+                ft_strncpy(var_name, start, var_len);
+                var_name[var_len] = '\0';
+
+                char *env_value = getenv(var_name);
+                if (env_value)
+				{
+                    ft_strcpy(&result[j], env_value);
+                    j += ft_strlen(env_value);
+                }
+
+                i += var_len + 1;
+                continue;
+            }
+        }
+
+        result[j++] = input[i++];
+    }
+
+    result[j] = '\0';
+    if (in_single_quote || in_double_quote)
 	{
-		new_str[n] = str[i];
-		n++;
-		i++;
-	}
-	return (new_str);
+        printf("Error: Unclosed quotes\n");
+        free(result);
+        return (NULL);
+    }
+
+    return result;
 }
 
 char	*build_executable_path(char *dir, char *command)
