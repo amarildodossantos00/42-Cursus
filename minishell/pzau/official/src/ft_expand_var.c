@@ -34,28 +34,6 @@ char	*ft_var_name(char *str, int n)
 	return (res);
 }
 
-/*
-int	if_exit_status(t_vars *minishell, char **str, \
-char *var_name, int *i)
-{
-	char	*tmp;
-	char	*value;
-
-	if (!ft_strcmp("?", var_name))
-		return (0);
-	tmp = ft_strdup(*str);
-	free(*str);
-	if (g_sigint == SIGINT)
-		minishell->exit_status = 130;
-	g_sigint = 0;
-	value = ft_itoa(minishell->exit_status);
-	*str = do_expansion(tmp, value, var_name, i);
-	ft_strfree(&tmp);
-	ft_strfree(&value);
-	return (1);
-}
-*/
-
 void	expand_no_env(char **str, char *var_name, int *i)
 {
 	char	*tmp;
@@ -170,8 +148,14 @@ int	expand_var(t_vars *vars)
 	i = 0;
 	while (vars->input[i])
 	{
-		if (vars->input[i] != '$' && vars->input[i] != '"' && vars->input[i] != '\0')
+		if (vars->input[i] == '\'')
+		{
 			i++;
+			while (vars->input[i] && vars->input[i] != '\'')
+				i++;
+			if (vars->input[i] == '\'')
+				i++;
+		}
 		else if (vars->input[i] == '"' && vars->input[i] != '\0')
 			double_quotes(vars, &vars->input, &i);
 		if (vars->input[i] == '$' && !is_delimiter(vars->input[i + 1]) && !is_special(vars->input[i + 1]))
