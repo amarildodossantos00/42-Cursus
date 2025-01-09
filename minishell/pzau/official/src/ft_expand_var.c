@@ -20,7 +20,7 @@ char	*ft_var_name(char *str, int n)
 	len = 0;
 	if (str[n + 1] == '?')
 		len++;
-	else if (!is_special(str[n]) && (isalnum(str[n + 1]) \
+	if (!is_special(str[n]) && (isalnum(str[n + 1]) \
 	|| str[n + 1] == '_'))
 		while (str[++n] && (!is_special(str[n]) \
 		&& (isalnum(str[n]) || str[n] == '_')))

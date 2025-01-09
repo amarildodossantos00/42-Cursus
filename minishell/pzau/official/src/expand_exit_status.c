@@ -24,6 +24,7 @@ void	expand_exit_status(t_vars *vars)
 	char	*exit;
 
 	pos = ft_strstr(vars->input, "$?");
+	add_and_update(&vars->env_ref, "?", "0", 0);
 	if (!pos)
 		return ;
 	vars->exit_status %= 256;
@@ -32,6 +33,7 @@ void	expand_exit_status(t_vars *vars)
 	exit = ft_itoa(vars->exit_status);
 	if (!exit)
 		return ;
+	add_and_update(&vars->env_ref, "?", exit, 0);
 	new_input = malloc(ft_strlen(vars->input) - 2 + ft_strlen(exit) + 1);
 	if (!new_input)
 	{

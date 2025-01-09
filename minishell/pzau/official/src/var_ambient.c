@@ -1,5 +1,21 @@
 #include "../header/header.h"
 
+int		get_exit_status(t_vars *vars)
+{
+	t_env	*current;
+
+	if (!vars->env_ref)
+		init_env(vars);
+	current = vars->env_ref;
+	while (current)
+	{
+		if (ft_strcmp(current->var, "?") == 0)
+			return (1);
+		current = current->next;
+	}
+	return (0);
+}
+
 char	*get_path(t_vars *vars)
 {
 	t_env	*current;
