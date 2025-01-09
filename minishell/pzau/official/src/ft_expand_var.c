@@ -138,7 +138,8 @@ void	double_quotes(t_vars *vars, char **str, int *i)
 		}
 		(*i)++;
 	}
-	++(*i);
+	//++(*i);
+	return ;
 }
 
 int	expand_var(t_vars *vars)

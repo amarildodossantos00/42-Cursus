@@ -16,11 +16,10 @@ static int	count_dollar(t_vars *vars)
 	count = 0;
 	while (vars->input[i])
 	{
-		// Verifica se há "$?" sem exigir espaço após
 		if (vars->input[i] == '$' && vars->input[i + 1] == '?')
 		{
 			count++;
-			i += 2; // Pula os caracteres '$' e '?'
+			i += 2;
 		}
 		else
 			i++;
@@ -31,7 +30,6 @@ static int	count_dollar(t_vars *vars)
 void	execute_command(t_vars *vars, char *command)
 {
 	vars->exit_status = 0;
-	//printf("\n\n\n%s\n\n\n", command);
 	if (!command || !vars->args || !vars->args[0])
 	{
 		vars->exit_status = 127;
@@ -50,29 +48,45 @@ void	expand_exit_status(t_vars *vars)
 	char	*new_input;
 	char	*pos;
 	char	*exit;
+	char	*temp;
 
 	pos = ft_strstr(vars->input, "$?");
 	if (!pos)
 		return ;
 	vars->exit_status %= 256;
-	if (vars->exit_status < 0 || vars->exit_status > 255)
-		vars->exit_status %= 256;
+	if (vars->exit_status < 0)
+		vars->exit_status += 256;
+
 	exit = ft_itoa(vars->exit_status);
 	if (!exit)
 		return ;
+
 	new_input = malloc(ft_strlen(vars->input) - 2 + ft_strlen(exit) + 1);
 	if (!new_input)
 	{
 		free(exit);
 		return ;
 	}
+
 	ft_strncpy(new_input, vars->input, pos - vars->input);
 	new_input[pos - vars->input] = '\0';
-	new_input = ft_strcat(new_input, exit);
-	new_input = ft_strcat(new_input, pos + 2);
+
+	temp = ft_strcat(new_input, exit);
+	free(new_input);
+	new_input = temp;
+
+	temp = ft_strcat(new_input, pos + 2);
+	free(new_input);
+	new_input = temp;
+
 	if (check_on(vars))
+	{
+		free(new_input);
 		new_input = ft_itoa(ft_atoi(exit) * count_dollar(vars));
+	}
+
 	free(exit);
 	free(vars->input);
 	vars->input = new_input;
 }
+
