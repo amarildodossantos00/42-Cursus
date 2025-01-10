@@ -28,39 +28,30 @@ int	count_args(char *input)
 	return (qnt);
 }
 
-char	**create_args(char *input)
+char	**create_args(t_vars *vars, char *input, size_t k)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
-	char	*aux;
-	char	*input_copy;
-	char	**args;
-
-	i = 0;
-	k = 0;
-	j = count_args(input);
-	args = malloc((j + 1) * sizeof(char *));
-	if (!args)
+	vars->i = 0;
+	vars->argss = malloc((count_args(input) + 1) * sizeof(char *));
+	if (!vars->argss)
 		return (NULL);
-	input_copy = malloc(ft_strlen(input) + 1);
-	ft_strcpy(input_copy, input);
-	aux = ft_strtok(input_copy, " ");
-	while (aux)
+	vars->input_copy = malloc(ft_strlen(input) + 1);
+	ft_strcpy(vars->input_copy, input);
+	vars->aux = ft_strtok(vars->input_copy, " ");
+	while (vars->aux)
 	{
-		args[i] = malloc(ft_strlen(aux) + 1);
-		if (!args[i])
+		vars->argss[vars->i] = malloc(ft_strlen(vars->aux) + 1);
+		if (!vars->argss[vars->i])
 		{
-			while (k++ < i)
-				free(args[k]);
-			free(args);
+			while (k++ < vars->i)
+				free(vars->argss[k]);
+			free(vars->argss);
 			return (NULL);
 		}
-		ft_strcpy(args[i], aux);
-		aux = ft_strtok(NULL, " ");
-		i++;
+		ft_strcpy(vars->argss[vars->i], vars->aux);
+		vars->aux = ft_strtok(NULL, " ");
+		vars->i++;
 	}
-	args[i] = NULL;
-	free(input_copy);
-	return (args);
+	vars->argss[vars->i] = NULL;
+	free(vars->input_copy);
+	return (vars->argss);
 }

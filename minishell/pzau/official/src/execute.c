@@ -1,64 +1,86 @@
 #include "../header/header.h"
 
-static char *without_qoutes(char *input)
+// one
+static void	process_ev_aux(t_vars *vars)
 {
-    char *result = malloc(ft_strlen(input) + 1);
-    if (!result)
-        return NULL;
-
-    int i = 0, j = 0;
-    int in_single_quote = 0;
-    int in_double_quote = 0;
-
-    while (input[i])
-	{
-        if (input[i] == '\'' && !in_double_quote)
-		{
-            in_single_quote = !in_single_quote;
-            i++;
-            continue;
-        } else if (input[i] == '"' && !in_single_quote)
-		{
-            in_double_quote = !in_double_quote;
-            i++;
-            continue;
-        } else if (input[i] == '$' && in_double_quote)
-		{
-            char *start = &input[i + 1];
-            int var_len = 0;
-            while (start[var_len] && (ft_isalnum(start[var_len]) || start[var_len] == '_'))
-                var_len++;
-            if (var_len > 0)
-			{
-                char var_name[var_len + 1];
-                ft_strncpy(var_name, start, var_len);
-                var_name[var_len] = '\0';
-
-                char *env_value = getenv(var_name);
-                if (env_value)
-				{
-                    ft_strcpy(&result[j], env_value);
-                    j += ft_strlen(env_value);
-                }
-
-                i += var_len + 1;
-                continue;
-            }
-        }
-
-        result[j++] = input[i++];
-    }
-
-    result[j] = '\0';
-    if (in_single_quote || in_double_quote)
-	{
-        printf("Error: Unclosed quotes\n");
-        free(result);
-        return (NULL);
-    }
-
-    return result;
+	vars->var_len = 0;
+	while (vars->start[vars->var_len] && (ft_isalnum(vars->start[vars->var_len])
+			|| vars->start[vars->var_len] == '_'))
+		vars->var_len++;
 }
+
+static int	process_env_variable(char *input, char **result, int *i, int *j)
+{
+	t_vars	*vars;
+
+	vars = malloc(sizeof(t_vars));
+	vars->start = &input[*i + 1];
+	process_ev_aux(vars);
+	if (vars->var_len > 0)
+	{
+		vars->var_name = malloc(vars->var_len + 1);
+		if (!vars->var_name)
+			return (0);
+		ft_strncpy(vars->var_name, vars->start, vars->var_len);
+		vars->var_name[vars->var_len] = '\0';
+		vars->env_value = getenv(vars->var_name);
+		free(vars->var_name);
+		if (vars->env_value)
+		{
+			ft_strcpy(&(*result)[*j], vars->env_value);
+			*j += ft_strlen(vars->env_value);
+		}
+		*i += vars->var_len + 1;
+		return (1);
+	}
+	return (0);
+}
+
+static char	*remove_quotes(char *input)
+{
+	char	*result;
+	int		i;
+	int		j;
+	int		in_single_quote;
+	int		in_double_quote;
+
+	i = 0;
+	j = 0;
+	in_single_quote = 0;
+	in_double_quote = 0;
+	result = malloc(ft_strlen(input) + 1);
+	if (!result)
+		return (NULL);
+	while (input[i])
+	{
+		if (input[i] == '\'' && !in_double_quote)
+			in_single_quote = !in_single_quote;
+		else if (input[i] == '"' && !in_single_quote)
+			in_double_quote = !in_double_quote;
+		else if (input[i] == '$' && in_double_quote)
+		{
+			if (process_env_variable(input, &result, &i, &j))
+				continue ;
+		}
+		else
+			result[j++] = input[i];
+		i++;
+	}
+	result[j] = '\0';
+	if (in_single_quote || in_double_quote)
+	{
+		printf("Error: Unclosed quotes\n");
+		free(result);
+		return (NULL);
+	}
+	return (result);
+}
+
+static char	*without_qoutes(char *input)
+{
+	return (remove_quotes(input));
+}
+//one
 
 char	*build_executable_path(char *dir, char *command)
 {

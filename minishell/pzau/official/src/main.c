@@ -1,10 +1,13 @@
 #include "../header/header.h"
 
+int	g_sig;
+
 static void	free_env_list(t_env *env_ref)
 {
-	t_env *current = env_ref;
-	t_env *next;
+	t_env	*current;
+	t_env	*next;
 
+	current = env_ref;
 	while (current != NULL)
 	{
 		next = current->next;
@@ -15,55 +18,51 @@ static void	free_env_list(t_env *env_ref)
 	}
 }
 
+t_env	*create_env_node(char *env_entry)
+{
+	char	*env_copy;
+	char	*var;
+	char	*value;
+	t_env	*node;
+
+	env_copy = ft_strdup(env_entry);
+	var = ft_strtok(env_copy, "=");
+	value = ft_strtok(NULL, "");
+	node = creat_node(var, value);
+	if (!env_copy)
+		return (NULL);
+	free(env_copy);
+	return (node);
+}
+
+void	append_env_node(t_env **current, char *env_entry)
+{
+	t_env	*new_node;
+
+	new_node = create_env_node(env_entry);
+	if (new_node)
+	{
+		(*current)->next = new_node;
+		*current = new_node;
+	}
+}
+
 void	init_env(t_vars *vars)
 {
-	char		*var;
-	char		*value;
-	char		*env_copy;
-	int			count;
-	t_env		*current;
+	int		count;
+	t_env	*current;
 
 	count = count_variables(vars->env);
 	if (count <= 0)
 		return ;
-	env_copy = ft_strdup(vars->env[--count]);
-	var = ft_strtok(env_copy, "=");
-	value = ft_strtok(NULL, "");
-	vars->env_ref = creat_node(var, value);
+	vars->env_ref = create_env_node(vars->env[--count]);
+	if (!vars->env_ref)
+		return ;
 	current = vars->env_ref;
-	free(env_copy);
 	while (--count >= 0)
-	{
-		env_copy = ft_strdup(vars->env[count]);
-		var = ft_strtok(env_copy, "=");
-		value = ft_strtok(NULL, "");
-		current->next = creat_node(var, value);
-		current = current->next;
-		free(env_copy);
-	}
+		append_env_node(&current, vars->env[count]);
 	if (current != NULL)
 		current->next = NULL;
-}
-
-static void	init_values(t_vars *vars)
-{
-	extern char	**environ;
-
-	vars->input = NULL;
-	vars->path = NULL;
-	vars->home = NULL;
-	vars->matrix = NULL;
-	vars->args = NULL;
-	vars->copy_input = NULL;
-	vars->redic_filter = NULL;
-	vars->env = environ;
-	vars->cargs = 0;
-	vars->redic_filter = NULL;
-	vars->commands = NULL;
-	vars->terminal = 0;
-	vars->exit_status = 0;
-	vars->val_red = 0;
-	vars->input_fd = 0;
 }
 
 int	main(void)

@@ -44,88 +44,37 @@ void	add_and_update(t_env **env_list, char *var, char *value, int exported)
 		current->next = new;
 }
 
+static void	swap_nodes(t_env *a, t_env *b)
+{
+	char	*var;
+	char	*value;
+
+	var = a->var;
+	value = a->value;
+	a->var = b->var;
+	a->value = b->value;
+	b->var = var;
+	b->value = value;
+}
+
 t_env	*sort_list(t_env *list)
 {
 	t_env	*current;
 	t_env	*next;
-	char	*var;
-	char	*value;
 
+	current = list;
 	if (!list || !list->next)
 		return (list);
-	current = list;
 	while (current)
 	{
 		next = current->next;
 		while (next)
 		{
 			if (ft_strcmp(current->var, next->var) > 0)
-			{
-				var = current->var;
-				value = current->value;
-				current->var = next->var;
-				current->value = next->value;
-				next->var = var;
-				next->value = value;
-			}
+				swap_nodes(current, next);
 			next = next->next;
 		}
 		current = current->next;
 	}
 	return (list);
-}
-
-void	print_env(t_env *env_list)
-{
-	sort_list(env_list);
-	while (env_list)
-	{
-		if (env_list)
-			printf("declare -x %s=\"%s\"\n", env_list->var, env_list->value);
-		else
-			printf("declare -x %s\n", env_list->var);
-		env_list = env_list->next;
-	}
-}
-
-void	ft_export(t_vars *vars, char **args)
-{
-	char	*var;
-	char	*value;
-	char	*equal;
-	int		i;
-
-	if (!args[1])
-		print_env(vars->env_ref);
-	else
-	{
-		i = 1;
-		while (args[i])
-		{
-			equal = ft_strchr(args[i], '=');
-			if (equal)
-			{
-				var = ft_substr(args[i], 0, equal - args[i]);
-				value = ft_strdup(equal + 1);
-			}
-			else
-			{
-				var = ft_strdup(args[i]);
-				value = ft_strdup("");
-			}
-			if (!is_valid_identifier(var))
-			{
-				printf("bash: export: `%s': not a valid identifier\n", args[i]);
-				vars->exit_status = 1;
-				free(var);
-				free(value);
-				i++;
-				continue ;
-			}
-			add_and_update(&vars->env_ref, var, value, 1);
-			free(var);
-			free(value);
-			i++;
-		}
-	}
 }

@@ -31,29 +31,20 @@ static int	crtl_d(t_vars *vars)
 	return (0);
 }
 
-void	start_promp(t_vars *vars)
+void	handle_signals(void)
 {
 	signal(SIGINT, control_c);
 	signal(SIGQUIT, SIG_IGN);
 	trigger_promp(2);
+}
+
+void	start_promp(t_vars *vars)
+{
+	handle_signals();
 	while (1)
 	{
-		vars->path = get_path(vars);
-		vars->copy_input = readline("minishell% ");
-		vars->input = ft_trim(vars->copy_input);
-		if (crtl_d(vars))
+		if (process_input(vars))
 			break ;
-		if (vars->input[0] == '\0')
-		{
-			free(vars->copy_input);
-			free(vars->input);
-			continue ;
-		}
-		if (ft_strlen(vars->input) > 0)
-			add_history(vars->copy_input);
-		expand_exit_status(vars);
-		read_readline(vars);
-		trigger_promp(2);
 		free(vars->copy_input);
 		free(vars->input);
 	}

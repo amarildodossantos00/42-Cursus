@@ -1,68 +1,61 @@
 #include "../../header/header.h"
 
-int	cheack_red(char *str)
+static void	processar_redic(t_vars *vars, char **redic)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '>')
-		{
-			if (str[i + 1] == '>')
-				return (1);
-			return (2);
-		}
-		if (str[i] == '<')
-		{
-			if (str[i + 1] == '<')
-				return (3);
-			return (4);
-		}
-		i++;
-	}
-	return (0);
-}
-
-static int	check_one_red(char **str)
-{
-	int	i;
-
-	i = 1;
-	while (str[i])
-	{
-		if (cheack_red(str[i]) != 3)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	redirecionamento(t_vars *vars, int status)
-{
-	int	i;
-	char	*str;
-	char	**redic;
 	char	**command;
+	char	*str_space;
+	char	*str_split;
+	int		i;
 
 	i = 0;
-	redic = org_red(vars->input);
-	vars->terminal = dup(STDOUT_FILENO);
-	if (cheack_input_red(vars ,vars->input, redic))
+	while (redic[i])
 	{
-		free(redic);
-			return ;
+		command = ft_split_red(redic[i]);
+		str_space = ft_space(command[1]);
+		if (count_words(command[1]) > 1)
+		{
+			str_split = ft_strjoin(" a ", command[1]);
+			free_split(command);
+			command = ft_split(str_split);
+			free(str_split);
+		}
+		if (!executar_redic(vars, redic[i], str_space))
+		{
+			free_split(command);
+			break ;
+		}
+		free_process_red(str_space, command);
+		i++;
 	}
+}
+
+static void	executar_comando_redic(t_vars *vars, char *comando)
+{
+	char	*str2;
+	char	**str1;
+
+	str2 = find_executable(comando, vars->path);
+	str1 = malloc(sizeof(char *) * 2);
+	str1[0] = comando;
+	str1[1] = NULL;
+	execve(str2, str1, NULL);
+	free(str1);
+	free(str2);
+	exit(EXIT_FAILURE);
+}
+
+static int	process_val_red(t_vars *vars, char **redic, int status)
+{
+	int		fd;
+	int		pid;
+	char	*val_itoa;
+	char	*file;
+
 	if (vars->val_red > 0 && redic[0] != NULL && status != 1)
 	{
-		int	fd;
-		int	pid;
-		char	*val_itoa;
-		extern char	**environ;
-
 		val_itoa = ft_itoa(vars->val_red);
+		file = ft_strjoin("/tmp/", val_itoa);
 		pid = fork();
-		char *file = ft_strjoin("/tmp/", val_itoa);
 		if (pid == 0)
 		{
 			fd = open(file, O_RDONLY);
@@ -70,86 +63,44 @@ void	redirecionamento(t_vars *vars, int status)
 				perror("Error opening the file");
 			dup2(fd, 0);
 			close(fd);
-			char *str2 = find_executable(redic[0], vars->path);
-			char   **str1 = malloc(sizeof(char *) * 2);
-			str1[0] = redic[0];
-			str1[1] = NULL;
-			execve(str2, str1, NULL);
-			free(str1);
-			free(str2);
+			executar_comando_redic(vars, redic[0]);
 		}
 		else
 			wait(NULL);
-		free(file);
 		free(val_itoa);
+		free(file);
 	}
-	while (redic[i] != NULL)
-	{
-		command = ft_split_red(redic[i]);
-		char *str_space = ft_space(command[1]);
-		if (count_words(command[1]) > 1)
-		{
-			char *str_split = ft_strjoin(" a ", command[1]);
-			command = ft_split(str_split);
-			free(str_split);
-		}
-		if (cheack_red(redic[i]) == 2)
-			redirect_output(str_space);
-		else if (cheack_red(redic[i]) == 1)
-			append_output(str_space);
-		else if (cheack_red(redic[i]) == 4)
-		{
-			if (redirect_input(str_space) == 1)
-			{
-				dup2(vars->terminal, STDOUT_FILENO);
-				printf("%s: No such file or directory\n", str_space);
-				free(str_space);
-				free_split(command);
-				free_split(redic);
-				return ;
-			}
-		}
-		else if (cheack_red(redic[i]) == 3)
-		{
-			i++;
-			free(str_space);
-			free_split(command);
-			continue ;
-		}
-		free(str_space);
-		free_split(command);
-		i++;
-	}
-	i = 0;
-	command = ft_split_red(redic[0]);
-	str = ft_strdup(command[0]);
-	free_split(command);
-	while (redic[i] != NULL)
-	{
-		char **commandv2 = ft_split_red(redic[i]);
-		if (count_words(commandv2[1]) > 1)
-		{
-			commandv2 = ft_split(commandv2[1]);
-			int j = 1;
-			while (commandv2[j])
-			{
-				char *new_str = ft_strjoin(ft_strjoin(str, " "), commandv2[j]);
-				free(str);
-				str = new_str;
-				j++;
-			}
-			free_split(commandv2);
-		}
-		free_split(commandv2);
-		i++;
-	}
-	free(vars->input);
-	vars->input = str;
-	if (!check_one_red(redic))
-	only_comands(vars);
-	free_split(redic);
-	command = NULL;
-	dup2(vars->terminal, STDOUT_FILENO);
-	close(vars->terminal);
+	return (0);
 }
 
+static void	finalizar_redirecionamento(t_vars *vars,
+	char **redic, int fd_terminal)
+{
+	free_split(redic);
+	dup2(fd_terminal, STDOUT_FILENO);
+	close(fd_terminal);
+}
+
+void	redirecionamento(t_vars *vars, int status)
+{
+	char	**redic;
+	int		fd_terminal;
+
+	fd_terminal = dup(STDOUT_FILENO);
+	redic = org_red(vars->input);
+	if (!redic || cheack_input_red(vars, vars->input, redic))
+	{
+		finalizar_redirecionamento(vars, redic, fd_terminal);
+		return ;
+	}
+	if (process_val_red(vars, redic, status) == 1)
+	{
+		finalizar_redirecionamento(vars, redic, fd_terminal);
+		return ;
+	}
+	processar_redic(vars, redic);
+	atualizar_input(vars, redic);
+	if (!check_one_red(redic))
+		only_comands(vars);
+	finalizar_redirecionamento(vars, redic, fd_terminal);
+}
