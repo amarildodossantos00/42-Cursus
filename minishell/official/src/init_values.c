@@ -7,20 +7,6 @@ static void	init_values_one(t_vars *vars)
 	vars->start = NULL;
 	vars->var_name = NULL;
 	vars->env_value = NULL;
-	vars->result = NULL;
-	vars->in = 0;
-	vars->j = 0;
-	vars->in_single_quote = 0;
-	vars->in_double_quote = 0;
-	vars->dir = NULL;
-	vars->executable = NULL;
-	vars->path_copy = NULL;
-	vars->executablee = NULL;
-	vars->new_strr = NULL;
-	vars->envv = NULL;
-	vars->command = NULL;
-	vars->str_space = NULL;
-	vars->str_split = NULL;
 }
 
 void	init_values(t_vars *vars)

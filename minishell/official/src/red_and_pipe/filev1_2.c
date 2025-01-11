@@ -6,9 +6,7 @@ int	executar_redic(t_vars *vars, char *redic, char *str_space)
 
 	red_type = cheack_red(redic);
 	if (red_type == 2)
-	{
 		redirect_output(str_space);
-	}
 	else if (red_type == 1)
 		append_output(str_space);
 	else if (red_type == 4)
@@ -17,6 +15,7 @@ int	executar_redic(t_vars *vars, char *redic, char *str_space)
 		{
 			dup2(vars->terminal, STDOUT_FILENO);
 			printf("%s: No such file or directory\n", str_space);
+			free(str_space);
 			return (0);
 		}
 	}

@@ -65,21 +65,16 @@ void	init_env(t_vars *vars)
 		current->next = NULL;
 }
 
-int	main(int ac, char **av)
+int	main(void)
 {
 	t_vars	vars;
 
-	if (ac == 1)
-	{
-		init_values(&vars);
-		init_env(&vars);
-		ensure_term_variable(&vars);
-		vars.env = convert_env_list(vars.env_ref);
-		start_promp(&vars);
-		free_env_list(vars.env_ref);
-		free_convert_env_list(vars.env);
-	}
-	else
-		printf("minishell: No such file\n");
+	init_values(&vars);
+	init_env(&vars);
+	ensure_term_variable(&vars);
+	vars.env = convert_env_list(vars.env_ref);
+	start_promp(&vars);
+	free_env_list(vars.env_ref);
+	free_convert_env_list(vars.env);
 	return (0);
 }
