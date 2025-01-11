@@ -118,7 +118,11 @@ int    expand_var(t_vars *vars)
         {
             var = return_name(&vars->input[i + 1]);
             if (search_var(vars, var, &i, ft_strlen(var) + i + 1))
+            {
+                free(var);
                 return (1);
+            }
+            free(var);
         }
         i++;
     }

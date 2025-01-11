@@ -77,12 +77,12 @@ void    all_commands(t_vars *vars)
 	else
 	{
 		waitpid(pid, &vars->exit_status, 0);
-        if (WIFEXITED(vars->exit_status))
-            vars->exit_status = WEXITSTATUS(vars->exit_status);
-        else if (WIFSIGNALED(vars->exit_status))
-            vars->exit_status = 128 + WTERMSIG(vars->exit_status);
-        else
-            vars->exit_status = 1;
+		if (WIFEXITED(vars->exit_status))
+		    vars->exit_status = WEXITSTATUS(vars->exit_status);
+		else if (WIFSIGNALED(vars->exit_status))
+		    vars->exit_status = 128 + WTERMSIG(vars->exit_status);
+		else
+		    vars->exit_status = 1;
 	}
 	trigger_promp(1);
 	while (j++ < vars->cargs)
